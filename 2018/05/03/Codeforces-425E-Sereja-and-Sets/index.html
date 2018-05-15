@@ -93,16 +93,14 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p><strong>Description:</strong><br>集合$S$包含$m$个区间$[l_i, r_i]$$(1 \leq l_i \leq r_i \leq n)$, 设$f(S)$表示最多能从$m$个区间中选出几个。<br>给出$n$和$k$，问多少个集合$S$满足$f(S)=k$。</p>
-<a id="more"></a>
-<hr>
-<p><strong>Solution:</strong><br>如果给出区间，只要按右端点排序贪心即可。<br>考虑$dp[i][j]$表示最右不超过$i$，$f(S)=j$的方案数，由$dp[k][j-1]$转移过来。<br>要多添加一个区间，那么这条线段右端点一定在$[k+1,i]$中，一共有$2^{i-k}-1$种选择方法，然后可以随意添加一些线段，必须保证和之前相交，有$2^{k*(i-k)}$种可能。</p>
+<h2 id=""><a href="#" class="headerlink" title=""></a><a id="more"></a></h2><p><strong>Solution:</strong><br>如果给出区间，只要按右端点排序贪心即可。<br>考虑$dp[i][j]$表示最右不超过$i$，$f(S)=j$的方案数，由$dp[k][j-1]$转移过来。<br>要多添加一个区间，那么这条线段右端点一定在$[k+1,i]$中，一共有$2^{i-k}-1$种选择方法，然后可以随意添加一些线段，必须保证和之前相交，有$2^{k*(i-k)}$种可能。</p>
 <hr>
 <p><strong>Code:</strong><br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>; </span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">505</span>, P = <span class="number">1e9</span> + <span class="number">7</span>;</span><br><span class="line"><span class="keyword">int</span> n, m;</span><br><span class="line">ll dp[maxn][maxn], bin[maxn * maxn];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;n, &amp;m);</span><br><span class="line">	bin[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n * n; ++i) &#123;</span><br><span class="line">		bin[i] = bin[i - <span class="number">1</span>] * <span class="number">2</span> % P;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">		dp[i][<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= min(m, i); ++j) &#123;</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> k = j - <span class="number">1</span>; k &lt;= i; ++k) &#123;</span><br><span class="line">				dp[i][j] = (dp[i][j] + dp[k][j - <span class="number">1</span>] * (bin[i - k] - <span class="number">1</span>) % P * bin[k * (i - k)] % P) % P;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%lld\n"</span>, dp[n][m]);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/03/Codeforces-425E-Sereja-and-Sets/" data-id="cjh782oi4000aayubf4vxt3ui" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/05/03/Codeforces-425E-Sereja-and-Sets/" data-id="cjh795vqi000auvubt36u3c7j" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/dp/">dp</a></li></ul>
@@ -240,23 +238,22 @@
 
 
 
-  </div><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+  </div>
 <script type="text/x-mathjax-config">
-  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-      all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-  });
-</script>
-
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
-</script>
-<!-- End: Injected MathJax -->
-<!-- hexo-inject:end -->
 </body>
 </html>

@@ -93,9 +93,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p><strong>简介</strong><br>一种树上启发式合并，用于离线不带修改统计子树信息，要求每个点能$O(1)$修改，复杂度$O(nlogn)$。</p>
-<a id="more"></a>
-<hr>
-<p><strong>算法过程</strong><br>先将树轻重链剖分，先递归做完轻儿子，然后做重儿子，顺便统计重儿子的信息。然后统计轻儿子子树信息得到答案，如果当前点不是父亲的重链清空信息。</p>
+<h2 id=""><a href="#" class="headerlink" title=""></a><a id="more"></a></h2><p><strong>算法过程</strong><br>先将树轻重链剖分，先递归做完轻儿子，然后做重儿子，顺便统计重儿子的信息。然后统计轻儿子子树信息得到答案，如果当前点不是父亲的重链清空信息。</p>
 <hr>
 <p><strong>复杂度分析</strong><br>我们发现每个点被统计当这个点不位于另一个点重儿子的子树中。根据轻重链剖分的性质，我们知道一个点到根最多经过$logn$条轻边，说明每个点最多被统计$logn$次，又修改复杂度为$O(1)$,所以总复杂度为$O(nlogn)$。</p>
 <hr>
@@ -104,7 +102,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/04/学习笔记-dsu-on-tree/" data-id="cjh782oiv0015ayub4qqb3rdx" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/05/04/学习笔记-dsu-on-tree/" data-id="cjh795vra0015uvubm2smqnnh" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/启发式合并/">启发式合并</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/树链剖分/">树链剖分</a></li></ul>
@@ -242,23 +240,22 @@
 
 
 
-  </div><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+  </div>
 <script type="text/x-mathjax-config">
-  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-      all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-  });
-</script>
-
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
-</script>
-<!-- End: Injected MathJax -->
-<!-- hexo-inject:end -->
 </body>
 </html>

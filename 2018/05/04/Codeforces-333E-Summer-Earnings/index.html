@@ -93,16 +93,14 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p><strong>Description:</strong><br>选出三个点使得最小距离最大。</p>
-<a id="more"></a>
-<hr>
-<p><strong>Solution:</strong><br>两两距离从大到小排序，用bitset判断两点是否同时连向第三点，如果有则是答案。</p>
+<h2 id=""><a href="#" class="headerlink" title=""></a><a id="more"></a></h2><p><strong>Solution:</strong><br>两两距离从大到小排序，用bitset判断两点是否同时连向第三点，如果有则是答案。</p>
 <hr>
 <p><strong>Code:</strong><br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">3005</span>;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">data</span> &#123;</span></span><br><span class="line">	<span class="keyword">int</span> a, b;</span><br><span class="line">	<span class="keyword">double</span> d;</span><br><span class="line">	data() &#123;&#125;</span><br><span class="line">	data(<span class="keyword">int</span> _a, <span class="keyword">int</span> _b, <span class="keyword">double</span> _d) : a(_a), b(_b), d(_d) &#123;&#125;</span><br><span class="line">	<span class="keyword">bool</span> <span class="keyword">friend</span> <span class="keyword">operator</span> &lt; (<span class="keyword">const</span> data &amp;a, <span class="keyword">const</span> data &amp;b) &#123;</span><br><span class="line">		<span class="keyword">return</span> a.d &gt; b.d;</span><br><span class="line">	&#125;</span><br><span class="line">&#125; s[maxn * maxn];</span><br><span class="line"><span class="keyword">int</span> n, tot;</span><br><span class="line"><span class="keyword">double</span> l, r, ans;</span><br><span class="line"><span class="built_in">bitset</span>&lt;maxn&gt; a[maxn];</span><br><span class="line"><span class="keyword">double</span> x[maxn], y[maxn];</span><br><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">dis</span><span class="params">(<span class="keyword">int</span> i, <span class="keyword">int</span> j)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> (x[i] - x[j]) * (x[i] - x[j]) + (y[i] - y[j]) * (y[i] - y[j]);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;n);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%lf%lf"</span>, &amp;x[i], &amp;y[i]);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j = i + <span class="number">1</span>; j &lt;= n; ++j) &#123;</span><br><span class="line">			s[++tot] = data(i, j, dis(i, j)); </span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	sort(s + <span class="number">1</span>, s + tot + <span class="number">1</span>);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= tot; ++i) &#123;</span><br><span class="line">		<span class="keyword">if</span>((a[s[i].a] &amp; a[s[i].b]).count()) &#123;</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">"%.6f\n"</span>, <span class="built_in">sqrt</span>(s[i].d) / <span class="number">2</span>);</span><br><span class="line">			<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		a[s[i].a].<span class="built_in">set</span>(s[i].b);</span><br><span class="line">		a[s[i].b].<span class="built_in">set</span>(s[i].a);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/04/Codeforces-333E-Summer-Earnings/" data-id="cjh782ohz0007ayubzp38mo4i" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/05/04/Codeforces-333E-Summer-Earnings/" data-id="cjh795vqd0007uvubyn47xd06" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/bitset/">bitset</a></li></ul>
@@ -240,6 +238,22 @@
 
 
 
-  </div><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  </div>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
 </body>
 </html>
