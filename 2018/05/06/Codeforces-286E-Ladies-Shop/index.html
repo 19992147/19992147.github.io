@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>[Codeforces 286E] Ladies&#39; Shop | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Description:给出$n$个数$a_i$,求从中选出最少的数$b_i$使得这些数做完全背包能表示的$\leq m$的数的集合等于$a_i$数的集合。">
+<meta name="keywords" content="多项式 &amp; 生成函数">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Codeforces 286E] Ladies&#39; Shop">
+<meta property="og:url" content="http://yoursite.com/2018/05/06/Codeforces-286E-Ladies-Shop/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Description:给出$n$个数$a_i$,求从中选出最少的数$b_i$使得这些数做完全背包能表示的$\leq m$的数的集合等于$a_i$数的集合。">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-05-06T03:19:38.331Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[Codeforces 286E] Ladies&#39; Shop">
+<meta name="twitter:description" content="Description:给出$n$个数$a_i$,求从中选出最少的数$b_i$使得这些数做完全背包能表示的$\leq m$的数的集合等于$a_i$数的集合。">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Codeforces-286E-Ladies-Shop" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/05/06/Codeforces-286E-Ladies-Shop/" class="article-date">
+  <time datetime="2018-05-06T03:07:26.000Z" itemprop="datePublished">2018-05-06</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Codeforces/">Codeforces</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      [Codeforces 286E] Ladies&#39; Shop
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>Description:</strong><br>给出$n$个数$a_i$,求从中选出最少的数$b_i$使得这些数做完全背包能表示的$\leq m$的数的集合等于$a_i$数的集合。</p>
+<a id="more"></a>
+<hr>
+<p><strong>Solution:</strong><br>很明显选出所有的$a_i$是满足条件的，如果$a_i$能表示的数的集合在$\leq m$的情况下不等于a的集合，就是无解的。<br>考虑构造解,根据题目条件，我们只要判断a中哪些数能够由其他数构造出来，只要把这些能够被构造出来的数删掉即是最小解。<br>由于现在保证有解，所以满足能被构造出来的数$a_k$满足$a_k=a_i+a_j$,那么构造生成函数即可判断每个数是否可以被构造。<br>无解的情况为一个数$x$满足$x=a_i+a_j$且没出现在a中。</p>
+<hr>
+<p><strong>Code:</strong><br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">1e6</span> + <span class="number">5</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">double</span> pi = <span class="built_in">acos</span>(<span class="number">-1</span>), eps = <span class="number">1e-5</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">read</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> x = <span class="number">0</span>, f = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">char</span> c = getchar();</span><br><span class="line">	<span class="keyword">while</span>(!<span class="built_in">isdigit</span>(c)) &#123; <span class="keyword">if</span>(c == <span class="string">'-'</span>) f = <span class="number">-1</span>; c = getchar(); &#125;</span><br><span class="line">	<span class="keyword">while</span>(<span class="built_in">isdigit</span>(c)) &#123; x = x * <span class="number">10</span> + c - <span class="string">'0'</span>; c = getchar(); &#125;</span><br><span class="line">	<span class="keyword">return</span> x * f;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">int</span> n, m, N, len;</span><br><span class="line"><span class="keyword">int</span> A[maxn];</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; ans;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">cp</span> &#123;</span> </span><br><span class="line">	<span class="keyword">double</span> x, y;</span><br><span class="line">	cp() &#123;&#125;</span><br><span class="line">	cp(<span class="keyword">double</span> _x, <span class="keyword">double</span> _y) : x(_x), y(_y) &#123;&#125;</span><br><span class="line">	cp <span class="keyword">friend</span> <span class="keyword">operator</span> + (<span class="keyword">const</span> cp &amp;a, <span class="keyword">const</span> cp &amp;b) &#123;</span><br><span class="line">		<span class="keyword">return</span> cp(a.x + b.x, a.y +  b.y);</span><br><span class="line">	&#125;</span><br><span class="line">	cp <span class="keyword">friend</span> <span class="keyword">operator</span> - (<span class="keyword">const</span> cp &amp;a, <span class="keyword">const</span> cp &amp;b) &#123;</span><br><span class="line">		<span class="keyword">return</span> cp(a.x - b.x, a.y - b.y);</span><br><span class="line">	&#125;</span><br><span class="line">	cp <span class="keyword">friend</span> <span class="keyword">operator</span> * (<span class="keyword">const</span> cp &amp;a, <span class="keyword">const</span> cp &amp;b) &#123;</span><br><span class="line">		<span class="keyword">return</span> cp(a.x * b.x - a.y * b.y, a.x * b.y + a.y * b.x);</span><br><span class="line">	&#125;</span><br><span class="line">&#125; a[maxn * <span class="number">4</span>];</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">FFT</span><span class="params">(cp *a, <span class="keyword">int</span> f)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; ++i) &#123;</span><br><span class="line">		<span class="keyword">int</span> t = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; len; ++j) &#123;</span><br><span class="line">			<span class="keyword">if</span>(i &gt;&gt; j &amp; <span class="number">1</span>) &#123;</span><br><span class="line">				t |= <span class="number">1</span> &lt;&lt; (len - j - <span class="number">1</span>);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(i &lt; t) &#123;</span><br><span class="line">			swap(a[i], a[t]);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> l = <span class="number">2</span>; l &lt;= N; l &lt;&lt;= <span class="number">1</span>) &#123;</span><br><span class="line">		<span class="keyword">int</span> m = l &gt;&gt; <span class="number">1</span>;</span><br><span class="line">		cp w = cp(<span class="built_in">cos</span>(pi / m), f * <span class="built_in">sin</span>(pi / m));</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; i += l) &#123;</span><br><span class="line">			cp t = cp(<span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> k = <span class="number">0</span>; k &lt; m; ++k, t = t * w) &#123;</span><br><span class="line">				cp x = a[i + k], y = t * a[i + m + k];</span><br><span class="line">				a[i + k] = x + y;</span><br><span class="line">				a[i + m + k] = x - y;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(f == <span class="number">-1</span>) &#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; ++i) &#123;</span><br><span class="line">			a[i].x /= N;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	n = read();</span><br><span class="line">	m = read();</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">		<span class="keyword">int</span> x = read();</span><br><span class="line">		A[x] = <span class="number">1</span>;</span><br><span class="line">		a[x].x = <span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(N = <span class="number">1</span>; N &lt;= <span class="number">2</span> * m; N &lt;&lt;= <span class="number">1</span>) &#123;</span><br><span class="line">		++len;</span><br><span class="line">	&#125;</span><br><span class="line">	FFT(a, <span class="number">1</span>);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; ++i) &#123;</span><br><span class="line">		a[i] = a[i] * a[i];</span><br><span class="line">	&#125;</span><br><span class="line">	FFT(a, <span class="number">-1</span>);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= m; ++i) &#123;</span><br><span class="line">		<span class="keyword">if</span>(!A[i] &amp;&amp; <span class="built_in">fabs</span>(a[i].x) &gt; eps) &#123;</span><br><span class="line">			<span class="built_in">puts</span>(<span class="string">"NO"</span>);</span><br><span class="line">			<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(A[i] &amp;&amp; <span class="built_in">fabs</span>(a[i].x) &lt; eps) &#123;</span><br><span class="line">			ans.push_back(i);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">puts</span>(<span class="string">"YES"</span>);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%d\n"</span>, ans.size());</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; ans.size(); ++i) &#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"%d "</span>, ans[i]);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/05/06/Codeforces-286E-Ladies-Shop/" data-id="cjh77d2nw0006l5ubn7prrig0" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/多项式-生成函数/">多项式 & 生成函数</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/05/06/bzoj-3516-国王饮水记加强版/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          [bzoj 3516] 国王饮水记加强版
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/05/06/bzoj-4650-优秀的拆分/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">[bzoj 4650] 优秀的拆分</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Codeforce/">Codeforce</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Codeforces/">Codeforces</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/bzoj/">bzoj</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/学习笔记/">学习笔记</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/bitset/">bitset</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dp/">dp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hash/">hash</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/凸包/">凸包</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/可并堆/">可并堆</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/后缀数组/">后缀数组</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/后缀自动机/">后缀自动机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/启发式合并/">启发式合并</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多项式-生成函数/">多项式 & 生成函数</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/差分/">差分</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/扫描线/">扫描线</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数学技巧/">数学技巧</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/树状数组/">树状数组</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/树链剖分/">树链剖分</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/线段树/">线段树</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/组合数学/">组合数学</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/计算几何/">计算几何</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/bitset/" style="font-size: 10px;">bitset</a> <a href="/tags/dp/" style="font-size: 20px;">dp</a> <a href="/tags/hash/" style="font-size: 10px;">hash</a> <a href="/tags/凸包/" style="font-size: 10px;">凸包</a> <a href="/tags/可并堆/" style="font-size: 10px;">可并堆</a> <a href="/tags/后缀数组/" style="font-size: 10px;">后缀数组</a> <a href="/tags/后缀自动机/" style="font-size: 10px;">后缀自动机</a> <a href="/tags/启发式合并/" style="font-size: 10px;">启发式合并</a> <a href="/tags/多项式-生成函数/" style="font-size: 10px;">多项式 & 生成函数</a> <a href="/tags/差分/" style="font-size: 15px;">差分</a> <a href="/tags/扫描线/" style="font-size: 10px;">扫描线</a> <a href="/tags/数学技巧/" style="font-size: 10px;">数学技巧</a> <a href="/tags/树状数组/" style="font-size: 10px;">树状数组</a> <a href="/tags/树链剖分/" style="font-size: 15px;">树链剖分</a> <a href="/tags/线段树/" style="font-size: 20px;">线段树</a> <a href="/tags/组合数学/" style="font-size: 10px;">组合数学</a> <a href="/tags/计算几何/" style="font-size: 10px;">计算几何</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/05/07/CTSC-APIO-2018-游记/">CTSC &amp; APIO 2018 游记</a>
+          </li>
+        
+          <li>
+            <a href="/2018/05/06/bzoj-3516-国王饮水记加强版/">[bzoj 3516] 国王饮水记加强版</a>
+          </li>
+        
+          <li>
+            <a href="/2018/05/06/Codeforces-286E-Ladies-Shop/">[Codeforces 286E] Ladies&#39; Shop</a>
+          </li>
+        
+          <li>
+            <a href="/2018/05/06/bzoj-4650-优秀的拆分/">[bzoj 4650] 优秀的拆分</a>
+          </li>
+        
+          <li>
+            <a href="/2018/05/05/bzoj-4585-烟火表演/">[bzoj 4585] 烟火表演</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

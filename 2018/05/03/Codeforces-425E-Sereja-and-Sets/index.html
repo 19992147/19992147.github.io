@@ -5,15 +5,20 @@
   
 
   
-  <title>Archives: 2018 | Hexo</title>
+  <title>[Codeforces 425E] Sereja and Sets | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/archives/2018/index.html">
+  <meta name="description" content="Description:集合$S$包含$m$个区间$[l_i, r_i]$$(1 \leq l_i \leq r_i \leq n)$, 设$f(S)$表示最多能从$m$个区间中选出几个。给出$n$和$k$，问多少个集合$S$满足$f(S)=k$。">
+<meta name="keywords" content="dp">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Codeforces 425E] Sereja and Sets">
+<meta property="og:url" content="http://yoursite.com/2018/05/03/Codeforces-425E-Sereja-and-Sets/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Description:集合$S$包含$m$个区间$[l_i, r_i]$$(1 \leq l_i \leq r_i \leq n)$, 设$f(S)$表示最多能从$m$个区间中选出几个。给出$n$和$k$，问多少个集合$S$满足$f(S)=k$。">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-05-04T08:07:03.611Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
+<meta name="twitter:title" content="[Codeforces 425E] Sereja and Sets">
+<meta name="twitter:description" content="Description:集合$S$包含$m$个区间$[l_i, r_i]$$(1 \leq l_i \leq r_i \leq n)$, 设$f(S)$表示最多能从$m$个区间中选出几个。给出$n$和$k$，问多少个集合$S$满足$f(S)=k$。">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -60,216 +65,72 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/05/07/CTSC-APIO-2018-游记/" class="archive-article-date">
-  <time datetime="2018-05-07T12:10:34.000Z" itemprop="datePublished">May 7</time>
+        <section id="main"><article id="post-Codeforces-425E-Sereja-and-Sets" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/05/03/Codeforces-425E-Sereja-and-Sets/" class="article-date">
+  <time datetime="2018-05-03T12:30:47.000Z" itemprop="datePublished">2018-05-03</time>
 </a>
-      
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Codeforces/">Codeforces</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/05/07/CTSC-APIO-2018-游记/">CTSC &amp; APIO 2018 游记</a>
+    <h1 class="article-title" itemprop="name">
+      [Codeforces 425E] Sereja and Sets
     </h1>
   
 
-    </header>
-  </div>
-</article>
-  
+      </header>
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/05/06/bzoj-3516-国王饮水记加强版/" class="archive-article-date">
-  <time datetime="2018-05-06T13:07:47.000Z" itemprop="datePublished">May 6</time>
-</a>
+    <div class="article-entry" itemprop="articleBody">
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/05/06/bzoj-3516-国王饮水记加强版/">[bzoj 3516] 国王饮水记加强版</a>
-    </h1>
-  
+        <p><strong>Description:</strong><br>集合$S$包含$m$个区间$[l_i, r_i]$$(1 \leq l_i \leq r_i \leq n)$, 设$f(S)$表示最多能从$m$个区间中选出几个。<br>给出$n$和$k$，问多少个集合$S$满足$f(S)=k$。</p>
+<a id="more"></a>
+<hr>
+<p><strong>Solution:</strong><br>如果给出区间，只要按右端点排序贪心即可。<br>考虑$dp[i][j]$表示最右不超过$i$，$f(S)=j$的方案数，由$dp[k][j-1]$转移过来。<br>要多添加一个区间，那么这条线段右端点一定在$[k+1,i]$中，一共有$2^{i-k}-1$种选择方法，然后可以随意添加一些线段，必须保证和之前相交，有$2^{k*(i-k)}$种可能。</p>
+<hr>
+<p><strong>Code:</strong><br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>; </span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">505</span>, P = <span class="number">1e9</span> + <span class="number">7</span>;</span><br><span class="line"><span class="keyword">int</span> n, m;</span><br><span class="line">ll dp[maxn][maxn], bin[maxn * maxn];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;n, &amp;m);</span><br><span class="line">	bin[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n * n; ++i) &#123;</span><br><span class="line">		bin[i] = bin[i - <span class="number">1</span>] * <span class="number">2</span> % P;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">		dp[i][<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= min(m, i); ++j) &#123;</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> k = j - <span class="number">1</span>; k &lt;= i; ++k) &#123;</span><br><span class="line">				dp[i][j] = (dp[i][j] + dp[k][j - <span class="number">1</span>] * (bin[i - k] - <span class="number">1</span>) % P * bin[k * (i - k)] % P) % P;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%lld\n"</span>, dp[n][m]);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/05/06/Codeforces-286E-Ladies-Shop/" class="archive-article-date">
-  <time datetime="2018-05-06T03:07:26.000Z" itemprop="datePublished">May 6</time>
-</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/05/06/Codeforces-286E-Ladies-Shop/">[Codeforces 286E] Ladies&#39; Shop</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/05/06/bzoj-4650-优秀的拆分/" class="archive-article-date">
-  <time datetime="2018-05-06T02:03:54.000Z" itemprop="datePublished">May 6</time>
-</a>
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/05/03/Codeforces-425E-Sereja-and-Sets/" data-id="cjh77d2o4000al5ubqlyi4oql" class="article-share-link">Share</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/05/06/bzoj-4650-优秀的拆分/">[bzoj 4650] 优秀的拆分</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/05/05/bzoj-4585-烟火表演/" class="archive-article-date">
-  <time datetime="2018-05-05T10:24:07.000Z" itemprop="datePublished">May 5</time>
-</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/05/05/bzoj-4585-烟火表演/">[bzoj 4585] 烟火表演</a>
-    </h1>
-  
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/dp/">dp</a></li></ul>
 
-    </header>
+    </footer>
   </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/05/03/Codeforces-213E-Two-Permutations/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          [Codeforces 213E] Two Permutations
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/05/03/bzoj-3772-精神污染/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">[bzoj 3772] 精神污染</div>
+    </a>
+  
+</nav>
+
+  
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/05/05/Codeforces-452E-Three-strings/" class="archive-article-date">
-  <time datetime="2018-05-05T02:11:08.000Z" itemprop="datePublished">May 5</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/05/05/Codeforces-452E-Three-strings/">[Codeforces 452E] Three strings</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/05/04/学习笔记-dsu-on-tree/" class="archive-article-date">
-  <time datetime="2018-05-04T10:34:08.000Z" itemprop="datePublished">May 4</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/05/04/学习笔记-dsu-on-tree/">[学习笔记] dsu on tree</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/05/04/Codeforces-333E-Summer-Earnings/" class="archive-article-date">
-  <time datetime="2018-05-04T08:02:10.000Z" itemprop="datePublished">May 4</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/05/04/Codeforces-333E-Summer-Earnings/">[Codeforces 333E] Summer Earnings</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/05/04/Codeforces-115E-Linear-Kingdom-Races/" class="archive-article-date">
-  <time datetime="2018-05-04T06:45:33.000Z" itemprop="datePublished">May 4</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/05/04/Codeforces-115E-Linear-Kingdom-Races/">[Codeforces 115E] Linear Kingdom Races</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/05/04/bzoj-4712-洪水/" class="archive-article-date">
-  <time datetime="2018-05-04T05:55:59.000Z" itemprop="datePublished">May 4</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/05/04/bzoj-4712-洪水/">[bzoj 4712] 洪水</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-
-  <nav id="page-nav">
-    
-    <span class="page-number current">1</span><a class="page-number" href="/archives/2018/page/2/">2</a><a class="extend next" rel="next" href="/archives/2018/page/2/">Next &raquo;</a>
-  </nav>
 
 </section>
         

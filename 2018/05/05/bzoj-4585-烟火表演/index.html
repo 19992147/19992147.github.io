@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>[bzoj 4585] 烟火表演 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Descrpiton:一棵有边权的树，求使所有叶子节点到根距离相同的最小修改代价。">
+<meta name="keywords" content="可并堆,凸包">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[bzoj 4585] 烟火表演">
+<meta property="og:url" content="http://yoursite.com/2018/05/05/bzoj-4585-烟火表演/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Descrpiton:一棵有边权的树，求使所有叶子节点到根距离相同的最小修改代价。">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-05-06T13:37:26.747Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[bzoj 4585] 烟火表演">
+<meta name="twitter:description" content="Descrpiton:一棵有边权的树，求使所有叶子节点到根距离相同的最小修改代价。">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-bzoj-4585-烟火表演" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/05/05/bzoj-4585-烟火表演/" class="article-date">
+  <time datetime="2018-05-05T10:24:07.000Z" itemprop="datePublished">2018-05-05</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/bzoj/">bzoj</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      [bzoj 4585] 烟火表演
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>Descrpiton:</strong><br>一棵有边权的树，求使所有叶子节点到根距离相同的最小修改代价。</p>
+<a id="more"></a>
+<hr>
+<p><strong>Solution:</strong><br>设$f(x)$表示叶子到根距离为x的花费。<br>那么有<br>$$f(x)=\sum{|x-w|}$$<br>所以得出$f(x)$是一个下凸的分段一次函数。<br>考虑对于$f(x)$有两种操作<br>1.加入到父亲的边<br>2.合并儿子的凸壳<br>由于我们只关心拐点的值，所以第二种情况直接暴力合并即可。<br>第一种情况即是$f(x) -&gt; f(x + w)$<br>设x在区间$[L,R]$取到最小值，那么我们可以得出新的函数<br>$F(x) = f(x) + w$           $(x \leq L)$<br>$F(x) = f(L) + w - (x - L)$ $(L \leq x \leq L + w)$<br>$F(x) = f(L)$                    $(L + w \leq x \leq R + w)$<br>$F(x) = f(L) + (x - R) - w$ $(R + w \leq x)$<br>发现事实上是将原来平移，再加入斜率为$-1,0,1$的三段函数。<br>由于只需要拐点，于是我们用可并堆维护拐点之间的大小关系即可,最后答案即是边权和减去斜率为负的拐点。</p>
+<hr>
+<p><strong>Code:</strong><br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">6e5</span> + <span class="number">5</span>;</span><br><span class="line"><span class="keyword">int</span> n, m, tot;</span><br><span class="line"><span class="keyword">long</span> <span class="keyword">long</span> ans;</span><br><span class="line"><span class="keyword">int</span> lc[maxn], rc[maxn], d[maxn], len[maxn], rt[maxn], fa[maxn], deg[maxn];</span><br><span class="line"><span class="keyword">long</span> <span class="keyword">long</span> v[maxn];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">merge</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(!x) &#123;</span><br><span class="line">		<span class="keyword">return</span> y;	</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(!y) &#123;</span><br><span class="line">		<span class="keyword">return</span> x;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(v[x] &lt; v[y]) &#123;</span><br><span class="line">		swap(x, y);</span><br><span class="line">	&#125;</span><br><span class="line">	rc[x] = merge(rc[x], y);</span><br><span class="line">	<span class="keyword">if</span>(d[rc[x]] &gt; d[lc[x]]) &#123;</span><br><span class="line">		swap(lc[x], rc[x]);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(!rc[x]) &#123;</span><br><span class="line">		d[x] = <span class="number">0</span>;</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		d[x] = d[rc[x]] + <span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> x;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pop</span><span class="params">(<span class="keyword">int</span> u)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> merge(lc[u], rc[u]);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;n, &amp;m);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= n + m; ++i) &#123;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;fa[i], &amp;len[i]);</span><br><span class="line">		ans += len[i];</span><br><span class="line">		++deg[fa[i]];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = n + m; i &gt; <span class="number">1</span>; --i) &#123;</span><br><span class="line">		<span class="keyword">long</span> <span class="keyword">long</span> l = <span class="number">0</span>, r = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">if</span>(i &lt;= n) &#123;</span><br><span class="line">			<span class="keyword">while</span>(--deg[i]) &#123;</span><br><span class="line">				rt[i] = pop(rt[i]);</span><br><span class="line">			&#125;</span><br><span class="line">			r = v[rt[i]];</span><br><span class="line">			rt[i] = pop(rt[i]);</span><br><span class="line">			l = v[rt[i]];</span><br><span class="line">			rt[i] = pop(rt[i]);</span><br><span class="line">		&#125;</span><br><span class="line">		v[++tot] = l + len[i];</span><br><span class="line">		v[++tot] = r + len[i];</span><br><span class="line">		rt[i] = merge(rt[i], merge(tot, tot - <span class="number">1</span>));</span><br><span class="line">		rt[fa[i]] = merge(rt[i], rt[fa[i]]);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">while</span>(deg[<span class="number">1</span>]--) &#123;</span><br><span class="line">		rt[<span class="number">1</span>] = pop(rt[<span class="number">1</span>]);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">while</span>(rt[<span class="number">1</span>]) &#123;</span><br><span class="line">		ans -= v[rt[<span class="number">1</span>]];</span><br><span class="line">		rt[<span class="number">1</span>] = pop(rt[<span class="number">1</span>]);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%lld\n"</span>, ans);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/05/05/bzoj-4585-烟火表演/" data-id="cjh77d2os000vl5ubnfajefw8" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/凸包/">凸包</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/可并堆/">可并堆</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/05/06/bzoj-4650-优秀的拆分/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          [bzoj 4650] 优秀的拆分
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/05/05/Codeforces-452E-Three-strings/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">[Codeforces 452E] Three strings</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Codeforce/">Codeforce</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Codeforces/">Codeforces</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/bzoj/">bzoj</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/学习笔记/">学习笔记</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/bitset/">bitset</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dp/">dp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hash/">hash</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/凸包/">凸包</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/可并堆/">可并堆</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/后缀数组/">后缀数组</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/后缀自动机/">后缀自动机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/启发式合并/">启发式合并</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多项式-生成函数/">多项式 & 生成函数</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/差分/">差分</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/扫描线/">扫描线</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数学技巧/">数学技巧</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/树状数组/">树状数组</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/树链剖分/">树链剖分</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/线段树/">线段树</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/组合数学/">组合数学</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/计算几何/">计算几何</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/bitset/" style="font-size: 10px;">bitset</a> <a href="/tags/dp/" style="font-size: 20px;">dp</a> <a href="/tags/hash/" style="font-size: 10px;">hash</a> <a href="/tags/凸包/" style="font-size: 10px;">凸包</a> <a href="/tags/可并堆/" style="font-size: 10px;">可并堆</a> <a href="/tags/后缀数组/" style="font-size: 10px;">后缀数组</a> <a href="/tags/后缀自动机/" style="font-size: 10px;">后缀自动机</a> <a href="/tags/启发式合并/" style="font-size: 10px;">启发式合并</a> <a href="/tags/多项式-生成函数/" style="font-size: 10px;">多项式 & 生成函数</a> <a href="/tags/差分/" style="font-size: 15px;">差分</a> <a href="/tags/扫描线/" style="font-size: 10px;">扫描线</a> <a href="/tags/数学技巧/" style="font-size: 10px;">数学技巧</a> <a href="/tags/树状数组/" style="font-size: 10px;">树状数组</a> <a href="/tags/树链剖分/" style="font-size: 15px;">树链剖分</a> <a href="/tags/线段树/" style="font-size: 20px;">线段树</a> <a href="/tags/组合数学/" style="font-size: 10px;">组合数学</a> <a href="/tags/计算几何/" style="font-size: 10px;">计算几何</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/05/07/CTSC-APIO-2018-游记/">CTSC &amp; APIO 2018 游记</a>
+          </li>
+        
+          <li>
+            <a href="/2018/05/06/bzoj-3516-国王饮水记加强版/">[bzoj 3516] 国王饮水记加强版</a>
+          </li>
+        
+          <li>
+            <a href="/2018/05/06/Codeforces-286E-Ladies-Shop/">[Codeforces 286E] Ladies&#39; Shop</a>
+          </li>
+        
+          <li>
+            <a href="/2018/05/06/bzoj-4650-优秀的拆分/">[bzoj 4650] 优秀的拆分</a>
+          </li>
+        
+          <li>
+            <a href="/2018/05/05/bzoj-4585-烟火表演/">[bzoj 4585] 烟火表演</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
