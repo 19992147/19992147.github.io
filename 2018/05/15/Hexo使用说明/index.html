@@ -5,15 +5,20 @@
   
 
   
-  <title>Archives: 2018 | 19992147</title>
+  <title>Hexo使用说明 | 19992147</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="19992147">
-<meta property="og:url" content="http://yoursite.com/archives/2018/page/2/index.html">
+  <meta name="description" content="一些使用hexo的tips">
+<meta name="keywords" content="工程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo使用说明">
+<meta property="og:url" content="http://yoursite.com/2018/05/15/Hexo使用说明/index.html">
 <meta property="og:site_name" content="19992147">
+<meta property="og:description" content="一些使用hexo的tips">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-05-15T07:09:13.420Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="19992147">
+<meta name="twitter:title" content="Hexo使用说明">
+<meta name="twitter:description" content="一些使用hexo的tips">
   
     <link rel="alternate" href="/atom.xml" title="19992147" type="application/atom+xml">
   
@@ -61,159 +66,86 @@
 </header>
 
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/05/04/bzoj-4712-洪水/" class="archive-article-date">
-  <time datetime="2018-05-04T05:55:59.000Z" itemprop="datePublished">May 4</time>
+        <section id="main"><article id="post-Hexo使用说明" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/05/15/Hexo使用说明/" class="article-date">
+  <time datetime="2018-05-15T06:39:53.000Z" itemprop="datePublished">2018-05-15</time>
 </a>
-      
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/技术/">技术</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/05/04/bzoj-4712-洪水/">[bzoj 4712] 洪水</a>
+    <h1 class="article-title" itemprop="name">
+      Hexo使用说明
     </h1>
   
 
-    </header>
-  </div>
-</article>
-  
+      </header>
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/05/04/Codeforces-256E-Lucky-Arrays/" class="archive-article-date">
-  <time datetime="2018-05-04T05:30:05.000Z" itemprop="datePublished">May 4</time>
-</a>
+    <div class="article-entry" itemprop="articleBody">
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/05/04/Codeforces-256E-Lucky-Arrays/">[Codeforces 256E] Lucky Arrays</a>
-    </h1>
-  
+        <p>一些使用hexo的tips</p>
+<h2 id="-more-"><a class="markdownIt-Anchor" href="#-more-"></a> <a id="more"></a></h2>
+<h3 id="hexo的搭建"><a class="markdownIt-Anchor" href="#hexo的搭建"></a> Hexo的搭建</h3>
+<p><strong>1.安装node.js</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install nodejs</span><br></pre></td></tr></table></figure>
+<hr>
+<p><strong>2.安装git</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install git</span><br></pre></td></tr></table></figure>
+<hr>
+<p><strong>3.安装hexo</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
+<hr>
+<p><strong>4.初始化</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo init &lt;dir&gt;</span><br><span class="line"><span class="built_in">cd</span> &lt;dir&gt;</span><br><span class="line">npm install</span><br></pre></td></tr></table></figure>
+<p>本地博客已建好</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo g</span><br><span class="line">hexo s</span><br></pre></td></tr></table></figure>
+<p>访问<a href="http://localhost:4000/" target="_blank" rel="noopener">http://localhost:4000/</a>本地预览</p>
+<hr>
+<p><strong>5.Gitbub部署</strong><br>
+注册Github<br>
+创建一个新的repositories，<a href="http://xn--xxx-uz3e3fq44b.github.io" target="_blank" rel="noopener">名字叫xxx.github.io</a>	<br>
+改变_config.yml中对应内容</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  <span class="built_in">type</span>: git</span><br><span class="line">  repo: git@github.com:xxx/xxx.github.io.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
+<p>执行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo g</span><br><span class="line">hexo d</span><br></pre></td></tr></table></figure>
+<p>访问xxx.github.io即可。</p>
+<hr>
+<h3 id="hexo支持markdown"><a class="markdownIt-Anchor" href="#hexo支持markdown"></a> Hexo支持markdown</h3>
+<p><a href="https://blog.csdn.net/crazy_scott/article/details/79293576" target="_blank" rel="noopener">https://blog.csdn.net/crazy_scott/article/details/79293576</a></p>
 
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/05/04/Codeforces-46E-Comb/" class="archive-article-date">
-  <time datetime="2018-05-04T01:37:55.000Z" itemprop="datePublished">May 4</time>
-</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/05/04/Codeforces-46E-Comb/">[Codeforces 46E] Comb</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/05/03/Codeforces-213E-Two-Permutations/" class="archive-article-date">
-  <time datetime="2018-05-03T14:27:43.000Z" itemprop="datePublished">May 3</time>
-</a>
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/05/15/Hexo使用说明/" data-id="cjh7by9rg000ln4ub1deq5l3n" class="article-share-link">Share</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/05/03/Codeforces-213E-Two-Permutations/">[Codeforces 213E] Two Permutations</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/05/03/Codeforces-425E-Sereja-and-Sets/" class="archive-article-date">
-  <time datetime="2018-05-03T12:30:47.000Z" itemprop="datePublished">May 3</time>
-</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/05/03/Codeforces-425E-Sereja-and-Sets/">[Codeforces 425E] Sereja and Sets</a>
-    </h1>
-  
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/工程/">工程</a></li></ul>
 
-    </header>
+    </footer>
   </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2018/05/07/CTSC-APIO-2018-游记/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">CTSC &amp; APIO 2018 游记</div>
+    </a>
+  
+</nav>
+
+  
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/05/03/bzoj-3772-精神污染/" class="archive-article-date">
-  <time datetime="2018-05-03T02:02:59.000Z" itemprop="datePublished">May 3</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/05/03/bzoj-3772-精神污染/">[bzoj 3772] 精神污染</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/05/03/bzoj-2677-tied/" class="archive-article-date">
-  <time datetime="2018-05-02T23:30:00.000Z" itemprop="datePublished">May 3</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/05/03/bzoj-2677-tied/">[bzoj 2677] tied</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-
-  <nav id="page-nav">
-    
-    <a class="extend prev" rel="prev" href="/archives/2018/">&laquo; Prev</a><a class="page-number" href="/archives/2018/">1</a><span class="page-number current">2</span>
-  </nav>
 
 </section>
         
