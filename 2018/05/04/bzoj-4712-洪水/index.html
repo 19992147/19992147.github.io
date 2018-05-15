@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="19992147">
 <meta property="og:description" content="Description:求将树上叶子全部截断的最小花费，可以修改点权。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-05-04T08:06:20.614Z">
+<meta property="og:updated_time" content="2018-05-15T11:12:51.645Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[bzoj 4712] 洪水">
 <meta name="twitter:description" content="Description:求将树上叶子全部截断的最小花费，可以修改点权。">
@@ -95,7 +95,9 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p><strong>Description:</strong><br>求将树上叶子全部截断的最小花费，可以修改点权。</p>
-<h2 id=""><a href="#" class="headerlink" title=""></a><a id="more"></a></h2><p><strong>Solution:</strong><br>基于链分治的动态$dp$。<br>如果静态可以得出</p>
+<hr>
+<a id="more"></a>
+<p><strong>Solution:</strong><br>基于链分治的动态$dp$。<br>如果静态可以得出</p>
 <script type="math/tex; mode=display">f[u] = min(w[u], \sum{f[v]})</script><p>如果把这个问题搬到序列上就是线段树区间最大值，树上继续沿用这个思想。<br>先将树轻重链剖分，设g[u]表示轻儿子的f和，那么我们得出</p>
 <script type="math/tex; mode=display">f[u] = max(w[u], f[son[u]] + g[u])</script><p>想象一下，一条重链的方案是一个点封上后面加上连续的g值。<br>线段树维护一下$(f, sum)$,那么线段树上合并两端区间即是$(min(f_l, f_r + sum_l, sum_l + sum_r)$</p>
 <hr>
@@ -104,7 +106,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/04/bzoj-4712-洪水/" data-id="cjh7gpxmx0019e3ubioquf5qk" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/05/04/bzoj-4712-洪水/" data-id="cjh7pl1gq0019x2ub44um1ra0" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/dp/">dp</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/树链剖分/">树链剖分</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/线段树/">线段树</a></li></ul>
@@ -143,7 +145,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Codeforces/">Codeforces</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/bzoj/">bzoj</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/学习笔记/">学习笔记</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/">技术</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂/">杂</a><span class="category-list-count">1</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Codeforces/">Codeforces</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/bzoj/">bzoj</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/loj/">loj</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/学习笔记/">学习笔记</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/">技术</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂/">杂</a><span class="category-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -153,7 +155,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/bitset/">bitset</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dp/">dp</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hash/">hash</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/个人/">个人</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/凸包/">凸包</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/可并堆/">可并堆</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/后缀数组/">后缀数组</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/后缀自动机/">后缀自动机</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/启发式合并/">启发式合并</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多项式-生成函数/">多项式 & 生成函数</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工程/">工程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/差分/">差分</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/扫描线/">扫描线</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数学技巧/">数学技巧</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/树状数组/">树状数组</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/树链剖分/">树链剖分</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/线段树/">线段树</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/组合数学/">组合数学</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/计算几何/">计算几何</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/bitset/">bitset</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dp/">dp</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hash/">hash</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/个人/">个人</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/二分/">二分</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/凸包/">凸包</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/可并堆/">可并堆</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/后缀数组/">后缀数组</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/后缀自动机/">后缀自动机</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/启发式合并/">启发式合并</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多项式-生成函数/">多项式 & 生成函数</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工程/">工程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/差分/">差分</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/扫描线/">扫描线</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数学技巧/">数学技巧</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/树状数组/">树状数组</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/树链剖分/">树链剖分</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/线段树/">线段树</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/组合数学/">组合数学</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/计算几何/">计算几何</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -163,7 +165,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/bitset/" style="font-size: 10px;">bitset</a> <a href="/tags/dp/" style="font-size: 20px;">dp</a> <a href="/tags/hash/" style="font-size: 10px;">hash</a> <a href="/tags/个人/" style="font-size: 10px;">个人</a> <a href="/tags/凸包/" style="font-size: 10px;">凸包</a> <a href="/tags/可并堆/" style="font-size: 10px;">可并堆</a> <a href="/tags/后缀数组/" style="font-size: 10px;">后缀数组</a> <a href="/tags/后缀自动机/" style="font-size: 10px;">后缀自动机</a> <a href="/tags/启发式合并/" style="font-size: 10px;">启发式合并</a> <a href="/tags/多项式-生成函数/" style="font-size: 10px;">多项式 & 生成函数</a> <a href="/tags/工程/" style="font-size: 10px;">工程</a> <a href="/tags/差分/" style="font-size: 15px;">差分</a> <a href="/tags/扫描线/" style="font-size: 10px;">扫描线</a> <a href="/tags/数学技巧/" style="font-size: 10px;">数学技巧</a> <a href="/tags/树状数组/" style="font-size: 10px;">树状数组</a> <a href="/tags/树链剖分/" style="font-size: 15px;">树链剖分</a> <a href="/tags/线段树/" style="font-size: 20px;">线段树</a> <a href="/tags/组合数学/" style="font-size: 10px;">组合数学</a> <a href="/tags/计算几何/" style="font-size: 10px;">计算几何</a>
+      <a href="/tags/bitset/" style="font-size: 10px;">bitset</a> <a href="/tags/dp/" style="font-size: 20px;">dp</a> <a href="/tags/hash/" style="font-size: 10px;">hash</a> <a href="/tags/个人/" style="font-size: 10px;">个人</a> <a href="/tags/二分/" style="font-size: 10px;">二分</a> <a href="/tags/凸包/" style="font-size: 10px;">凸包</a> <a href="/tags/可并堆/" style="font-size: 10px;">可并堆</a> <a href="/tags/后缀数组/" style="font-size: 10px;">后缀数组</a> <a href="/tags/后缀自动机/" style="font-size: 10px;">后缀自动机</a> <a href="/tags/启发式合并/" style="font-size: 10px;">启发式合并</a> <a href="/tags/多项式-生成函数/" style="font-size: 10px;">多项式 & 生成函数</a> <a href="/tags/工程/" style="font-size: 10px;">工程</a> <a href="/tags/差分/" style="font-size: 13.33px;">差分</a> <a href="/tags/扫描线/" style="font-size: 10px;">扫描线</a> <a href="/tags/数学技巧/" style="font-size: 10px;">数学技巧</a> <a href="/tags/树状数组/" style="font-size: 10px;">树状数组</a> <a href="/tags/树链剖分/" style="font-size: 13.33px;">树链剖分</a> <a href="/tags/线段树/" style="font-size: 16.67px;">线段树</a> <a href="/tags/组合数学/" style="font-size: 10px;">组合数学</a> <a href="/tags/计算几何/" style="font-size: 10px;">计算几何</a>
     </div>
   </div>
 
@@ -172,7 +174,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">17</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">18</span></li></ul>
     </div>
   </div>
 
@@ -183,6 +185,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2018/05/15/loj-2478-林克卡特树/">[loj 2478] 林克卡特树</a>
+          </li>
         
           <li>
             <a href="/2018/05/15/Hexo使用说明/">Hexo使用说明</a>
@@ -198,10 +204,6 @@
         
           <li>
             <a href="/2018/05/06/Codeforces-286E-Ladies-Shop/">[Codeforces 286E] Ladies&#39; Shop</a>
-          </li>
-        
-          <li>
-            <a href="/2018/05/06/bzoj-4650-优秀的拆分/">[bzoj 4650] 优秀的拆分</a>
           </li>
         
       </ul>
