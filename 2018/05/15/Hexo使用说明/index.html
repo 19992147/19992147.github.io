@@ -51,6 +51,8 @@
         
           <a class="main-nav-link" href="/archives">Archives</a>
         
+          <a class="main-nav-link" href="/about">About</a>
+        
       </nav>
       <nav id="sub-nav">
         
@@ -93,39 +95,26 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>一些使用hexo的tips</p>
-<h2 id="-more-"><a class="markdownIt-Anchor" href="#-more-"></a> <a id="more"></a></h2>
-<h3 id="hexo的搭建"><a class="markdownIt-Anchor" href="#hexo的搭建"></a> Hexo的搭建</h3>
-<p><strong>1.安装node.js</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install nodejs</span><br></pre></td></tr></table></figure>
+<h2 id=""><a href="#" class="headerlink" title=""></a><a id="more"></a></h2><h3 id="Hexo的搭建"><a href="#Hexo的搭建" class="headerlink" title="Hexo的搭建"></a>Hexo的搭建</h3><p><strong>1.安装node.js</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install nodejs</span><br></pre></td></tr></table></figure></p>
 <hr>
-<p><strong>2.安装git</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install git</span><br></pre></td></tr></table></figure>
+<p><strong>2.安装git</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install git</span><br></pre></td></tr></table></figure></p>
 <hr>
-<p><strong>3.安装hexo</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
+<p><strong>3.安装hexo</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br></pre></td></tr></table></figure></p>
 <hr>
-<p><strong>4.初始化</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo init &lt;dir&gt;</span><br><span class="line"><span class="built_in">cd</span> &lt;dir&gt;</span><br><span class="line">npm install</span><br></pre></td></tr></table></figure>
-<p>本地博客已建好</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo g</span><br><span class="line">hexo s</span><br></pre></td></tr></table></figure>
+<p><strong>4.初始化</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo init &lt;dir&gt;</span><br><span class="line"><span class="built_in">cd</span> &lt;dir&gt;</span><br><span class="line">npm install</span><br></pre></td></tr></table></figure></p>
+<p>本地博客已建好<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo g</span><br><span class="line">hexo s</span><br></pre></td></tr></table></figure></p>
 <p>访问<a href="http://localhost:4000/" target="_blank" rel="noopener">http://localhost:4000/</a>本地预览</p>
 <hr>
-<p><strong>5.Gitbub部署</strong><br>
-注册Github<br>
-创建一个新的repositories，<a href="http://xn--xxx-uz3e3fq44b.github.io" target="_blank" rel="noopener">名字叫xxx.github.io</a>	<br>
-改变_config.yml中对应内容</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  <span class="built_in">type</span>: git</span><br><span class="line">  repo: git@github.com:xxx/xxx.github.io.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
-<p>执行</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo g</span><br><span class="line">hexo d</span><br></pre></td></tr></table></figure>
+<p><strong>5.Gitbub部署</strong><br>注册Github<br>创建一个新的repositories，名字叫xxx.github.io<br>改变_config.yml中对应内容<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  <span class="built_in">type</span>: git</span><br><span class="line">  repo: git@github.com:xxx/xxx.github.io.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure></p>
+<p>执行<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo g</span><br><span class="line">hexo d</span><br></pre></td></tr></table></figure></p>
 <p>访问xxx.github.io即可。</p>
 <hr>
-<h3 id="hexo支持markdown"><a class="markdownIt-Anchor" href="#hexo支持markdown"></a> Hexo支持markdown</h3>
-<p><a href="https://blog.csdn.net/crazy_scott/article/details/79293576" target="_blank" rel="noopener">https://blog.csdn.net/crazy_scott/article/details/79293576</a></p>
+<h3 id="Hexo支持markdown"><a href="#Hexo支持markdown" class="headerlink" title="Hexo支持markdown"></a>Hexo支持markdown</h3><p><a href="https://blog.csdn.net/crazy_scott/article/details/79293576" target="_blank" rel="noopener">https://blog.csdn.net/crazy_scott/article/details/79293576</a></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/15/Hexo使用说明/" data-id="cjh7by9rg000ln4ub1deq5l3n" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/05/15/Hexo使用说明/" data-id="cjh7ga530000mt7ubnj2ghnw1" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/工程/">工程</a></li></ul>
@@ -240,6 +229,8 @@
   
     <a href="/archives" class="mobile-nav-link">Archives</a>
   
+    <a href="/about" class="mobile-nav-link">About</a>
+  
 </nav>
     
 
@@ -269,7 +260,6 @@
             all[i].SourceElement().parentNode.className += ' has-jax';
     });
 </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
-
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </body>
 </html>
