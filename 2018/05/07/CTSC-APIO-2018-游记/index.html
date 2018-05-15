@@ -7,14 +7,18 @@
   
   <title>CTSC &amp; APIO 2018 游记 | 19992147</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="article">
+  <meta name="description" content="前言 考的不好，失误较多,记录一下比赛的历程。  CTSC-DAY0 宾馆入住，由于是小床房，室友和家长去了外边住。晚上做了一道题早早地睡了，希望明天好好发挥，至少得拿个牌。  CTSC-DAY1 先看了看三道题，第一道题叙述较长，不是很清楚难度;第二道题和冬令营的考题十分相似，可是我并没有学习正确做法，而且既然出题人敢再次出这个idea，肯定是有备而来。第三道题大概不可做，暴力分不是很多。 仔细">
+<meta name="keywords" content="-个人">
+<meta property="og:type" content="article">
 <meta property="og:title" content="CTSC &amp; APIO 2018 游记">
 <meta property="og:url" content="http://yoursite.com/2018/05/07/CTSC-APIO-2018-游记/index.html">
 <meta property="og:site_name" content="19992147">
+<meta property="og:description" content="前言 考的不好，失误较多,记录一下比赛的历程。  CTSC-DAY0 宾馆入住，由于是小床房，室友和家长去了外边住。晚上做了一道题早早地睡了，希望明天好好发挥，至少得拿个牌。  CTSC-DAY1 先看了看三道题，第一道题叙述较长，不是很清楚难度;第二道题和冬令营的考题十分相似，可是我并没有学习正确做法，而且既然出题人敢再次出这个idea，肯定是有备而来。第三道题大概不可做，暴力分不是很多。 仔细">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-05-07T12:10:34.735Z">
+<meta property="og:updated_time" content="2018-05-15T06:37:55.005Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CTSC &amp; APIO 2018 游记">
+<meta name="twitter:description" content="前言 考的不好，失误较多,记录一下比赛的历程。  CTSC-DAY0 宾馆入住，由于是小床房，室友和家长去了外边住。晚上做了一道题早早地睡了，希望明天好好发挥，至少得拿个牌。  CTSC-DAY1 先看了看三道题，第一道题叙述较长，不是很清楚难度;第二道题和冬令营的考题十分相似，可是我并没有学习正确做法，而且既然出题人敢再次出这个idea，肯定是有备而来。第三道题大概不可做，暴力分不是很多。 仔细">
   
     <link rel="alternate" href="/atom.xml" title="19992147" type="application/atom+xml">
   
@@ -68,6 +72,10 @@
   <time datetime="2018-05-07T12:10:34.000Z" itemprop="datePublished">2018-05-07</time>
 </a>
     
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/杂/">杂</a>
+  </div>
+
   </div>
   <div class="article-inner">
     
@@ -84,13 +92,63 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <p><strong>前言</strong><br>
+考的不好，失误较多,记录一下比赛的历程。</p>
+<hr>
+<p><strong>CTSC-DAY0</strong><br>
+宾馆入住，由于是小床房，室友和家长去了外边住。晚上做了一道题早早地睡了，希望明天好好发挥，至少得拿个牌。</p>
+<hr>
+<p><strong>CTSC-DAY1</strong><br>
+先看了看三道题，第一道题叙述较长，不是很清楚难度;第二道题和冬令营的考题十分相似，可是我并没有学习正确做法，而且既然出题人敢再次出这个idea，肯定是有备而来。第三道题大概不可做，暴力分不是很多。<br>
+仔细研究了一下第一题，发现70分是一个简单的背包，100分神似bzoj2287,是一个删除物品的背包，可是我已经忘记了那题的正确做法。如果用NTT或分治做感觉并不能多得分。于是写了70分做法，由于一个细节写错了，过了大样例已经用时2.5小时。<br>
+第二题的暴力分不是很明确。O(n^2)的做法可以用st表做，但是n=8666的数据范围似乎并不能跑过，于是删掉了写完待调的st表，改成了暴力求lca。其他的部分分说不定可做，也可以尝试乱搞，可是由于认为第一题可做，于是时间全部砸给了第一题。<br>
+剩下的时间写完了第三题25分暴力，然后思考第一题直至结束，仍然没有想出来dp解决的方法。</p>
+<p>到了查分的时间，得分是70+30+10=110。这是一个很低的分数，其他同学大多比我高上一些，t3前面的暴力wa了，听了讲课又得知第二题O(n^2)可以通过45分，第一题的正解是可逆背包。<br>
+如果考试的时候拿到了后面的暴力，那么分数也不算低了，这样做的难度也并不大。70+45+25=140算是一个不错的分数。<br>
+第一题思维僵化，由于原题并不能用可逆的方法做，自己虽然想到了却放弃了这个做法，看来比赛的时候不能过分依赖原题，也要开创新的想法。<br>
+这个分大概是铜牌了，110实在是有点低。</p>
+<hr>
+<p><strong>CTSC-DAY2</strong><br>
+答辩日，打打游戏做做题听听讲度过了一天。感觉最有用的论文是关于生成函数的，大多数论文都是命题报告。</p>
+<hr>
+<p><strong>CTSC-DAY3</strong><br>
+抱着翻盘的想法进入考场，如果考的高一些银牌也是能达到的。<br>
+看完了三道题，觉得第一题最可做，于是思考了一下在40分钟过了这道题。这有点打乱我的节奏了，做题的速度也缓慢了下来。<br>
+又花了不少的时间看懂后面两道题。第二题的暴力似乎比较困难，第三题是提答，并没有做过，先去研究第三题。<br>
+花了很长时间研究第三题，由于不熟悉题答的做法，先开始对ans文件进行了操作，然后又思考了如何写出通解，最后才发现每个点都有不同的特性，第一个点可以爆搜，后面的点可以网络流，中间的点似乎可以乱搞。<br>
+这时还剩2个小时，由于第二题还没有写，于是去尝试第二题的40分暴力，不停地写写写，直到结束。</p>
+<p>100+0+6 这是今天的得分。&quot;狗牌?&quot;我想道。其他同学都做出了t1,t3也拿了不少的分。可以说今天做出了第一题的人分数都比我高。<br>
+玩游戏吧，没什么好想的。剩下的时间都在游戏中度过。</p>
+<hr>
+<p><strong>APIO-DAY0</strong><br>
+在宾馆中度过，打打游戏做做题，想想APIO能不能弥补CTSC的铁牌。</p>
+<hr>
+<p><strong>APIO-DAY1</strong><br>
+旁边坐着集训队大爷，气场强大，让我感受到了小说中来自高手的压迫。<br>
+看了看三道题，第三道题是一个求割点，难点应该在于讨论。对于自己的代码能力没有很强的自信，转战其他题。<br>
+旁边的同学已经写上了第一题，于是转去思考第一题的做法。想了很长很长时间仍然没有头绪，想到了二分，却没有很好的办法解决查询可行的方法。<br>
+时间过得很快，只剩下两个半小时了，自己却一分没得。这样会重复省选时的悲剧，赶紧写了第二三题的暴力，获得了7+31分。一会又写完了第一题的12分，这时机器开始卡了，反馈很慢，只能等待结果返回。第二题y=0的部分大概是一个标记永久化线段树，写写写调调调，由于中间不断看结果花了很长时间。最后交上去直到结束也没有反馈。</p>
+<p>和同学去食堂吃饭，除了zjc其他人比我还低，大家都不太会做今天的题，如果剩下的12分拿到了说不定能有Ag。</p>
+<p>回去看了看结果，没有过，还是50分，Cu预定。</p>
+<hr>
+<p><strong>APIO-DAY2</strong><br>
+在寝室里待了一天，颓颓颓。晚上zty告诉我我拿了两个铜。CTSC能拿铜牌真是令人感动，但是仍然被所有人吊打。</p>
+<hr>
+<p><strong>疏散日</strong><br>
+回家。</p>
+<hr>
+<p><strong>总结</strong><br>
+CTSC挂在策略，APIO挂在自己弱，APIO只拿了GXZ的0.18。<br>
+希望NOI能考好点，至少不要像CTSC这样难看。</p>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/07/CTSC-APIO-2018-游记/" data-id="cjh795vpo0000uvub71oksupp" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/05/07/CTSC-APIO-2018-游记/" data-id="cjh7b171v000015ubqdra0wuz" class="article-share-link">Share</a>
       
       
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/个人/">-个人</a></li></ul>
+
     </footer>
   </div>
   
@@ -116,7 +174,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Codeforces/">Codeforces</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/bzoj/">bzoj</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/学习笔记/">学习笔记</a><span class="category-list-count">1</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Codeforces/">Codeforces</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/bzoj/">bzoj</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/学习笔记/">学习笔记</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂/">杂</a><span class="category-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -126,7 +184,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/bitset/">bitset</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dp/">dp</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hash/">hash</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/凸包/">凸包</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/可并堆/">可并堆</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/后缀数组/">后缀数组</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/后缀自动机/">后缀自动机</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/启发式合并/">启发式合并</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多项式-生成函数/">多项式 & 生成函数</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/差分/">差分</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/扫描线/">扫描线</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数学技巧/">数学技巧</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/树状数组/">树状数组</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/树链剖分/">树链剖分</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/线段树/">线段树</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/组合数学/">组合数学</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/计算几何/">计算几何</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/个人/">-个人</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bitset/">bitset</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dp/">dp</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hash/">hash</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/凸包/">凸包</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/可并堆/">可并堆</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/后缀数组/">后缀数组</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/后缀自动机/">后缀自动机</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/启发式合并/">启发式合并</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多项式-生成函数/">多项式 & 生成函数</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/差分/">差分</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/扫描线/">扫描线</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数学技巧/">数学技巧</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/树状数组/">树状数组</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/树链剖分/">树链剖分</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/线段树/">线段树</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/组合数学/">组合数学</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/计算几何/">计算几何</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -136,7 +194,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/bitset/" style="font-size: 10px;">bitset</a> <a href="/tags/dp/" style="font-size: 20px;">dp</a> <a href="/tags/hash/" style="font-size: 10px;">hash</a> <a href="/tags/凸包/" style="font-size: 10px;">凸包</a> <a href="/tags/可并堆/" style="font-size: 10px;">可并堆</a> <a href="/tags/后缀数组/" style="font-size: 10px;">后缀数组</a> <a href="/tags/后缀自动机/" style="font-size: 10px;">后缀自动机</a> <a href="/tags/启发式合并/" style="font-size: 10px;">启发式合并</a> <a href="/tags/多项式-生成函数/" style="font-size: 10px;">多项式 & 生成函数</a> <a href="/tags/差分/" style="font-size: 15px;">差分</a> <a href="/tags/扫描线/" style="font-size: 10px;">扫描线</a> <a href="/tags/数学技巧/" style="font-size: 10px;">数学技巧</a> <a href="/tags/树状数组/" style="font-size: 10px;">树状数组</a> <a href="/tags/树链剖分/" style="font-size: 15px;">树链剖分</a> <a href="/tags/线段树/" style="font-size: 20px;">线段树</a> <a href="/tags/组合数学/" style="font-size: 10px;">组合数学</a> <a href="/tags/计算几何/" style="font-size: 10px;">计算几何</a>
+      <a href="/tags/个人/" style="font-size: 10px;">-个人</a> <a href="/tags/bitset/" style="font-size: 10px;">bitset</a> <a href="/tags/dp/" style="font-size: 20px;">dp</a> <a href="/tags/hash/" style="font-size: 10px;">hash</a> <a href="/tags/凸包/" style="font-size: 10px;">凸包</a> <a href="/tags/可并堆/" style="font-size: 10px;">可并堆</a> <a href="/tags/后缀数组/" style="font-size: 10px;">后缀数组</a> <a href="/tags/后缀自动机/" style="font-size: 10px;">后缀自动机</a> <a href="/tags/启发式合并/" style="font-size: 10px;">启发式合并</a> <a href="/tags/多项式-生成函数/" style="font-size: 10px;">多项式 & 生成函数</a> <a href="/tags/差分/" style="font-size: 15px;">差分</a> <a href="/tags/扫描线/" style="font-size: 10px;">扫描线</a> <a href="/tags/数学技巧/" style="font-size: 10px;">数学技巧</a> <a href="/tags/树状数组/" style="font-size: 10px;">树状数组</a> <a href="/tags/树链剖分/" style="font-size: 15px;">树链剖分</a> <a href="/tags/线段树/" style="font-size: 20px;">线段树</a> <a href="/tags/组合数学/" style="font-size: 10px;">组合数学</a> <a href="/tags/计算几何/" style="font-size: 10px;">计算几何</a>
     </div>
   </div>
 
