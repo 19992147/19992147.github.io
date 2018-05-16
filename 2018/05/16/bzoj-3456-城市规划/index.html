@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="19992147">
 <meta property="og:description" content="Description:求$n$个点有标号无向连通图个数。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-05-16T11:52:54.221Z">
+<meta property="og:updated_time" content="2018-05-16T12:37:50.142Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[bzoj 3456] 城市规划">
 <meta name="twitter:description" content="Description:求$n$个点有标号无向连通图个数。">
@@ -98,8 +98,8 @@
 <hr>
 <a id="more"></a>
 <p><strong>Solution:</strong><br>考虑无向图的$EGF$ </p>
-<script type="math/tex; mode=display">G(x) = \sum_{n \geq 0}{2^C_{n}{2}*\frac_{x^n}{n!}}</script><p>每一项的系数表示无标号的无向图个数<br>再考虑和无向连通图的关系<br>设无向连通图的EGF为</p>
-<script type="math/tex; mode=display">F(x) = \sum_{n \ geq 0}{C_n*\frac_{x^n}{n!}}</script><p>根据组合关系，得出</p>
+<script type="math/tex; mode=display">G(x) = \sum_{n \geq 0}{2^{C_{n}^{2}}*\frac{x^n}{n!}}</script><p>每一项的系数表示无标号的无向图个数<br>再考虑和无向连通图的关系<br>设无向连通图的$EGF$为</p>
+<script type="math/tex; mode=display">F(x) = \sum_{n \geq 0}{C_n*\frac{x^n}{n!}}</script><p>根据组合关系，得出</p>
 <script type="math/tex; mode=display">G(x) = e^F(x)</script><p>那么推得</p>
 <script type="math/tex; mode=display">F(x)=ln(G(x))</script><p>多项式求$ln$即可，复杂度$O(nlogn)$</p>
 <p>如何思考出关于$EGF$的做法？因为无向联通图是无向图的划分，自然联想到$EGF$。</p>
@@ -109,7 +109,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/16/bzoj-3456-城市规划/" data-id="cjh90f2gu000u6eubccc60xlo" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/05/16/bzoj-3456-城市规划/" data-id="cjh9372x2000uwjub2s829k0n" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/多项式-生成函数/">多项式 & 生成函数</a></li></ul>
@@ -255,23 +255,7 @@
             all[i].SourceElement().parentNode.className += ' has-jax';
     });
 </script>
-<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
-</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-      all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-  });
-</script>
-
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
-</script>
-<!-- End: Injected MathJax -->
-<!-- hexo-inject:end -->
 </body>
 </html>
