@@ -5,15 +5,20 @@
   
 
   
-  <title>Category: 杂 | 19992147</title>
+  <title>[bzoj 5334] 数学计算 | 19992147</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="19992147">
-<meta property="og:url" content="http://yoursite.com/categories/杂/index.html">
+  <meta name="description" content="Description:给出一个初始为$1$的数$x$，执行两种操作:1.乘上一个数并取模2.撤销某次乘法输出操作后的数$x$">
+<meta name="keywords" content="线段树">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[bzoj 5334] 数学计算">
+<meta property="og:url" content="http://yoursite.com/2018/05/17/bzoj-5334-数学计算/index.html">
 <meta property="og:site_name" content="19992147">
+<meta property="og:description" content="Description:给出一个初始为$1$的数$x$，执行两种操作:1.乘上一个数并取模2.撤销某次乘法输出操作后的数$x$">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-05-17T13:54:26.376Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="19992147">
+<meta name="twitter:title" content="[bzoj 5334] 数学计算">
+<meta name="twitter:description" content="Description:给出一个初始为$1$的数$x$，执行两种操作:1.乘上一个数并取模2.撤销某次乘法输出操作后的数$x$">
   
     <link rel="alternate" href="/atom.xml" title="19992147" type="application/atom+xml">
   
@@ -63,40 +68,63 @@
 </header>
 
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/05/07/CTSC-APIO-2018-游记/" class="archive-article-date">
-  <time datetime="2018-05-07T12:10:34.000Z" itemprop="datePublished">May 7</time>
+        <section id="main"><article id="post-bzoj-5334-数学计算" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/05/17/bzoj-5334-数学计算/" class="article-date">
+  <time datetime="2018-05-17T13:50:25.000Z" itemprop="datePublished">2018-05-17</time>
 </a>
-      
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/bzoj/">bzoj</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/05/07/CTSC-APIO-2018-游记/">CTSC &amp; APIO 2018 游记</a>
+    <h1 class="article-title" itemprop="name">
+      [bzoj 5334] 数学计算
     </h1>
   
 
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>Description:</strong><br>给出一个初始为$1$的数$x$，执行两种操作:<br>1.乘上一个数并取模<br>2.撤销某次乘法<br>输出操作后的数$x$</p>
+<hr>
+<a id="more"></a>
+<p><strong>Solution:</strong><br>线段树维护操作，如果是撤销则把对应位置赋为$1$。</p>
+<hr>
+<p><strong>Code:</strong><br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> m, P;</span><br><span class="line"><span class="keyword">int</span> t[<span class="number">400005</span>];</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">update</span><span class="params">(<span class="keyword">int</span> l, <span class="keyword">int</span> r, <span class="keyword">int</span> x, <span class="keyword">int</span> p, <span class="keyword">int</span> d)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(l == r) &#123; t[x] = d; <span class="keyword">return</span>; &#125;</span><br><span class="line">	<span class="keyword">int</span> mid = (l + r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">if</span>(p &lt;= mid) update(l, mid, x &lt;&lt; <span class="number">1</span>, p, d); <span class="keyword">else</span> update(mid + <span class="number">1</span>, r, x &lt;&lt; <span class="number">1</span> | <span class="number">1</span>, p, d);</span><br><span class="line">	t[x] = <span class="number">1L</span>L * t[x &lt;&lt; <span class="number">1</span>] * t[x &lt;&lt; <span class="number">1</span> | <span class="number">1</span>] % P;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> T; <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;T);</span><br><span class="line">	<span class="keyword">while</span>(T--) &#123;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;m, &amp;P);</span><br><span class="line">		fill(t + <span class="number">1</span>, t + <span class="number">4</span> * m + <span class="number">1</span>, <span class="number">1</span>);</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= m; ++i) &#123;</span><br><span class="line">			<span class="keyword">int</span> opt, x;</span><br><span class="line">			<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;opt, &amp;x);</span><br><span class="line">			<span class="keyword">if</span>(opt == <span class="number">1</span>) &#123;</span><br><span class="line">				update(<span class="number">1</span>, m, <span class="number">1</span>, i, x);</span><br><span class="line">			&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">				update(<span class="number">1</span>, m, <span class="number">1</span>, x, <span class="number">1</span>);</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">"%d\n"</span>, t[<span class="number">1</span>]);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/05/17/bzoj-5334-数学计算/" data-id="cjhaljpba001ihmube149ts9e" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/线段树/">线段树</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2018/05/17/bzoj-3684-大朋友和多叉树/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">[bzoj 3684] 大朋友和多叉树</div>
+    </a>
+  
+</nav>
+
+  
+</article>
 
 </section>
         
