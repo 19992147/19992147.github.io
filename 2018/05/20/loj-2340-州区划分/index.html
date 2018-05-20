@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+  
+
+  
+  <title>[loj 2340] 州区划分 | 19992147</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Description:给出$n$个城市和$m$条双向道路，一个合法的州的定义是该州不存在欧拉回路。现在要求统计对于所有合法方案满意度的和。定义一个方案的满意度为方案中每个州的满意度的乘积，每个州的满意度为第$i$个州的人口在前$i$个州的人口中所占比例的$p$次幂。">
+<meta name="keywords" content="dp,多项式 &amp; 生成函数">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[loj 2340] 州区划分">
+<meta property="og:url" content="http://yoursite.com/2018/05/20/loj-2340-州区划分/index.html">
+<meta property="og:site_name" content="19992147">
+<meta property="og:description" content="Description:给出$n$个城市和$m$条双向道路，一个合法的州的定义是该州不存在欧拉回路。现在要求统计对于所有合法方案满意度的和。定义一个方案的满意度为方案中每个州的满意度的乘积，每个州的满意度为第$i$个州的人口在前$i$个州的人口中所占比例的$p$次幂。">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-05-20T15:43:02.983Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[loj 2340] 州区划分">
+<meta name="twitter:description" content="Description:给出$n$个城市和$m$条双向道路，一个合法的州的定义是该州不存在欧拉回路。现在要求统计对于所有合法方案满意度的和。定义一个方案的满意度为方案中每个州的满意度的乘积，每个州的满意度为第$i$个州的人口在前$i$个州的人口中所占比例的$p$次幂。">
+  
+    <link rel="alternate" href="/atom.xml" title="19992147" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">19992147</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-loj-2340-州区划分" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/05/20/loj-2340-州区划分/" class="article-date">
+  <time datetime="2018-05-20T13:28:24.000Z" itemprop="datePublished">2018-05-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      [loj 2340] 州区划分
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>Description:</strong><br>给出$n$个城市和$m$条双向道路，一个合法的州的定义是该州不存在欧拉回路。现在要求统计对于所有合法方案满意度的和。定义一个方案的满意度为方案中每个州的满意度的乘积，每个州的满意度为第$i$个州的人口在前$i$个州的人口中所占比例的$p$次幂。</p>
+<hr>
+<a id="more"></a>
+<p><strong>Solution:</strong><br>定义$dp[i][S]$表示集合为$S$的城市划分为$i$个州的满意度和，g[S]表示当前S集合合法的情况下的满意度，考虑转移</p>
+<script type="math/tex; mode=display">dp[i][S] = dp[i-1][S-S0]*g[S0]</script><p>复杂度为$O(3^nn)$，无法通过此题。</p>
+<p>考虑利用$FMT$优化，由于$FMT$是或和，不能直接做。<br>改变状态，设$dp[i][S]$表示当前一共所有州的城市数量和，且这些州城市的并集为$S$，这些州的城市可以相交;$g[i][S]$表示城市集合$S$，一共有$i$个州。先用$FMT$把所有变量转化为点值，然后进行$dp$即可。</p>
+<hr>
+<p><strong>Code:</strong><br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = (<span class="number">1</span> &lt;&lt; <span class="number">21</span>) + <span class="number">5</span>, P = <span class="number">998244353</span>;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">edge</span> &#123;</span></span><br><span class="line">	<span class="keyword">int</span> u, v;</span><br><span class="line">	edge() &#123;&#125;</span><br><span class="line">	edge(<span class="keyword">int</span> _u, <span class="keyword">int</span> _v) : u(_u), v(_v) &#123;&#125;</span><br><span class="line">&#125; e[<span class="number">405</span>];</span><br><span class="line"><span class="keyword">int</span> n, m, p;</span><br><span class="line"><span class="keyword">int</span> w[<span class="number">22</span>], d[<span class="number">22</span>], f[<span class="number">22</span>][maxn], g[<span class="number">22</span>][maxn], inv[maxn], fa[<span class="number">22</span>], s[maxn];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> x == fa[x] ? x : fa[x] = find(fa[x]);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">power</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> t)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> ret = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(; t; t &gt;&gt;= <span class="number">1</span>, x = <span class="number">1L</span>L * x * x % P) <span class="keyword">if</span>(t &amp; <span class="number">1</span>) ret = <span class="number">1L</span>L * ret * x % P;</span><br><span class="line">	<span class="keyword">return</span> ret;</span><br><span class="line">&#125; </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">FMT</span><span class="params">(<span class="keyword">int</span> *a, <span class="keyword">int</span> f)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> L = <span class="number">1</span> &lt;&lt; n;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; L; i &lt;&lt;= <span class="number">1</span>) <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; L; ++j) <span class="keyword">if</span>(i &amp; j) &#123; a[j] += a[j ^ i] * f; <span class="keyword">if</span>(a[j] &lt; <span class="number">0</span>) a[j] += P; <span class="keyword">else</span> <span class="keyword">if</span>(a[j] &gt;= P) a[j] -= P; &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d%d%d"</span>, &amp;n, &amp;m, &amp;p);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= m; ++i) &#123;</span><br><span class="line">		<span class="keyword">int</span> u, v; <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;u, &amp;v); --u; --v;</span><br><span class="line">		e[i] = edge(u, v);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ++i) <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;w[i]);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> S = <span class="number">1</span>; S &lt; <span class="number">1</span> &lt;&lt; n; ++S) &#123;</span><br><span class="line">		<span class="keyword">int</span> sum = <span class="number">0</span>, cnt = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ++i) d[i] = <span class="number">0</span>, fa[i] = i; </span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ++i) &#123;</span><br><span class="line">			<span class="keyword">if</span>(S &gt;&gt; i &amp; <span class="number">1</span>) &#123;</span><br><span class="line"> 				sum += w[i]; </span><br><span class="line"> 				++cnt;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">int</span> bit = cnt;</span><br><span class="line">		s[S] = sum;</span><br><span class="line">		inv[S] = power(power(s[S], P - <span class="number">2</span>), p);</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= m; ++i) <span class="keyword">if</span>((S &gt;&gt; e[i].u &amp; <span class="number">1</span>) &amp;&amp; (S &gt;&gt; e[i].v &amp; <span class="number">1</span>))&#123;</span><br><span class="line">			<span class="keyword">int</span> u = find(e[i].u), v = find(e[i].v);</span><br><span class="line">			++d[e[i].u]; ++d[e[i].v];</span><br><span class="line">			<span class="keyword">if</span>(u != v) &#123;</span><br><span class="line">				fa[u] = v;</span><br><span class="line">				--cnt;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">bool</span> f = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ++i) <span class="keyword">if</span>(S &gt;&gt; i &amp; <span class="number">1</span>) f |= d[i] &amp; <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">if</span>(f || cnt &gt; <span class="number">1</span>) g[bit][S] = power(s[S], p);</span><br><span class="line">	&#125;</span><br><span class="line">	f[<span class="number">0</span>][<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">	FMT(f[<span class="number">0</span>], <span class="number">1</span>);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) FMT(g[i], <span class="number">1</span>);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= i; ++j) <span class="keyword">for</span>(<span class="keyword">int</span> S = <span class="number">0</span>; S &lt; <span class="number">1</span> &lt;&lt; n; ++S) f[i][S] = (f[i][S] + <span class="number">1L</span>L * f[i - j][S] * g[j][S] % P) % P;</span><br><span class="line">		FMT(f[i], <span class="number">-1</span>);</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> S = <span class="number">0</span>; S &lt; <span class="number">1</span> &lt;&lt; n; ++S) f[i][S] = <span class="number">1L</span>L * f[i][S] * inv[S] % P;</span><br><span class="line">		<span class="keyword">if</span>(i &lt; n) FMT(f[i], <span class="number">1</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%d\n"</span>, f[n][(<span class="number">1</span> &lt;&lt; n) - <span class="number">1</span>]);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/05/20/loj-2340-州区划分/" data-id="cjhezqczt001fzfubuslk44ur" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/dp/">dp</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/多项式-生成函数/">多项式 & 生成函数</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2018/05/18/bzoj-5341-暴力写挂/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">[bzoj 5341] 暴力写挂</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Codeforces/">Codeforces</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/bzoj/">bzoj</a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/loj/">loj</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/学习笔记/">学习笔记</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/">技术</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂/">杂</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/bitset/">bitset</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dp/">dp</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hash/">hash</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/个人/">个人</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/二分/">二分</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/凸包/">凸包</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/可并堆/">可并堆</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/后缀数组/">后缀数组</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/后缀自动机/">后缀自动机</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/启发式合并/">启发式合并</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多项式-生成函数/">多项式 & 生成函数</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工程/">工程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/差分/">差分</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/扫描线/">扫描线</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数学技巧/">数学技巧</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/树状数组/">树状数组</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/树链剖分/">树链剖分</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/点分治/">点分治</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/线段树/">线段树</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/组合数学/">组合数学</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/虚树/">虚树</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/计算几何/">计算几何</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/bitset/" style="font-size: 10px;">bitset</a> <a href="/tags/dp/" style="font-size: 20px;">dp</a> <a href="/tags/hash/" style="font-size: 10px;">hash</a> <a href="/tags/个人/" style="font-size: 10px;">个人</a> <a href="/tags/二分/" style="font-size: 10px;">二分</a> <a href="/tags/凸包/" style="font-size: 10px;">凸包</a> <a href="/tags/可并堆/" style="font-size: 10px;">可并堆</a> <a href="/tags/后缀数组/" style="font-size: 10px;">后缀数组</a> <a href="/tags/后缀自动机/" style="font-size: 10px;">后缀自动机</a> <a href="/tags/启发式合并/" style="font-size: 10px;">启发式合并</a> <a href="/tags/多项式-生成函数/" style="font-size: 15px;">多项式 & 生成函数</a> <a href="/tags/工程/" style="font-size: 10px;">工程</a> <a href="/tags/差分/" style="font-size: 12.5px;">差分</a> <a href="/tags/扫描线/" style="font-size: 10px;">扫描线</a> <a href="/tags/数学技巧/" style="font-size: 10px;">数学技巧</a> <a href="/tags/树状数组/" style="font-size: 10px;">树状数组</a> <a href="/tags/树链剖分/" style="font-size: 12.5px;">树链剖分</a> <a href="/tags/点分治/" style="font-size: 10px;">点分治</a> <a href="/tags/线段树/" style="font-size: 17.5px;">线段树</a> <a href="/tags/组合数学/" style="font-size: 10px;">组合数学</a> <a href="/tags/虚树/" style="font-size: 10px;">虚树</a> <a href="/tags/计算几何/" style="font-size: 10px;">计算几何</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">23</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/05/20/loj-2340-州区划分/">[loj 2340] 州区划分</a>
+          </li>
+        
+          <li>
+            <a href="/2018/05/18/bzoj-5341-暴力写挂/">[bzoj 5341] 暴力写挂</a>
+          </li>
+        
+          <li>
+            <a href="/2018/05/17/bzoj-5334-数学计算/">[bzoj 5334] 数学计算</a>
+          </li>
+        
+          <li>
+            <a href="/2018/05/17/bzoj-3684-大朋友和多叉树/">[bzoj 3684] 大朋友和多叉树</a>
+          </li>
+        
+          <li>
+            <a href="/2018/05/16/bzoj-3456-城市规划/">[bzoj 3456] 城市规划</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 19992147<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</body>
+</html>
