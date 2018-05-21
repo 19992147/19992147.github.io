@@ -5,15 +5,20 @@
   
 
   
-  <title>Archives: 2018 | 19992147</title>
+  <title>[Codeforces 840C] On the Bench | 19992147</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="19992147">
-<meta property="og:url" content="http://yoursite.com/archives/2018/index.html">
+  <meta name="description" content="Description:求满足相邻两数乘积不为完全平方数的排列个数。">
+<meta name="keywords" content="dp,组合数学">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Codeforces 840C] On the Bench">
+<meta property="og:url" content="http://yoursite.com/2018/05/21/Codeforces-840C-On-the-Bench/index.html">
 <meta property="og:site_name" content="19992147">
+<meta property="og:description" content="Description:求满足相邻两数乘积不为完全平方数的排列个数。">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-05-21T12:46:46.211Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="19992147">
+<meta name="twitter:title" content="[Codeforces 840C] On the Bench">
+<meta name="twitter:description" content="Description:求满足相邻两数乘积不为完全平方数的排列个数。">
   
     <link rel="alternate" href="/atom.xml" title="19992147" type="application/atom+xml">
   
@@ -63,216 +68,64 @@
 </header>
 
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/05/21/Codeforces-840C-On-the-Bench/" class="archive-article-date">
-  <time datetime="2018-05-21T12:18:59.000Z" itemprop="datePublished">May 21</time>
+        <section id="main"><article id="post-Codeforces-840C-On-the-Bench" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/05/21/Codeforces-840C-On-the-Bench/" class="article-date">
+  <time datetime="2018-05-21T12:18:59.000Z" itemprop="datePublished">2018-05-21</time>
 </a>
-      
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Codeforces/">Codeforces</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/05/21/Codeforces-840C-On-the-Bench/">[Codeforces 840C] On the Bench</a>
+    <h1 class="article-title" itemprop="name">
+      [Codeforces 840C] On the Bench
     </h1>
   
 
-    </header>
-  </div>
-</article>
-  
+      </header>
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/05/20/loj-2340-州区划分/" class="archive-article-date">
-  <time datetime="2018-05-20T13:28:24.000Z" itemprop="datePublished">May 20</time>
-</a>
+    <div class="article-entry" itemprop="articleBody">
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/05/20/loj-2340-州区划分/">[loj 2340] 州区划分</a>
-    </h1>
-  
+        <p><strong>Description:</strong><br>求满足相邻两数乘积不为完全平方数的排列个数。</p>
+<hr>
+<a id="more"></a>
+<p><strong>Solution:</strong><br>首先转化限制，将所有数的完全平方因子全部去除，那么相邻两个数乘积为完全平方数的条件即为两个数相等。</p>
+<p>将转化后相同的数分成一组按组进行$dp$。设$dp[i][j]$表示前$i$组有$j$个相等的数相邻,$sum$为之前所有数之间的空隙个数。考虑转移,枚举当前的数分成$k+1$组，再考虑插入的位置，可插入的位置有两种情况，分别是位于两个相等或不相等的数中间，枚举插入相等空隙数的组数$p$，得出转移</p>
+<script type="math/tex; mode=display">dp[i][j+sz[i]-k-p-1]=dp[i-1][j]*C_{k}^{p}*C_{sz[i]-1}^{k}*C_{sum+2-j}^{k+p-1}</script><hr>
+<p><strong>Code:</strong><br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">305</span>, P = <span class="number">1e9</span> + <span class="number">7</span>;</span><br><span class="line"><span class="keyword">int</span> n, sum, m;</span><br><span class="line"><span class="keyword">int</span> a[maxn], sz[maxn], c[maxn][maxn], fac[maxn], dp[maxn][maxn];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;n);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;a[i]);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">2</span>; j * j &lt;= a[i]; ++j) <span class="keyword">while</span>(a[i] % (j * j) == <span class="number">0</span>) a[i] /= j * j;</span><br><span class="line">	sort(a + <span class="number">1</span>, a + n + <span class="number">1</span>);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) <span class="keyword">if</span>(a[i] != a[i - <span class="number">1</span>]) sz[++m] = <span class="number">1</span>; <span class="keyword">else</span> ++sz[m];</span><br><span class="line">	c[<span class="number">0</span>][<span class="number">0</span>] = <span class="number">1</span>; fac[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">		c[i][<span class="number">0</span>] = <span class="number">1</span>; fac[i] = <span class="number">1L</span>L * fac[i - <span class="number">1</span>] * i % P;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= i; ++j) c[i][j] = (c[i - <span class="number">1</span>][j] + c[i - <span class="number">1</span>][j - <span class="number">1</span>]) % P;</span><br><span class="line">	&#125;</span><br><span class="line">	dp[<span class="number">1</span>][sz[<span class="number">1</span>] - <span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">	sum = <span class="number">-1</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= m; ++i) &#123;</span><br><span class="line">		sum += sz[i - <span class="number">1</span>];</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt;= sum; ++j) &#123;</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> k = <span class="number">0</span>; k &lt; sz[i]; ++k) &#123;</span><br><span class="line">				<span class="keyword">for</span>(<span class="keyword">int</span> p = <span class="number">0</span>; p &lt;= min(j, k + <span class="number">1</span>); ++p) &#123;</span><br><span class="line">					dp[i][j + sz[i] - <span class="number">1</span> - k - p] = (dp[i][j + sz[i] - <span class="number">1</span> - k - p] + <span class="number">1L</span>L * dp[i - <span class="number">1</span>][j] * c[sz[i] - <span class="number">1</span>][k] % P * c[j][p] % P * c[sum + <span class="number">2</span> - j][k + <span class="number">1</span> - p] % P) % P;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">int</span> ans = dp[m][<span class="number">0</span>];</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= m; ++i) ans = <span class="number">1L</span>L * ans * fac[sz[i]] % P;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%d\n"</span>, ans);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/05/18/bzoj-5341-暴力写挂/" class="archive-article-date">
-  <time datetime="2018-05-18T14:33:33.000Z" itemprop="datePublished">May 18</time>
-</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/05/18/bzoj-5341-暴力写挂/">[bzoj 5341] 暴力写挂</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/05/17/bzoj-5334-数学计算/" class="archive-article-date">
-  <time datetime="2018-05-17T13:50:25.000Z" itemprop="datePublished">May 17</time>
-</a>
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/05/21/Codeforces-840C-On-the-Bench/" data-id="cjhg8q5vd000c6qubasw7wkus" class="article-share-link">Share</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/05/17/bzoj-5334-数学计算/">[bzoj 5334] 数学计算</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/05/17/bzoj-3684-大朋友和多叉树/" class="archive-article-date">
-  <time datetime="2018-05-17T12:55:40.000Z" itemprop="datePublished">May 17</time>
-</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/05/17/bzoj-3684-大朋友和多叉树/">[bzoj 3684] 大朋友和多叉树</a>
-    </h1>
-  
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/dp/">dp</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/组合数学/">组合数学</a></li></ul>
 
-    </header>
+    </footer>
   </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2018/05/20/loj-2340-州区划分/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">[loj 2340] 州区划分</div>
+    </a>
+  
+</nav>
+
+  
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/05/16/bzoj-3456-城市规划/" class="archive-article-date">
-  <time datetime="2018-05-16T10:31:11.000Z" itemprop="datePublished">May 16</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/05/16/bzoj-3456-城市规划/">[bzoj 3456] 城市规划</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/05/15/loj-2478-林克卡特树/" class="archive-article-date">
-  <time datetime="2018-05-15T13:13:23.000Z" itemprop="datePublished">May 15</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/05/15/loj-2478-林克卡特树/">[loj 2478] 林克卡特树</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/05/15/Hexo使用说明/" class="archive-article-date">
-  <time datetime="2018-05-15T06:39:53.000Z" itemprop="datePublished">May 15</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/05/15/Hexo使用说明/">Hexo使用说明</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/05/07/CTSC-APIO-2018-游记/" class="archive-article-date">
-  <time datetime="2018-05-07T12:10:34.000Z" itemprop="datePublished">May 7</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/05/07/CTSC-APIO-2018-游记/">CTSC &amp; APIO 2018 游记</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/05/06/bzoj-3516-国王饮水记加强版/" class="archive-article-date">
-  <time datetime="2018-05-06T13:07:47.000Z" itemprop="datePublished">May 6</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/05/06/bzoj-3516-国王饮水记加强版/">[bzoj 3516] 国王饮水记加强版</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-
-  <nav id="page-nav">
-    
-    <span class="page-number current">1</span><a class="page-number" href="/archives/2018/page/2/">2</a><a class="page-number" href="/archives/2018/page/3/">3</a><a class="extend next" rel="next" href="/archives/2018/page/2/">Next &raquo;</a>
-  </nav>
 
 </section>
         
