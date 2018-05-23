@@ -5,20 +5,20 @@
   
 
   
-  <title>CTSC &amp; APIO 2018 游记 | 19992147</title>
+  <title>[bzoj 3930] 选数 | 19992147</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="前言考的不好，失误较多,记录一下比赛的历程。">
-<meta name="keywords" content="个人">
+  <meta name="description" content="Description:给出区间$[L,R]$,从中选出$n$个可重复的数，要求这些数的最大公约数为$k$，求选数的方案数。">
+<meta name="keywords" content="莫比乌斯反演">
 <meta property="og:type" content="article">
-<meta property="og:title" content="CTSC &amp; APIO 2018 游记">
-<meta property="og:url" content="http://yoursite.com/2018/05/07/CTSC-APIO-2018-游记/index.html">
+<meta property="og:title" content="[bzoj 3930] 选数">
+<meta property="og:url" content="http://yoursite.com/2018/05/23/bzoj-3930-选数/index.html">
 <meta property="og:site_name" content="19992147">
-<meta property="og:description" content="前言考的不好，失误较多,记录一下比赛的历程。">
+<meta property="og:description" content="Description:给出区间$[L,R]$,从中选出$n$个可重复的数，要求这些数的最大公约数为$k$，求选数的方案数。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-05-15T11:13:48.638Z">
+<meta property="og:updated_time" content="2018-05-23T13:21:39.575Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="CTSC &amp; APIO 2018 游记">
-<meta name="twitter:description" content="前言考的不好，失误较多,记录一下比赛的历程。">
+<meta name="twitter:title" content="[bzoj 3930] 选数">
+<meta name="twitter:description" content="Description:给出区间$[L,R]$,从中选出$n$个可重复的数，要求这些数的最大公约数为$k$，求选数的方案数。">
   
     <link rel="alternate" href="/atom.xml" title="19992147" type="application/atom+xml">
   
@@ -68,14 +68,14 @@
 </header>
 
       <div class="outer">
-        <section id="main"><article id="post-CTSC-APIO-2018-游记" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-bzoj-3930-选数" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2018/05/07/CTSC-APIO-2018-游记/" class="article-date">
-  <time datetime="2018-05-07T12:10:34.000Z" itemprop="datePublished">2018-05-07</time>
+    <a href="/2018/05/23/bzoj-3930-选数/" class="article-date">
+  <time datetime="2018-05-23T13:05:26.000Z" itemprop="datePublished">2018-05-23</time>
 </a>
     
   <div class="article-category">
-    <a class="article-category-link" href="/categories/杂/">杂</a>
+    <a class="article-category-link" href="/categories/bzoj/">bzoj</a>
   </div>
 
   </div>
@@ -86,7 +86,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      CTSC &amp; APIO 2018 游记
+      [bzoj 3930] 选数
     </h1>
   
 
@@ -94,38 +94,25 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><strong>前言</strong><br>考的不好，失误较多,记录一下比赛的历程。</p>
+        <p><strong>Description:</strong><br>给出区间$[L,R]$,从中选出$n$个可重复的数，要求这些数的最大公约数为$k$，求选数的方案数。</p>
 <hr>
 <a id="more"></a>
-<p><strong>CTSC-DAY0</strong><br>宾馆入住，由于是小床房，室友和家长去了外边住。晚上做了一道题早早地睡了，希望明天好好发挥，至少得拿个牌。</p>
+<p><strong>Solution:</strong><br>设$f(d)$表示选出的数最大公约数为$d$的方案数，$F(d)$表示选出的数最大公约数为$d$的倍数的方案数，根据莫比乌斯反演有</p>
+<script type="math/tex; mode=display">f(d)=\sum_{D|d}{F(\frac{D}{d})*\mu(d)}</script><p>枚举最大公约数k的倍数次，转化为</p>
+<script type="math/tex; mode=display">\begin{eqnarray}f(n)
+    &=&\sum_{i=1}^{[\frac{R}{k}]}{\mu(i)F([\frac{R}{ki}])}\\
+    &=&\sum_{i=1}^{[\frac{R}{k}]}{\mu(i)([\frac{R}{i}]-[\frac{L-1}{i}])^n}\\
+\end{eqnarray}</script><p>于是分块求和，问题转化为求$\mu$的前缀和，杜教筛即可。</p>
 <hr>
-<p><strong>CTSC-DAY1</strong><br>先看了看三道题，第一道题叙述较长，不是很清楚难度;第二道题和冬令营的考题十分相似，可是我并没有学习正确做法，而且既然出题人敢再次出这个idea，肯定是有备而来。第三道题大概不可做，暴力分不是很多。<br>仔细研究了一下第一题，发现70分是一个简单的背包，100分神似bzoj2287,是一个删除物品的背包，可是我已经忘记了那题的正确做法。如果用NTT或分治做感觉并不能多得分。于是写了70分做法，由于一个细节写错了，过了大样例已经用时2.5小时。<br>第二题的暴力分不是很明确。O(n^2)的做法可以用st表做，但是n=8666的数据范围似乎并不能跑过，于是删掉了写完待调的st表，改成了暴力求lca。其他的部分分说不定可做，也可以尝试乱搞，可是由于认为第一题可做，于是时间全部砸给了第一题。<br>剩下的时间写完了第三题25分暴力，然后思考第一题直至结束，仍然没有想出来dp解决的方法。</p>
-<p>到了查分的时间，得分是70+30+10=110。这是一个很低的分数，其他同学大多比我高上一些，t3前面的暴力wa了，听了讲课又得知第二题O(n^2)可以通过45分，第一题的正解是可逆背包。<br>如果考试的时候拿到了后面的暴力，那么分数也不算低了，这样做的难度也并不大。70+45+25=140算是一个不错的分数。<br>第一题思维僵化，由于原题并不能用可逆的方法做，自己虽然想到了却放弃了这个做法，看来比赛的时候不能过分依赖原题，也要开创新的想法。<br>这个分大概是铜牌了，110实在是有点低。</p>
-<hr>
-<p><strong>CTSC-DAY2</strong><br>答辩日，打打游戏做做题听听讲度过了一天。感觉最有用的论文是关于生成函数的，大多数论文都是命题报告。</p>
-<hr>
-<p><strong>CTSC-DAY3</strong><br>抱着翻盘的想法进入考场，如果考的高一些银牌也是能达到的。<br>看完了三道题，觉得第一题最可做，于是思考了一下在40分钟过了这道题。这有点打乱我的节奏了，做题的速度也缓慢了下来。<br>又花了不少的时间看懂后面两道题。第二题的暴力似乎比较困难，第三题是提答，并没有做过，先去研究第三题。<br>花了很长时间研究第三题，由于不熟悉题答的做法，先开始对ans文件进行了操作，然后又思考了如何写出通解，最后才发现每个点都有不同的特性，第一个点可以爆搜，后面的点可以网络流，中间的点似乎可以乱搞。<br>这时还剩2个小时，由于第二题还没有写，于是去尝试第二题的40分暴力，不停地写写写，直到结束。</p>
-<p>100+0+6 这是今天的得分。”狗牌?”我想道。其他同学都做出了t1,t3也拿了不少的分。可以说今天做出了第一题的人分数都比我高。<br>玩游戏吧，没什么好想的。剩下的时间都在游戏中度过。</p>
-<hr>
-<p><strong>APIO-DAY0</strong><br>在宾馆中度过，打打游戏做做题，想想APIO能不能弥补CTSC的铁牌。</p>
-<hr>
-<p><strong>APIO-DAY1</strong><br>旁边坐着集训队大爷，气场强大，让我感受到了小说中来自高手的压迫。<br>看了看三道题，第三道题是一个求割点，难点应该在于讨论。对于自己的代码能力没有很强的自信，转战其他题。<br>旁边的同学已经写上了第一题，于是转去思考第一题的做法。想了很长很长时间仍然没有头绪，想到了二分，却没有很好的办法解决查询可行的方法。<br>时间过得很快，只剩下两个半小时了，自己却一分没得。这样会重复省选时的悲剧，赶紧写了第二三题的暴力，获得了7+31分。一会又写完了第一题的12分，这时机器开始卡了，反馈很慢，只能等待结果返回。第二题y=0的部分大概是一个标记永久化线段树，写写写调调调，由于中间不断看结果花了很长时间。最后交上去直到结束也没有反馈。</p>
-<p>和同学去食堂吃饭，除了zjc其他人比我还低，大家都不太会做今天的题，如果剩下的12分拿到了说不定能有Ag。</p>
-<p>回去看了看结果，没有过，还是50分，Cu预定。</p>
-<hr>
-<p><strong>APIO-DAY2</strong><br>在寝室里待了一天，颓颓颓。晚上zty告诉我我拿了两个铜。CTSC能拿铜牌真是令人感动，但是仍然被所有人吊打。</p>
-<hr>
-<p><strong>疏散日</strong><br>回家。</p>
-<hr>
-<p><strong>总结</strong><br>CTSC挂在策略，APIO挂在自己弱，APIO只拿了GXZ的0.18。<br>希望NOI能考好点，至少不要像CTSC这样难看。</p>
+<p><strong>Code:</strong><br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">1e7</span> + <span class="number">5</span>, P = <span class="number">1e9</span> + <span class="number">7</span>;</span><br><span class="line"><span class="keyword">int</span> n, k, L, R, m;</span><br><span class="line"><span class="keyword">long</span> <span class="keyword">long</span> ans;</span><br><span class="line"><span class="keyword">int</span> mu[maxn], mark[maxn], p[maxn];</span><br><span class="line"><span class="built_in">map</span>&lt;<span class="keyword">int</span>, <span class="keyword">long</span> <span class="keyword">long</span>&gt; mp;</span><br><span class="line"><span class="function"><span class="keyword">long</span> <span class="keyword">long</span> <span class="title">power</span><span class="params">(<span class="keyword">long</span> <span class="keyword">long</span> x, <span class="keyword">long</span> <span class="keyword">long</span> t)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">long</span> <span class="keyword">long</span> ret = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(; t; t &gt;&gt;= <span class="number">1</span>, x = x * x % P) <span class="keyword">if</span>(t &amp; <span class="number">1</span>) ret = ret * x % P;</span><br><span class="line">	<span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Shaker</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	mu[<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">2</span>; i &lt; maxn; ++i) &#123;</span><br><span class="line">		<span class="keyword">if</span>(!mark[i]) &#123;</span><br><span class="line">			p[++p[<span class="number">0</span>]] = i; </span><br><span class="line">			mu[i] = <span class="number">-1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= p[<span class="number">0</span>] &amp;&amp; i * p[j] &lt; maxn; ++j) &#123;</span><br><span class="line">			mark[i * p[j]] = <span class="number">1</span>;</span><br><span class="line">			<span class="keyword">if</span>(i % p[j] == <span class="number">0</span>) <span class="keyword">break</span>;</span><br><span class="line">			mu[i * p[j]] = -mu[i];</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; maxn; ++i) mu[i] += mu[i - <span class="number">1</span>];</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">long</span> <span class="keyword">long</span> <span class="title">get_mu</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(n &lt; maxn) <span class="keyword">return</span> mu[n];</span><br><span class="line">	<span class="keyword">if</span>(mp.find(n) != mp.end()) <span class="keyword">return</span> mp[n];</span><br><span class="line">	<span class="keyword">long</span> <span class="keyword">long</span> ret = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">2</span>, j; i &lt;= n; i = j + <span class="number">1</span>) &#123;</span><br><span class="line">		j = n / (n / i);</span><br><span class="line">		ret -= (j - i + <span class="number">1</span>) * get_mu(n / i);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> mp[n] = ret;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d%d%d%d"</span>, &amp;n, &amp;k, &amp;L, &amp;R);</span><br><span class="line">	Shaker(); </span><br><span class="line">	L = (L - <span class="number">1</span>) / k; R = R / k; </span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>, j; i &lt;= R; i = j + <span class="number">1</span>) &#123;</span><br><span class="line">		j = min(R / (R / i), L / i ? L / (L / i) : <span class="number">1000000000</span>);</span><br><span class="line">		ans = (ans + (get_mu(j) - get_mu(i - <span class="number">1</span>) + P) % P * power(R / i - L / i, n) % P) % P;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%lld\n"</span>, ans);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/07/CTSC-APIO-2018-游记/" data-id="cjhj6348g000069ub28u3tbzk" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/05/23/bzoj-3930-选数/" data-id="cjhj6349u001f69ubu1pybx6t" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/个人/">个人</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/莫比乌斯反演/">莫比乌斯反演</a></li></ul>
 
     </footer>
   </div>
@@ -133,19 +120,19 @@
     
 <nav id="article-nav">
   
-    <a href="/2018/05/15/Hexo使用说明/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2018/05/23/loj-2541-猎人杀/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          Hexo使用说明
+          [loj 2541] 猎人杀
         
       </div>
     </a>
   
   
-    <a href="/2018/05/06/bzoj-3516-国王饮水记加强版/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2018/05/22/bzoj-1382-Mars-Map/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">[bzoj 3516] 国王饮水记加强版</div>
+      <div class="article-nav-title">[bzoj 1382] Mars Map</div>
     </a>
   
 </nav>
