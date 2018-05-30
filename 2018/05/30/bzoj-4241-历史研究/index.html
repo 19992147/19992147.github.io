@@ -5,15 +5,20 @@
   
 
   
-  <title>Tag: 概率与期望 | 19992147</title>
+  <title>[bzoj 4241] 历史研究 | 19992147</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="19992147">
-<meta property="og:url" content="http://yoursite.com/tags/概率与期望/index.html">
+  <meta name="description" content="Description:给出长度为$n$的序列，询问区间$[L,R]$权值乘以出现次数的最大值。">
+<meta name="keywords" content="莫队">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[bzoj 4241] 历史研究">
+<meta property="og:url" content="http://yoursite.com/2018/05/30/bzoj-4241-历史研究/index.html">
 <meta property="og:site_name" content="19992147">
+<meta property="og:description" content="Description:给出长度为$n$的序列，询问区间$[L,R]$权值乘以出现次数的最大值。">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-05-30T08:56:37.520Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="19992147">
+<meta name="twitter:title" content="[bzoj 4241] 历史研究">
+<meta name="twitter:description" content="Description:给出长度为$n$的序列，询问区间$[L,R]$权值乘以出现次数的最大值。">
   
     <link rel="alternate" href="/atom.xml" title="19992147" type="application/atom+xml">
   
@@ -63,39 +68,65 @@
 </header>
 
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/05/23/loj-2541-猎人杀/" class="archive-article-date">
-  <time datetime="2018-05-23T13:51:21.000Z" itemprop="datePublished">May 23</time>
+        <section id="main"><article id="post-bzoj-4241-历史研究" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/05/30/bzoj-4241-历史研究/" class="article-date">
+  <time datetime="2018-05-30T08:42:31.000Z" itemprop="datePublished">2018-05-30</time>
 </a>
-      
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/bzoj/">bzoj</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/05/23/loj-2541-猎人杀/">[loj 2541] 猎人杀</a>
+    <h1 class="article-title" itemprop="name">
+      [bzoj 4241] 历史研究
     </h1>
   
 
-    </header>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>Description:</strong><br>给出长度为$n$的序列，询问区间$[L,R]$权值乘以出现次数的最大值。</p>
+<hr>
+<a id="more"></a>
+<p><strong>Solution:</strong><br>首先本题有一个比较暴力的利用莫队与线段树的方法，复杂度较高。<br>上面的做法复杂度瓶颈在于无法做到删除时$O(1)$维护答案，于是引入了回滚莫队的做法。</p>
+<p>先将询问按左端点所在块为第一关键字，右端点为第二关键字排序，如果左右端点位于同一块，暴力查询即可，单次复杂度$O(\sqrt{n})$。<br>把左右端点不在同一块的询问按照左端点所在块分类，对于每一类询问，由于右端点递增，不断加入即可，由于左端点没有单调性，每次暴力加入后恢复原状即可做到只有加入。</p>
+<p>总复杂度为$O(n\sqrt{n})$</p>
+<hr>
+<p><strong>Code:</strong><br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">1e5</span> + <span class="number">5</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">read</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> x = <span class="number">0</span>; <span class="keyword">char</span> c = getchar();</span><br><span class="line">	<span class="keyword">while</span>(!<span class="built_in">isdigit</span>(c)) c = getchar();</span><br><span class="line">	<span class="keyword">while</span>(<span class="built_in">isdigit</span>(c)) x = x * <span class="number">10</span> + c - <span class="string">'0'</span>, c = getchar();</span><br><span class="line">	<span class="keyword">return</span> x;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">int</span> n, m, l, r, pos;</span><br><span class="line"><span class="keyword">long</span> <span class="keyword">long</span> now, pre;</span><br><span class="line"><span class="keyword">int</span> a[maxn], p[maxn];</span><br><span class="line"><span class="keyword">long</span> <span class="keyword">long</span> sum[maxn], num[maxn], ans[maxn];</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">data</span> &#123;</span></span><br><span class="line">	<span class="keyword">int</span> l, r, b, id;</span><br><span class="line">	<span class="keyword">bool</span> <span class="keyword">friend</span> <span class="keyword">operator</span> &lt; (<span class="keyword">const</span> data &amp;a, <span class="keyword">const</span> data &amp;b) &#123; <span class="keyword">return</span> a.b == b.b ? a.r &lt; b.r : a.b &lt; b.b; &#125;</span><br><span class="line">&#125; q[maxn];</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> p)</span> </span>&#123;</span><br><span class="line">	sum[p] += v[p];</span><br><span class="line">	now = max(now, sum[p]);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">del</span><span class="params">(<span class="keyword">int</span> p)</span> </span>&#123;</span><br><span class="line">	sum[p] -= v[p];</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	n = read(); m = read();</span><br><span class="line">	<span class="keyword">int</span> block = <span class="built_in">sqrt</span>(n);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) &#123; a[i] = read(); v.push_back(a[i]); &#125;</span><br><span class="line">	sort(v.begin(), v.end());</span><br><span class="line">	v.erase(unique(v.begin(), v.end()), v.end());</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) p[i] = lower_bound(v.begin(), v.end(), a[i]) - v.begin();</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= m; ++i) &#123;</span><br><span class="line">		q[i].l = read(); q[i].r = read(); q[i].id = i; q[i].b = (q[i].l - <span class="number">1</span>) / block + <span class="number">1</span>; </span><br><span class="line">	&#125;</span><br><span class="line">	sort(q + <span class="number">1</span>, q + m + <span class="number">1</span>);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= m; ++i) &#123;</span><br><span class="line">		<span class="keyword">if</span>(q[i].b != q[i - <span class="number">1</span>].b) &#123;</span><br><span class="line">			<span class="built_in">memset</span>(sum, <span class="number">0</span>, <span class="keyword">sizeof</span>(sum));</span><br><span class="line">			l = pos = q[i].b * block + <span class="number">1</span>;</span><br><span class="line">			r = l - <span class="number">1</span>;</span><br><span class="line">			pre = now = <span class="number">0</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>((q[i].l - <span class="number">1</span>) / block == (q[i].r - <span class="number">1</span>) / block) &#123;</span><br><span class="line">			<span class="keyword">long</span> <span class="keyword">long</span> t = <span class="number">0</span>;</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> j = q[i].l; j &lt;= q[i].r; ++j) &#123; num[p[j]] += a[j]; t = max(t, num[p[j]]); &#125;</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> j = q[i].l; j &lt;= q[i].r; ++j) num[p[j]] -= a[j];</span><br><span class="line">			ans[q[i].id] = t;</span><br><span class="line">			<span class="keyword">continue</span>;</span><br><span class="line">		&#125; </span><br><span class="line">		<span class="keyword">while</span>(r &lt; q[i].r) add(p[++r]);</span><br><span class="line">		pre = now;</span><br><span class="line">		<span class="keyword">while</span>(l &gt; q[i].l) add(p[--l]);</span><br><span class="line">		ans[q[i].id] = now;</span><br><span class="line">		<span class="keyword">while</span>(l &lt; pos) del(p[l++]);</span><br><span class="line">		now = pre;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= m; ++i) <span class="built_in">printf</span>(<span class="string">"%lld\n"</span>, ans[i]);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/05/30/bzoj-4241-历史研究/" data-id="cjhsylz28001rufub9up1vrsh" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/莫队/">莫队</a></li></ul>
+
+    </footer>
   </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2018/05/26/bzoj-5354-开房间/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">[bzoj 5354] 开房间</div>
+    </a>
+  
+</nav>
+
+  
 </article>
-  
-  
-    </div></section>
-  
 
 
 </section>
