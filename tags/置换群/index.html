@@ -5,20 +5,15 @@
   
 
   
-  <title>[学习笔记] dsu on tree | 19992147</title>
+  <title>Tag: 置换群 | 19992147</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="简介一种树上启发式合并，用于离线不带修改统计子树信息，要求每个点能$O(1)$修改，复杂度$O(nlogn)$。">
-<meta name="keywords" content="树链剖分,启发式合并">
-<meta property="og:type" content="article">
-<meta property="og:title" content="[学习笔记] dsu on tree">
-<meta property="og:url" content="http://yoursite.com/2018/05/04/学习笔记-dsu-on-tree/index.html">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="19992147">
+<meta property="og:url" content="http://yoursite.com/tags/置换群/index.html">
 <meta property="og:site_name" content="19992147">
-<meta property="og:description" content="简介一种树上启发式合并，用于离线不带修改统计子树信息，要求每个点能$O(1)$修改，复杂度$O(nlogn)$。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-06-01T02:47:25.598Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="[学习笔记] dsu on tree">
-<meta name="twitter:description" content="简介一种树上启发式合并，用于离线不带修改统计子树信息，要求每个点能$O(1)$修改，复杂度$O(nlogn)$。">
+<meta name="twitter:title" content="19992147">
   
     <link rel="alternate" href="/atom.xml" title="19992147" type="application/atom+xml">
   
@@ -68,74 +63,39 @@
 </header>
 
       <div class="outer">
-        <section id="main"><article id="post-学习笔记-dsu-on-tree" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/05/04/学习笔记-dsu-on-tree/" class="article-date">
-  <time datetime="2018-05-04T10:34:08.000Z" itemprop="datePublished">2018-05-04</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/学习笔记/">学习笔记</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
+        <section id="main">
   
-    <h1 class="article-title" itemprop="name">
-      [学习笔记] dsu on tree
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2018" class="archive-year">2018</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2018/06/01/学习笔记-Burnside引理-Polya定理/" class="archive-article-date">
+  <time datetime="2018-06-01T00:46:18.000Z" itemprop="datePublished">Jun 1</time>
+</a>
+      
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2018/06/01/学习笔记-Burnside引理-Polya定理/">[学习笔记] Burnside引理 &amp; Pólya定理</a>
     </h1>
   
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><strong>简介</strong><br>一种树上启发式合并，用于离线不带修改统计子树信息，要求每个点能$O(1)$修改，复杂度$O(nlogn)$。</p>
-<hr>
-<a id="more"></a>
-<p><strong>算法过程</strong><br>先将树轻重链剖分，先递归做完轻儿子，然后做重儿子，顺便统计重儿子的信息。然后统计轻儿子子树信息得到答案，如果当前点不是父亲的重链清空信息。</p>
-<hr>
-<p><strong>复杂度分析</strong><br>我们发现每个点被统计当这个点不位于另一个点重儿子的子树中。根据轻重链剖分的性质，我们知道一个点到根最多经过$logn$条轻边，说明每个点最多被统计$logn$次，又修改复杂度为$O(1)$,所以总复杂度为$O(nlogn)$。</p>
-<hr>
-<p><strong>例题</strong><br>Codeforces 600E Lomsat gelral<br>Description:询问每颗子树中出现次数最多的颜色们编号和。<br>code:<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">1e5</span> + <span class="number">5</span>;</span><br><span class="line"><span class="keyword">int</span> n, m, Max;</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; G[maxn];</span><br><span class="line"><span class="keyword">int</span> sz[maxn], son[maxn], a[maxn], cou[maxn], big[maxn];</span><br><span class="line"><span class="keyword">long</span> <span class="keyword">long</span> ans[maxn];</span><br><span class="line">pair&lt;<span class="keyword">int</span>, <span class="keyword">long</span> <span class="keyword">long</span>&gt; f[maxn];</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> u, <span class="keyword">int</span> last)</span> </span>&#123;</span><br><span class="line">	sz[u] = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; G[u].size(); ++i) &#123;</span><br><span class="line">		<span class="keyword">int</span> v = G[u][i];</span><br><span class="line">		<span class="keyword">if</span>(v != last) &#123;</span><br><span class="line">			dfs(v, u);</span><br><span class="line">			sz[u] += sz[v];</span><br><span class="line">			<span class="keyword">if</span>(sz[v] &gt; sz[son[u]]) &#123;</span><br><span class="line">				son[u] = v;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125; </span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">update</span><span class="params">(<span class="keyword">int</span> u, <span class="keyword">int</span> last, <span class="keyword">int</span> t)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> &amp;c = cou[a[u]];</span><br><span class="line">	--f[c].first;</span><br><span class="line">	f[c].second -= a[u];</span><br><span class="line">	c += t;</span><br><span class="line">	++f[c].first;</span><br><span class="line">	f[c].second += a[u];</span><br><span class="line">	<span class="keyword">if</span>(t == <span class="number">1</span>) &#123;</span><br><span class="line">		Max = max(Max, c);</span><br><span class="line">	&#125; <span class="keyword">else</span> <span class="keyword">if</span>(!f[Max].first) &#123;</span><br><span class="line">		--Max;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; G[u].size(); ++i) &#123;</span><br><span class="line">		<span class="keyword">int</span> v = G[u][i];</span><br><span class="line">		<span class="keyword">if</span>(v != last &amp;&amp; !big[v]) &#123;</span><br><span class="line">			update(v, u, t);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> u, <span class="keyword">int</span> last, <span class="keyword">int</span> t)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; G[u].size(); ++i) &#123;</span><br><span class="line">		<span class="keyword">int</span> v = G[u][i];</span><br><span class="line">		<span class="keyword">if</span>(v == last || v == son[u]) &#123;</span><br><span class="line">			<span class="keyword">continue</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		dfs(v, u, <span class="number">0</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(son[u]) &#123;</span><br><span class="line">		big[son[u]] = <span class="number">1</span>;</span><br><span class="line">		dfs(son[u], u, <span class="number">1</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	update(u, last, <span class="number">1</span>);</span><br><span class="line">	big[son[u]] = <span class="number">0</span>;</span><br><span class="line">	ans[u] = f[Max].second;</span><br><span class="line">	<span class="keyword">if</span>(!t) &#123;</span><br><span class="line">		update(u, last, <span class="number">-1</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;n);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;a[i]);   </span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; ++i) &#123;</span><br><span class="line">		<span class="keyword">int</span> u, v;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;u, &amp;v);</span><br><span class="line">		G[u].push_back(v);</span><br><span class="line">		G[v].push_back(u); </span><br><span class="line">	&#125;	</span><br><span class="line">	dfs(<span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line">	dfs(<span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"%lld "</span>, ans[i]);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/04/学习笔记-dsu-on-tree/" data-id="cjhvdbfz9002ydeubm58jojiy" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/启发式合并/">启发式合并</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/树链剖分/">树链剖分</a></li></ul>
-
-    </footer>
+    </header>
   </div>
-  
-    
-<nav id="article-nav">
-  
-    <a href="/2018/05/05/Codeforces-452E-Three-strings/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          [Codeforces 452E] Three strings
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2018/05/04/Codeforces-333E-Summer-Earnings/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">[Codeforces 333E] Summer Earnings</div>
-    </a>
-  
-</nav>
-
-  
 </article>
+  
+  
+    </div></section>
+  
 
 
 </section>
