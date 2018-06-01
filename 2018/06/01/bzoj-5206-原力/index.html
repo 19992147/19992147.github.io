@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+  
+
+  
+  <title>[bzoj 5206] 原力 | 19992147</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Description:给出一张$n$个点$m$条边的无向图，每条条边有权值和颜色，共有三种不同颜色。求所有包含三种颜色三元环边权积的和。">
+<meta name="keywords" content="hash,分类讨论">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[bzoj 5206] 原力">
+<meta property="og:url" content="http://yoursite.com/2018/06/01/bzoj-5206-原力/index.html">
+<meta property="og:site_name" content="19992147">
+<meta property="og:description" content="Description:给出一张$n$个点$m$条边的无向图，每条条边有权值和颜色，共有三种不同颜色。求所有包含三种颜色三元环边权积的和。">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-06-01T15:16:42.765Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[bzoj 5206] 原力">
+<meta name="twitter:description" content="Description:给出一张$n$个点$m$条边的无向图，每条条边有权值和颜色，共有三种不同颜色。求所有包含三种颜色三元环边权积的和。">
+  
+    <link rel="alternate" href="/atom.xml" title="19992147" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">19992147</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-bzoj-5206-原力" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/06/01/bzoj-5206-原力/" class="article-date">
+  <time datetime="2018-06-01T15:06:59.000Z" itemprop="datePublished">2018-06-01</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/bzoj/">bzoj</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      [bzoj 5206] 原力
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>Description:</strong><br>给出一张$n$个点$m$条边的无向图，每条条边有权值和颜色，共有三种不同颜色。求所有包含三种颜色三元环边权积的和。</p>
+<hr>
+<a id="more"></a>
+<p><strong>Solution:</strong><br>使用根号分治，对于度数大于$\sqrt{n}$的点分成一类，枚举其中三点计算答案。由于这样的点的数量不超过$\sqrt{n}$,复杂度为$O(n\sqrt{n})$。<br>对于度数小于等于$\sqrt{n}$的点，枚举这样的点以及两条出边计算答案，要求当前点枚举的出边连的点接编号大于当前点或者度数$\sqrt{n}$才统计答案，能做到不重不漏。枚举第一条边的总复杂度可以视为边的数量，第二条边枚举的复杂度小于等于$\sqrt{n}$,所以总复杂度为$O(m\sqrt{n})$。<br>过程中要求对边进行存储，把$map$当成哈希表即可。</p>
+<hr>
+<p><strong>Code:</strong><br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">1e5</span> + <span class="number">5</span>, P = <span class="number">1e9</span> + <span class="number">7</span>;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">edge</span> &#123;</span></span><br><span class="line">	<span class="keyword">int</span> nxt, to, t, w;</span><br><span class="line">&#125; e[maxn * <span class="number">2</span>];</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">data</span> &#123;</span></span><br><span class="line">	<span class="keyword">int</span> u, v, t;</span><br><span class="line">	data() &#123;&#125;</span><br><span class="line">	data(<span class="keyword">int</span> _u, <span class="keyword">int</span> _v, <span class="keyword">int</span> <span class="keyword">_t</span>) : u(_u), v(_v), t(<span class="keyword">_t</span>) &#123;&#125;</span><br><span class="line">	<span class="keyword">inline</span> <span class="keyword">bool</span> <span class="keyword">friend</span> <span class="keyword">operator</span> &lt; (<span class="keyword">const</span> data &amp;a, <span class="keyword">const</span> data &amp;b) &#123; </span><br><span class="line">		<span class="keyword">if</span>(a.u != b.u) <span class="keyword">return</span> a.u &lt; b.u;</span><br><span class="line">		<span class="keyword">if</span>(a.v != b.v) <span class="keyword">return</span> a.v &lt; b.v;</span><br><span class="line">		<span class="keyword">return</span> a.t &lt; b.t;</span><br><span class="line">	&#125; </span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">int</span> n, m, top, ans, cnt = <span class="number">1</span>;</span><br><span class="line"><span class="built_in">map</span>&lt;data, <span class="keyword">int</span>&gt; mp;</span><br><span class="line"><span class="keyword">int</span> d[maxn], h[maxn], st[maxn];</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">read</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> x = <span class="number">0</span>; <span class="keyword">char</span> c = getchar();</span><br><span class="line">	<span class="keyword">while</span>(!<span class="built_in">isdigit</span>(c)) c = getchar();</span><br><span class="line">	<span class="keyword">while</span>(<span class="built_in">isdigit</span>(c)) x = x * <span class="number">10</span> + c - <span class="string">'0'</span>, c = getchar();</span><br><span class="line">	<span class="keyword">return</span> x;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">link</span><span class="params">(<span class="keyword">int</span> u, <span class="keyword">int</span> v, <span class="keyword">int</span> w, <span class="keyword">int</span> t)</span> </span>&#123;</span><br><span class="line">	e[++cnt].nxt = h[u];</span><br><span class="line">	h[u] = cnt;</span><br><span class="line">	e[cnt].to = v;</span><br><span class="line">	e[cnt].w = w;</span><br><span class="line">	e[cnt].t = t;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	n = read(); m = read();</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= m; ++i) &#123;</span><br><span class="line">		<span class="keyword">int</span> u = read(), v = read(), w = read(), t;</span><br><span class="line">		<span class="keyword">char</span> c = getchar();</span><br><span class="line">		<span class="keyword">while</span>(c &lt; <span class="string">'A'</span> || c &gt; <span class="string">'Z'</span>) c = getchar();</span><br><span class="line">		<span class="keyword">if</span>(c == <span class="string">'R'</span>) t = <span class="number">1</span>; <span class="keyword">else</span> <span class="keyword">if</span>(c == <span class="string">'G'</span>) t = <span class="number">2</span>; <span class="keyword">else</span> t = <span class="number">3</span>;</span><br><span class="line">		mp[data(u, v, t)] = (mp[data(u, v, t)] + w) % P;</span><br><span class="line">		mp[data(v, u, t)] = (mp[data(v, u, t)] + w) % P;</span><br><span class="line">		link(u, v, w, t); link(v, u, w, t);</span><br><span class="line">		++d[u]; ++d[v];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">int</span> B = <span class="built_in">sqrt</span>(n);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) <span class="keyword">if</span>(d[i] &gt;= B) st[++top] = i;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= top; ++i) <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= top; ++j) <span class="keyword">for</span>(<span class="keyword">int</span> k = <span class="number">1</span>; k &lt;= top; ++k) &#123;</span><br><span class="line">		ans = (ans + <span class="number">1L</span>L * mp[data(st[i], st[j], <span class="number">1</span>)] * mp[data(st[i], st[k], <span class="number">2</span>)] % P * mp[data(st[j], st[k], <span class="number">3</span>)] % P) % P;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) <span class="keyword">if</span>(d[i] &lt; B) <span class="keyword">for</span>(<span class="keyword">int</span> j = h[i]; j; j = e[j].nxt) <span class="keyword">if</span>(e[j].to &gt; i || d[e[j].to] &gt;= B) &#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> k = e[j].nxt; k; k = e[k].nxt) <span class="keyword">if</span>(e[j].t != e[k].t &amp;&amp; (e[k].to &gt; i || d[e[k].to] &gt;= B)) &#123;</span><br><span class="line">			ans = (ans + <span class="number">1L</span>L * e[j].w * e[k].w % P * mp[data(e[j].to, e[k].to, <span class="number">6</span> - e[j].t - e[k].t)] % P) % P;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%d\n"</span>, ans);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/06/01/bzoj-5206-原力/" data-id="cjhw43abw002hvqubam38li5p" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hash/">hash</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/分类讨论/">分类讨论</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2018/06/01/刷题记录-日记/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">刷题记录 &amp; 日记</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Codeforces/">Codeforces</a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/bzoj/">bzoj</a><span class="category-list-count">22</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/loj/">loj</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/学习笔记/">学习笔记</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/">技术</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂/">杂</a><span class="category-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/LCT/">LCT</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bitset/">bitset</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dp/">dp</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hash/">hash</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/个人/">个人</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/二分/">二分</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/凸包/">凸包</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/分治/">分治</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/分类讨论/">分类讨论</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/博弈论/">博弈论</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/可并堆/">可并堆</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/后缀数组/">后缀数组</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/后缀自动机/">后缀自动机</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/启发式合并/">启发式合并</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多项式-生成函数/">多项式 & 生成函数</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/容斥原理/">容斥原理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工程/">工程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/差分/">差分</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/扫描线/">扫描线</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/拉格朗日乘数法/">拉格朗日乘数法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/拉格朗日插值法/">拉格朗日插值法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/搜索/">搜索</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数学技巧/">数学技巧</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/最短路/">最短路</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/树状数组/">树状数组</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/树链剖分/">树链剖分</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/概率与期望/">概率与期望</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/点分治/">点分治</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/矩阵快速幂/">矩阵快速幂</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/线性代数/">线性代数</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/线段树/">线段树</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/组合数学/">组合数学</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/网络流/">网络流</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/置换群/">置换群</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/莫比乌斯反演/">莫比乌斯反演</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/莫队/">莫队</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/虚树/">虚树</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/计算几何/">计算几何</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/高斯消元/">高斯消元</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/LCT/" style="font-size: 10px;">LCT</a> <a href="/tags/bitset/" style="font-size: 14px;">bitset</a> <a href="/tags/dp/" style="font-size: 20px;">dp</a> <a href="/tags/hash/" style="font-size: 12px;">hash</a> <a href="/tags/个人/" style="font-size: 12px;">个人</a> <a href="/tags/二分/" style="font-size: 12px;">二分</a> <a href="/tags/凸包/" style="font-size: 12px;">凸包</a> <a href="/tags/分治/" style="font-size: 10px;">分治</a> <a href="/tags/分类讨论/" style="font-size: 10px;">分类讨论</a> <a href="/tags/博弈论/" style="font-size: 10px;">博弈论</a> <a href="/tags/可并堆/" style="font-size: 10px;">可并堆</a> <a href="/tags/后缀数组/" style="font-size: 10px;">后缀数组</a> <a href="/tags/后缀自动机/" style="font-size: 10px;">后缀自动机</a> <a href="/tags/启发式合并/" style="font-size: 10px;">启发式合并</a> <a href="/tags/多项式-生成函数/" style="font-size: 16px;">多项式 & 生成函数</a> <a href="/tags/容斥原理/" style="font-size: 10px;">容斥原理</a> <a href="/tags/工程/" style="font-size: 10px;">工程</a> <a href="/tags/差分/" style="font-size: 12px;">差分</a> <a href="/tags/扫描线/" style="font-size: 12px;">扫描线</a> <a href="/tags/拉格朗日乘数法/" style="font-size: 10px;">拉格朗日乘数法</a> <a href="/tags/拉格朗日插值法/" style="font-size: 10px;">拉格朗日插值法</a> <a href="/tags/搜索/" style="font-size: 10px;">搜索</a> <a href="/tags/数学技巧/" style="font-size: 10px;">数学技巧</a> <a href="/tags/最短路/" style="font-size: 10px;">最短路</a> <a href="/tags/树状数组/" style="font-size: 10px;">树状数组</a> <a href="/tags/树链剖分/" style="font-size: 14px;">树链剖分</a> <a href="/tags/概率与期望/" style="font-size: 10px;">概率与期望</a> <a href="/tags/点分治/" style="font-size: 10px;">点分治</a> <a href="/tags/矩阵快速幂/" style="font-size: 10px;">矩阵快速幂</a> <a href="/tags/线性代数/" style="font-size: 10px;">线性代数</a> <a href="/tags/线段树/" style="font-size: 18px;">线段树</a> <a href="/tags/组合数学/" style="font-size: 12px;">组合数学</a> <a href="/tags/网络流/" style="font-size: 10px;">网络流</a> <a href="/tags/置换群/" style="font-size: 12px;">置换群</a> <a href="/tags/莫比乌斯反演/" style="font-size: 10px;">莫比乌斯反演</a> <a href="/tags/莫队/" style="font-size: 10px;">莫队</a> <a href="/tags/虚树/" style="font-size: 10px;">虚树</a> <a href="/tags/计算几何/" style="font-size: 10px;">计算几何</a> <a href="/tags/高斯消元/" style="font-size: 10px;">高斯消元</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">38</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/06/01/bzoj-5206-原力/">[bzoj 5206] 原力</a>
+          </li>
+        
+          <li>
+            <a href="/2018/06/01/刷题记录-日记/">刷题记录 &amp; 日记</a>
+          </li>
+        
+          <li>
+            <a href="/2018/06/01/bzoj-1815-color-有色图/">[bzoj 1815] color 有色图</a>
+          </li>
+        
+          <li>
+            <a href="/2018/06/01/学习笔记-Burnside引理-Polya定理/">[学习笔记] Burnside引理 &amp; Pólya定理</a>
+          </li>
+        
+          <li>
+            <a href="/2018/05/31/bzoj-5212-历史/">[bzoj 5212] 历史</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 19992147<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</body>
+</html>
