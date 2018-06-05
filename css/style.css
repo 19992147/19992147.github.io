@@ -504,7 +504,7 @@ body {
 .search-form-submit:focus {
   color: #777;
 }
-.article {
+`.article {
   margin: 50px 0;
 }
 .article-inner {
