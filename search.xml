@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[故事]]></title>
     <url>%2F2018%2F06%2F05%2F%E6%95%85%E4%BA%8B%2F</url>
-    <content type="text"><![CDATA[function doDecrypt (pwd, onError) { console.log('in doDecrypt'); const txt = document.getElementById('enc_content').innerHTML; let plantext; try { const bytes = CryptoJS.AES.decrypt(txt, pwd); var plaintext = bytes.toString(CryptoJS.enc.Utf8); } catch(err) { if(onError) { onError(err); } return; } document.getElementById('enc_content').innerHTML = plaintext; document.getElementById('enc_content').style.display = 'block'; document.getElementById('enc_passwd').style.display = 'none'; if(typeof MathJax !== 'undefined') { MathJax.Hub.Queue( ['resetEquationNumbers', MathJax.InputJax.TeX], ['PreProcess', MathJax.Hub], ['Reprocess', MathJax.Hub] ); } } U2FsdGVkX1/Lb2PfY2MxHMX+eyBcviFP1FTWY0nUUzo/gQMG03oLSJe2KP6AzZTUhEjK9rPygDSwUWFD/hNZn0AShjWzk9SvqTfjksVxnEdFizrtrXAjPBPhfMcJ1uKVxJVD5ITm/gSDA1Ob6EieuCcN0bKaO/W5l/4F2dRvBukZoSurZkj9+H14qogff49z var onError = function(error) { document.getElementById("enc_error").innerHTML = "password error!" }; function decrypt() { var passwd = document.getElementById("enc_pwd_input").value; console.log(passwd); doDecrypt(passwd, onError); }]]></content>
+    <content type="text"><![CDATA[function doDecrypt (pwd, onError) { console.log('in doDecrypt'); const txt = document.getElementById('enc_content').innerHTML; let plantext; try { const bytes = CryptoJS.AES.decrypt(txt, pwd); var plaintext = bytes.toString(CryptoJS.enc.Utf8); } catch(err) { if(onError) { onError(err); } return; } document.getElementById('enc_content').innerHTML = plaintext; document.getElementById('enc_content').style.display = 'block'; document.getElementById('enc_passwd').style.display = 'none'; if(typeof MathJax !== 'undefined') { MathJax.Hub.Queue( ['resetEquationNumbers', MathJax.InputJax.TeX], ['PreProcess', MathJax.Hub], ['Reprocess', MathJax.Hub] ); } } U2FsdGVkX1+URuxLuCXfUQK56d2/UU7MXi4XpaDoUfTCYRnLYTlkwPo2O34F7kLAvG1chPWDcSmJ0GRvLWhNwdM+5ozGxVfFwJssLBrcl9LTUt3WDV71egP7W41fVrV1oLz7CCTnsQ6keHfGlHJBwxTziX//AnPabcvinktsaidb+hoJ08l4LMgnXvck1PHC var onError = function(error) { document.getElementById("enc_error").innerHTML = "password error!" }; function decrypt() { var passwd = document.getElementById("enc_pwd_input").value; console.log(passwd); doDecrypt(passwd, onError); }]]></content>
       <categories>
         <category>杂</category>
       </categories>
@@ -228,8 +228,8 @@
         <category>loj</category>
       </categories>
       <tags>
-        <tag>dp</tag>
         <tag>多项式 &amp; 生成函数</tag>
+        <tag>dp</tag>
         <tag>概率与期望</tag>
         <tag>分治</tag>
         <tag>容斥原理</tag>
@@ -289,8 +289,8 @@
         <category>loj</category>
       </categories>
       <tags>
-        <tag>dp</tag>
         <tag>多项式 &amp; 生成函数</tag>
+        <tag>dp</tag>
       </tags>
   </entry>
   <entry>
@@ -462,8 +462,8 @@
         <category>Codeforces</category>
       </categories>
       <tags>
-        <tag>dp</tag>
         <tag>线段树</tag>
+        <tag>dp</tag>
       </tags>
   </entry>
   <entry>
@@ -474,8 +474,8 @@
         <category>bzoj</category>
       </categories>
       <tags>
-        <tag>dp</tag>
         <tag>线段树</tag>
+        <tag>dp</tag>
         <tag>树链剖分</tag>
       </tags>
   </entry>
