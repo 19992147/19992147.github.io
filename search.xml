@@ -1,9 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[[bzoj 3698] XWW的难题]]></title>
+    <url>%2F2018%2F06%2F06%2Fbzoj-3698-XWW%E7%9A%84%E9%9A%BE%E9%A2%98%2F</url>
+    <content type="text"><![CDATA[Description:给出一个$n*n$的矩阵，矩阵中每个元素可以上取整或下取整。要求出最后一行一列每一行每一列前$n-1$个元素之和等于最后一个元素，且所有元素之和最大。 Solution:把行列分别建点，如果某个元素不是整数意味着可以上取整。对应行向列连边。现在要求求上下界最大流。以下是解决上下界最大流的方法:1.建图原图中边的容量视为上界减下界，设立超级源汇，如果一个点进入的流量大于出去额流量，则由超级源连向该点，容量为差值，否则连向超级汇，容量为差值的相反数，再从汇向源连一条容量为$inf$的边。2.操作先由超级源汇跑出可行流，再从源汇跑最大流即是答案。 Code:12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273#include &lt;bits/stdc++.h&gt;using namespace std;const int maxn = 305, inf = 1e9;struct edge &#123; int nxt, to, f;&#125; e[maxn * maxn * 10];int n, source, sink, S, T, cnt = 1, tot;int h[maxn], iter[maxn], in[maxn], d[maxn], deg[maxn];double a[105][105];void link(int u, int v, int f) &#123; e[++cnt].nxt = h[u]; h[u] = cnt; e[cnt].to = v; e[cnt].f = f;&#125;void insert(int u, int v, int f) &#123; link(u, v, f); link(v, u, 0);&#125;int dfs(int u, int sink, int delta) &#123; if(u == sink) return delta; int ret = 0; for(int &amp;i = iter[u]; i &amp;&amp; delta; i = e[i].nxt) if(d[e[i].to] == d[u] + 1 &amp;&amp; e[i].f) &#123; int x = dfs(e[i].to, sink, min(e[i].f, delta)); e[i].f -= x; e[i ^ 1].f += x; ret += x; delta -= x; &#125; return ret;&#125;bool bfs(int source, int sink) &#123; queue&lt;int&gt; q; memset(d, -1, sizeof(d)); q.push(source); d[source] = 0; while(!q.empty()) &#123; int u = q.front(); q.pop(); for(int i = h[u]; i; i = e[i].nxt) if(d[e[i].to] == -1 &amp;&amp; e[i].f)&#123; d[e[i].to] = d[u] + 1; q.push(e[i].to); &#125; &#125; return ~d[sink];&#125;int dinic(int source, int sink) &#123; int ret = 0; while(bfs(source, sink)) &#123; for(int i = 0; i &lt; maxn; ++i) iter[i] = h[i]; ret += dfs(source, sink, inf); &#125; return ret;&#125;int main() &#123; scanf("%d", &amp;n); for(int i = 1; i &lt;= n; ++i) for(int j = 1; j &lt;= n; ++j) scanf("%lf", &amp;a[i][j]); sink = 2 * n + 1; S = 2 * n + 2; T = 2 * n + 3; for(int i = 1; i &lt;= n; ++i) &#123; if(a[i][n] != (int)a[i][n]) insert(source, i, 1); if(a[n][i] != (int)a[n][i]) insert(i + n, sink, 1); deg[source] -= (int)a[i][n]; deg[i] += (int)a[i][n]; deg[i + n] -= (int)a[n][i]; deg[sink] += (int)a[n][i]; &#125; for(int i = 1; i &lt; n; ++i) for(int j = 1; j &lt; n; ++j) &#123; if(a[i][j] != (int)a[i][j]) insert(i, j + n, 1); deg[i] -= (int)a[i][j]; deg[j + n] += (int)a[i][j]; &#125; for(int i = 0; i &lt;= sink; ++i) if(deg[i] &gt; 0) &#123; tot += deg[i]; insert(S, i, deg[i]); &#125; else insert(i, T, -deg[i]); insert(sink, source, inf); if(dinic(S, T) != tot) &#123; puts("No"); return 0; &#125; printf("%d\n", dinic(source, sink) * 3); return 0;&#125;]]></content>
+      <categories>
+        <category>bzoj</category>
+      </categories>
+      <tags>
+        <tag>网络流</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Linux下的对拍]]></title>
+    <url>%2F2018%2F06%2F06%2FLinux%E4%B8%8B%E7%9A%84%E5%AF%B9%E6%8B%8D%2F</url>
+    <content type="text"><![CDATA[数据生成器12345678#include &lt;bits/stdc++.h&gt;using namespace std;int main() &#123; freopen("data.in", "w", stdout); //数据生成器 fclose(stdout); return 0;&#125; 正解 &amp; 暴力12345678910#include &lt;bits/stdc++.h&gt;using namespace std;int main() &#123; freopen("data.in", "r", stdin); freopen("1.out", "w", stdout); //正解 fclose(stdin); fclose(stdout); return 0;&#125; 12345678910#include &lt;bits/stdc++.h&gt;using namespace std;int main() &#123; freopen("data.in", "r", stdin); freopen("2.out", "w", stdout); //暴力 fclose(stdin); fclose(stdout); return 0;&#125; 对拍器1234567891011121314#include &lt;bits/stdc++.h&gt;using namespace std;int main() &#123; while(1) &#123; system("./data"); system("./1"); system("./2"); if(system("diff 1.out 2.out")) &#123; system("pause"); break; &#125; else puts("AC"); &#125; return 0;&#125;]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>工程</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[[bzoj 4550] 小奇的博弈]]></title>
+    <url>%2F2018%2F06%2F06%2Fbzoj-4550-%E5%B0%8F%E5%A5%87%E7%9A%84%E5%8D%9A%E5%BC%88%2F</url>
+    <content type="text"><![CDATA[Description:$1*n$的棋盘上有$k$个棋子，一半为黑色另一半为白色。每次可以移动$[1,d]$个某种颜色的棋子，且黑色只能向右，白色只能向左，如果不能移动则输，问使黑棋先手获胜的初始棋局数。 Solution:把黑白棋子两两配对，空隙看作石子，那么相当于每个人每次可以在$[1,d]$堆中取石子。于是问题转化成了$K-nim$游戏。$K-nim$游戏先手获胜的条件是所有石子每个二进制位之和能被$k+1$整除，那么考虑$dp$。$dp[i][j]$表示前$i$对石子用了$j$个位置的方案数， 转移即可。 Code:1234567891011121314151617181920212223242526#include &lt;bits/stdc++.h&gt;using namespace std;const int maxn = 1e4 + 5, P = 1e9 + 7;inline int read() &#123; int x = 0; char c = getchar(); while(!isdigit(c)) c = getchar(); while(isdigit(c)) x = x * 10 + c - '0', c = getchar(); return x;&#125;void u(int &amp;x, int y) &#123; x = (x + y) % P; &#125;int n, k, d;int c[maxn][105], dp[16][maxn];int main() &#123; n = read(); k = read() / 2; d = read(); c[0][0] = 1; for(int i = 1; i &lt;= n; ++i) &#123; c[i][0] = 1; for(int j = 1; j &lt;= min(2 * k, i); ++j) c[i][j] = (c[i - 1][j - 1] + c[i - 1][j]) % P; &#125; dp[0][0] = 1; for(int i = 0; i &lt; 15; ++i) for(int j = 0; j &lt;= n - 2 * k; ++j) for(int K = 0; K * (d + 1) * (1 &lt;&lt; i) + j &lt;= n &amp;&amp; K * (d + 1) &lt;= k; ++K) u(dp[i + 1][j + K * (d + 1) * (1 &lt;&lt; i)], 1LL * dp[i][j] * c[k][K * (d + 1)] % P); int ans = 0; for(int i = 0; i &lt;= n - 2 * k; ++i) u(ans, 1LL * dp[15][i] * c[n - i - k][k] % P); printf("%d\n", (c[n][2 * k] - ans + P) % P); return 0;&#125;]]></content>
+      <categories>
+        <category>bzoj</category>
+      </categories>
+      <tags>
+        <tag>dp</tag>
+        <tag>博弈论</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[[bzoj 5329] 战略游戏]]></title>
+    <url>%2F2018%2F06%2F06%2Fbzoj-5329-%E6%88%98%E7%95%A5%E6%B8%B8%E6%88%8F%2F</url>
+    <content type="text"><![CDATA[Description:给出一棵$n$个点的树，每次选出一些点，询问除给出点之外哪些点删除会导致给出点不连通。 Solution:先将原树建成割点树，每次即询问给出点路径上的割点个数。预处理每个点到根割点数量，在虚树上计算一下即可。 Code:123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103#include &lt;bits/stdc++.h&gt;using namespace std;const int maxn = 4e5 + 5;int n, m, dfs_clock, cnt, Top, q, ans; vector&lt;int&gt; G[maxn], g[maxn * 2];int st[maxn * 2], son[maxn], dep[maxn], dis[maxn], low[maxn], dfn[maxn], fa[maxn], top[maxn], a[maxn * 2], sz[maxn], in[maxn], out[maxn];void tarjan(int u, int f) &#123; dfn[u] = low[u] = ++dfs_clock; st[++Top] = u; for(int i = 0; i &lt; G[u].size(); ++i) &#123; int v = G[u][i]; if(v == f) continue; if(!dfn[v]) &#123; tarjan(v, u); low[u] = min(low[u], low[v]); if(low[v] &gt;= dfn[u]) &#123; ++cnt; while(st[Top + 1] != v) &#123; g[cnt].push_back(st[Top]); g[st[Top]].push_back(cnt); --Top; &#125; g[cnt].push_back(u); g[u].push_back(cnt); &#125; &#125; else low[u] = min(low[u], dfn[v]); &#125;&#125;int lca(int u, int v) &#123; while(top[u] != top[v]) &#123; if(dep[top[u]] &lt; dep[top[v]]) swap(u, v); u = fa[top[u]]; &#125; return dep[u] &lt; dep[v] ? u : v;&#125;void dfs(int u, int f) &#123; sz[u] = 1; son[u] = 0; dis[u] = dis[f] + (u &lt;= n); for(int i = 0; i &lt; g[u].size(); ++i) &#123; int v = g[u][i]; if(v == f) continue; dep[v] = dep[u] + 1; fa[v] = u; dfs(v, u); sz[u] += sz[v]; if(sz[v] &gt; sz[son[u]]) son[u] = v; &#125; &#125;void dfs(int u, int f, int t) &#123; top[u] = t; in[u] = ++dfs_clock; if(son[u]) dfs(son[u], u, t); for(int i = 0; i &lt; g[u].size(); ++i) &#123; int v = g[u][i]; if(v == f || v == son[u]) continue; dfs(v, u, v); &#125; out[u] = dfs_clock;&#125;bool cmp(int i, int j) &#123; return in[i] &lt; in[j]; &#125;int main() &#123; int T; scanf("%d", &amp;T); while(T--) &#123; memset(dfn, 0, sizeof(dfn)); memset(low, 0, sizeof(low)); memset(st, 0, sizeof(st)); scanf("%d%d", &amp;n, &amp;m); dfs_clock = 0; for(int i = 1; i &lt;= n; ++i) G[i].clear(); for(int i = 1; i &lt;= m; ++i) &#123; int u, v; scanf("%d%d", &amp;u, &amp;v); G[u].push_back(v); G[v].push_back(u); &#125; cnt = n; tarjan(1, 0); dfs_clock = 0; dfs(1, 0); dfs(1, 0, 1); scanf("%d", &amp;q); while(q--) &#123; int tot; scanf("%d", &amp;tot); ans = -tot; for(int i = 1; i &lt;= tot; ++i) &#123; scanf("%d", &amp;a[i]); &#125; sort(a + 1, a + tot + 1, cmp); for(int i = tot; i &gt; 1; --i) a[++tot] = lca(a[i], a[i - 1]); sort(a + 1, a + tot + 1, cmp); tot = unique(a + 1, a + tot + 1) - a - 1; int top = 0; for(int i = 1; i &lt;= tot; ++i) &#123; while(top &amp;&amp; !(in[st[top]] &lt;= in[a[i]] &amp;&amp; out[st[top]] &gt;= out[a[i]])) --top; if(top) ans += dis[fa[a[i]]] - dis[st[top]]; st[++top] = a[i]; &#125; for(int i = 1; i &lt;= tot; ++i) if(a[i] &lt;= n) ++ans; printf("%d\n", ans); &#125; for(int i = 1; i &lt;= cnt; ++i) g[i].clear(); &#125; return 0;&#125; 考$APIO$时忘记了求割点，如果记得就发财了。]]></content>
+      <categories>
+        <category>bzoj</category>
+      </categories>
+      <tags>
+        <tag>虚树</tag>
+        <tag>tarjan &amp; 联通分量</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[[bzoj 3925] 地震后的幻想乡]]></title>
+    <url>%2F2018%2F06%2F06%2Fbzoj-3925-%E5%9C%B0%E9%9C%87%E5%90%8E%E7%9A%84%E5%B9%BB%E6%83%B3%E4%B9%A1%2F</url>
+    <content type="text"><![CDATA[Description:给出一张$n$个点$m$条边的图，每条边的边权是均匀分布在$[0,1]$的实数。求期望最小生成树最大边权。 Solution:由于写完之后忘记保存，于是博主不准备再写一遍，附上一个不错的题解。 Code:123456789101112131415161718192021222324252627282930313233343536#include &lt;bits/stdc++.h&gt;using namespace std;const int maxn = 11, maxm = 55;int n, m;double ans;long long c[55][55], cnt[1 &lt;&lt; maxn], e[maxn], tmp[1 &lt;&lt; maxn], f[1 &lt;&lt; maxn][maxm], g[1 &lt;&lt; maxn][maxm];int main() &#123; scanf("%d%d", &amp;n, &amp;m); for(int i = 1; i &lt;= m; ++i) &#123; int u, v; scanf("%d%d", &amp;u, &amp;v); --u; --v; e[u] |= 1 &lt;&lt; v; e[v] |= 1 &lt;&lt; u; &#125; c[0][0] = 1; for(int i = 1; i &lt;= m; ++i) &#123; c[i][0] = 1; for(int j = 1; j &lt;= i; ++j) c[i][j] = c[i - 1][j - 1] + c[i - 1][j]; &#125; for(int i = 0; i &lt; 1 &lt;&lt; n; ++i) cnt[i] = __builtin_popcount(i); for(int S = 1; S &lt; 1 &lt;&lt; n; ++S) &#123; if(cnt[S] == 1) &#123; g[S][0] = 1; continue; &#125; for(int i = 0; i &lt; n; ++i) if(S &gt;&gt; i &amp; 1) tmp[S] += cnt[S &amp; e[i]]; tmp[S] &gt;&gt;= 1; int t = S &amp; -S; for(int S0 = (S - 1) &amp; S; S0; S0 = (S0 - 1) &amp; S) if(S0 &amp; t) for(int i = 0; i &lt;= tmp[S0]; ++i) for(int j = 0; j &lt;= tmp[S ^ S0]; ++j) f[S][i + j] += g[S0][i] * c[tmp[S ^ S0]][j]; for(int i = 0; i &lt;= tmp[S]; ++i) g[S][i] = c[tmp[S]][i] - f[S][i]; &#125; for(int i = 0; i &lt;= m; ++i) ans += (double)f[(1 &lt;&lt; n) - 1][i] / c[tmp[(1 &lt;&lt; n) - 1]][i]; ans /= m + 1; printf("%.6f\n", ans); return 0;&#125;]]></content>
+      <categories>
+        <category>bzoj</category>
+      </categories>
+      <tags>
+        <tag>dp</tag>
+        <tag>概率与期望</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[故事]]></title>
     <url>%2F2018%2F06%2F05%2F%E6%95%85%E4%BA%8B%2F</url>
-    <content type="text"><![CDATA[function doDecrypt (pwd, onError) { console.log('in doDecrypt'); const txt = document.getElementById('enc_content').innerHTML; let plantext; try { const bytes = CryptoJS.AES.decrypt(txt, pwd); var plaintext = bytes.toString(CryptoJS.enc.Utf8); } catch(err) { if(onError) { onError(err); } return; } document.getElementById('enc_content').innerHTML = plaintext; document.getElementById('enc_content').style.display = 'block'; document.getElementById('enc_passwd').style.display = 'none'; if(typeof MathJax !== 'undefined') { MathJax.Hub.Queue( ['resetEquationNumbers', MathJax.InputJax.TeX], ['PreProcess', MathJax.Hub], ['Reprocess', MathJax.Hub] ); } } U2FsdGVkX1+URuxLuCXfUQK56d2/UU7MXi4XpaDoUfTCYRnLYTlkwPo2O34F7kLAvG1chPWDcSmJ0GRvLWhNwdM+5ozGxVfFwJssLBrcl9LTUt3WDV71egP7W41fVrV1oLz7CCTnsQ6keHfGlHJBwxTziX//AnPabcvinktsaidb+hoJ08l4LMgnXvck1PHC var onError = function(error) { document.getElementById("enc_error").innerHTML = "password error!" }; function decrypt() { var passwd = document.getElementById("enc_pwd_input").value; console.log(passwd); doDecrypt(passwd, onError); }]]></content>
+    <content type="text"><![CDATA[function doDecrypt (pwd, onError) { console.log('in doDecrypt'); const txt = document.getElementById('enc_content').innerHTML; let plantext; try { const bytes = CryptoJS.AES.decrypt(txt, pwd); var plaintext = bytes.toString(CryptoJS.enc.Utf8); } catch(err) { if(onError) { onError(err); } return; } document.getElementById('enc_content').innerHTML = plaintext; document.getElementById('enc_content').style.display = 'block'; document.getElementById('enc_passwd').style.display = 'none'; if(typeof MathJax !== 'undefined') { MathJax.Hub.Queue( ['resetEquationNumbers', MathJax.InputJax.TeX], ['PreProcess', MathJax.Hub], ['Reprocess', MathJax.Hub] ); } } U2FsdGVkX18xHfGTXqIdZHJn8wYfIJML4EVzuVInpF1A/5MBEduinkjOd1KxN1w5vL+QwzMRO7w/mhPra+yvgwP1O65f99ZR3lpYkKbJ65QvwB8Kv/j2K34fkZFMsmCbUHwLVb9ENRc6u99HV1072Pctz0B9ExdBmFy3acjKUwXoiFO5eBpNnHPtKBuDQeja var onError = function(error) { document.getElementById("enc_error").innerHTML = "password error!" }; function decrypt() { var passwd = document.getElementById("enc_pwd_input").value; console.log(passwd); doDecrypt(passwd, onError); }]]></content>
       <categories>
         <category>杂</category>
       </categories>
@@ -14,7 +72,7 @@
   <entry>
     <title><![CDATA[[Codeforces 827E] Rusty String]]></title>
     <url>%2F2018%2F06%2F04%2FCodeforces-827E-Rusty-String%2F</url>
-    <content type="text"><![CDATA[Description:求带通配符字符串的循环节。 Solution:考虑求循环节的方法，求出$kmp$的$nxt$数组,那么答案就是$n-nxt$。由于有通配符，所以不能使用$kmp$，于是通过$FFT$计算。两个数组中分别把V和K标记为1，做FFT，如果一个位置的和为0那么意味着这个长度不是循环节，那么长度的约数也不是循环节，于是找出未被标记的长度即可。 Code:123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566#include &lt;bits/stdc++.h&gt;using namespace std;const int maxn = 2e6 + 5;const double pi = acos(-1), eps = 1e-5;struct cp &#123; double x, y; cp() &#123;&#125; cp(double _x, double _y) : x(_x), y(_y) &#123;&#125; inline cp friend operator + (const cp &amp;a, const cp &amp;b) &#123; return cp(a.x + b.x, a.y + b.y); &#125; inline cp friend operator - (const cp &amp;a, const cp &amp;b) &#123; return cp(a.x - b.x, a.y - b.y); &#125; inline cp friend operator * (const cp &amp;a, const cp &amp;b) &#123; return cp(a.x * b.x - a.y * b.y, a.x * b.y + a.y * b.x); &#125;&#125; a[maxn], b[maxn];int n, m, len;char s[maxn];bool can[maxn];void FFT(cp *a, int f) &#123; for(int i = 0; i &lt; n; ++i) &#123; int t = 0; for(int j = 0; j &lt; len; ++j) if(i &gt;&gt; j &amp; 1) t |= 1 &lt;&lt; (len - j - 1); if(i &lt; t) swap(a[i], a[t]); &#125; for(int l = 2; l &lt;= n; l &lt;&lt;= 1) &#123; int m = l &gt;&gt; 1; cp w = cp(cos(pi / m), f * sin(pi / m)); for(int i = 0; i &lt; n; i += l) &#123; cp t = cp(1, 0); for(int k = 0; k &lt; m; ++k, t = t * w) &#123; cp x = a[i + k], y = t * a[i + m + k]; a[i + k] = x + y; a[i + m + k] = x - y; &#125; &#125; &#125; if(f == -1) for(int i = 0; i &lt; n; ++i) a[i].x /= n;&#125;void init() &#123; scanf("%d%s", &amp;m, s); n = 1; len = 0; while(n &lt;= m * 2) n &lt;&lt;= 1, ++len; for(int i = 0; i &lt; n; ++i) a[i] = b[i] = cp(0, 0), can[i] = 0; for(int i = 0; i &lt; m; ++i) if(s[i] == 'V') a[i].x = 1; else if(s[i] == 'K') b[m - i - 1].x = 1;&#125;void solve() &#123; FFT(a, 1); FFT(b, 1); for(int i = 0; i &lt; n; ++i) a[i] = a[i] * b[i]; FFT(a, -1); for(int i = 0; i &lt; n; ++i) if(fabs(a[i].x) &gt;= eps) &#123; can[abs(i - m + 1)] = 1; &#125; for(int i = 1; i &lt; m; ++i) if(!can[i]) for(int j = i &lt;&lt; 1; j &lt; m; j += i) if(can[j]) &#123; can[i] = 1; break; &#125; int ans = 0; for(int i = 1; i &lt;= m; ++i) if(!can[i]) ++ans; printf("%d\n", ans); for(int i = 1; i &lt;= m; ++i) if(!can[i]) printf("%d ", i); puts("");&#125;int main() &#123; int T; scanf("%d", &amp;T); while(T--) &#123; init(); solve(); &#125; return 0;&#125;]]></content>
+    <content type="text"><![CDATA[Description:求带通配符字符串的循环节。 Solution:考虑求循环节的方法，求出$kmp$的$nxt$数组,那么答案就是$n-nxt$。由于有通配符，所以不能使用$kmp$，于是通过$FFT$计算。两个数组中分别把$V$和$K$标记为$1$，做$FFT$，如果一个位置的和为$0$那么意味着这个长度不是循环节，那么长度的约数也不是循环节，于是找出未被标记的长度即可。 Code:123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566#include &lt;bits/stdc++.h&gt;using namespace std;const int maxn = 2e6 + 5;const double pi = acos(-1), eps = 1e-5;struct cp &#123; double x, y; cp() &#123;&#125; cp(double _x, double _y) : x(_x), y(_y) &#123;&#125; inline cp friend operator + (const cp &amp;a, const cp &amp;b) &#123; return cp(a.x + b.x, a.y + b.y); &#125; inline cp friend operator - (const cp &amp;a, const cp &amp;b) &#123; return cp(a.x - b.x, a.y - b.y); &#125; inline cp friend operator * (const cp &amp;a, const cp &amp;b) &#123; return cp(a.x * b.x - a.y * b.y, a.x * b.y + a.y * b.x); &#125;&#125; a[maxn], b[maxn];int n, m, len;char s[maxn];bool can[maxn];void FFT(cp *a, int f) &#123; for(int i = 0; i &lt; n; ++i) &#123; int t = 0; for(int j = 0; j &lt; len; ++j) if(i &gt;&gt; j &amp; 1) t |= 1 &lt;&lt; (len - j - 1); if(i &lt; t) swap(a[i], a[t]); &#125; for(int l = 2; l &lt;= n; l &lt;&lt;= 1) &#123; int m = l &gt;&gt; 1; cp w = cp(cos(pi / m), f * sin(pi / m)); for(int i = 0; i &lt; n; i += l) &#123; cp t = cp(1, 0); for(int k = 0; k &lt; m; ++k, t = t * w) &#123; cp x = a[i + k], y = t * a[i + m + k]; a[i + k] = x + y; a[i + m + k] = x - y; &#125; &#125; &#125; if(f == -1) for(int i = 0; i &lt; n; ++i) a[i].x /= n;&#125;void init() &#123; scanf("%d%s", &amp;m, s); n = 1; len = 0; while(n &lt;= m * 2) n &lt;&lt;= 1, ++len; for(int i = 0; i &lt; n; ++i) a[i] = b[i] = cp(0, 0), can[i] = 0; for(int i = 0; i &lt; m; ++i) if(s[i] == 'V') a[i].x = 1; else if(s[i] == 'K') b[m - i - 1].x = 1;&#125;void solve() &#123; FFT(a, 1); FFT(b, 1); for(int i = 0; i &lt; n; ++i) a[i] = a[i] * b[i]; FFT(a, -1); for(int i = 0; i &lt; n; ++i) if(fabs(a[i].x) &gt;= eps) &#123; can[abs(i - m + 1)] = 1; &#125; for(int i = 1; i &lt; m; ++i) if(!can[i]) for(int j = i &lt;&lt; 1; j &lt; m; j += i) if(can[j]) &#123; can[i] = 1; break; &#125; int ans = 0; for(int i = 1; i &lt;= m; ++i) if(!can[i]) ++ans; printf("%d\n", ans); for(int i = 1; i &lt;= m; ++i) if(!can[i]) printf("%d ", i); puts("");&#125;int main() &#123; int T; scanf("%d", &amp;T); while(T--) &#123; init(); solve(); &#125; return 0;&#125;]]></content>
       <categories>
         <category>Codeforces</category>
       </categories>
@@ -38,7 +96,7 @@
   <entry>
     <title><![CDATA[[bzoj 4945] 游戏]]></title>
     <url>%2F2018%2F06%2F03%2Fbzoj-4945-%E6%B8%B8%E6%88%8F%2F</url>
-    <content type="text"><![CDATA[Description:给出一张地图，如果某个位置上的标记不为x则表示该位置不能使用编号为标记的赛车，是$x$则表示可以任意选。再给出$m$条关系，表示如果某个位置选了某种赛车那么另外一个位置必须选择另外一种赛车。输出方案。 Solution:可以看出本题是一个$3-SAT$问题。$3-SAT$问题是$NPC$问题，不能解决。发现$x$的数量很少，于是枚举每个$x$位置的标记，表示不能选这种赛车，问题转化为了$2-SAT$问题。考虑如何添加关系。每个位置拆成两个点，表示选了哪种赛车。给出的$m$条关系中可以直接添加，还需要添加这些关系的逆否命题。最后输出方案，发现$tarjan$后的编号就是拓扑序，直接输出即可。 Code:12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576#include &lt;bits/stdc++.h&gt;using namespace std;const int maxn = 1e5 + 5;int n, m, dfs_clock, top, tot;int bel[maxn], dfn[maxn], low[maxn], st[maxn], vis[maxn], a[maxn], b[maxn], c[maxn], d[maxn];char s[maxn];vector&lt;int&gt; G[maxn];void tarjan(int u) &#123; dfn[u] = low[u] = ++dfs_clock; vis[u] = 1; st[++top] = u; for(int i = 0; i &lt; G[u].size(); ++i) &#123; int v = G[u][i]; if(!dfn[v]) &#123; tarjan(v); low[u] = min(low[u], low[v]); &#125; else if(vis[v]) low[u] = min(low[u], low[v]); &#125; if(dfn[u] == low[u]) &#123; ++tot; while(st[top + 1] != u) &#123; bel[st[top]] = tot; vis[st[top]] = 0; --top; &#125; &#125;&#125;int get(int a, int b) &#123; if(s[a] == 'a') return b == 0 ? 0 : 2 * a + b - 1; else if(s[a] == 'b') return b == 1 ? 0 : 2 * a + b / 2; else return b == 2 ? 0 : 2 * a + b;&#125;bool solve() &#123; dfs_clock = 0; tot = 0; memset(dfn, 0, sizeof(dfn)); memset(low, 0, sizeof(low)); for(int i = 1; i &lt;= 2 * n + 1; ++i) G[i].clear(); for(int i = 1; i &lt;= m; ++i) &#123; int x = get(a[i], c[i]), y = get(b[i], d[i]); if(x) &#123; if(y) &#123; G[x].push_back(y); G[y ^ 1].push_back(x ^ 1); &#125; else &#123; G[x].push_back(x ^ 1); &#125; &#125; &#125; for(int i = 2; i &lt;= 2 * n + 1; ++i) if(!dfn[i]) tarjan(i); for(int i = 1; i &lt;= n; ++i) if(bel[i &lt;&lt; 1] == bel[i &lt;&lt; 1 | 1]) return 0; for(int i = 1; i &lt;= n; ++i) &#123; if(s[i] == 'a') putchar(bel[i &lt;&lt; 1] &lt; bel[i &lt;&lt; 1 | 1] ? 'B' : 'C'); else if(s[i] == 'b') putchar(bel[i &lt;&lt; 1] &lt; bel[i &lt;&lt; 1 | 1] ? 'A' : 'C'); else putchar(bel[i &lt;&lt; 1] &lt; bel[i &lt;&lt; 1 | 1] ? 'A' : 'B'); &#125; return 1;&#125;bool dfs(int d) &#123; if(d == n + 1) return solve(); if(s[d] == 'x') &#123; s[d] = 'a'; if(dfs(d + 1)) return 1; s[d] = 'b'; &#125; return dfs(d + 1);&#125;int main() &#123; scanf("%d%*d%s%d", &amp;n, s + 1, &amp;m); for(int i = 1; i &lt;= m; ++i) &#123; char s1[10], s2[10]; scanf("%d%s%d%s", &amp;a[i], s1, &amp;b[i], s2); c[i] = s1[0] - 'A'; d[i] = s2[0] - 'A'; &#125; if(!dfs(1)) puts("-1"); return 0;&#125;]]></content>
+    <content type="text"><![CDATA[Description:给出一张地图，如果某个位置上的标记不为$x$则表示该位置不能使用编号为标记的赛车，是$x$则表示可以任意选。再给出$m$条关系，表示如果某个位置选了某种赛车那么另外一个位置必须选择另外一种赛车。输出方案。 Solution:可以看出本题是一个$3-SAT$问题。$3-SAT$问题是$NPC$问题，不能解决。发现$x$的数量很少，于是枚举每个$x$位置的标记，表示不能选这种赛车，问题转化为了$2-SAT$问题。考虑如何添加关系。每个位置拆成两个点，表示选了哪种赛车。给出的$m$条关系中可以直接添加，还需要添加这些关系的逆否命题。最后输出方案，发现$tarjan$后的编号就是拓扑序，直接输出即可。 Code:12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576#include &lt;bits/stdc++.h&gt;using namespace std;const int maxn = 1e5 + 5;int n, m, dfs_clock, top, tot;int bel[maxn], dfn[maxn], low[maxn], st[maxn], vis[maxn], a[maxn], b[maxn], c[maxn], d[maxn];char s[maxn];vector&lt;int&gt; G[maxn];void tarjan(int u) &#123; dfn[u] = low[u] = ++dfs_clock; vis[u] = 1; st[++top] = u; for(int i = 0; i &lt; G[u].size(); ++i) &#123; int v = G[u][i]; if(!dfn[v]) &#123; tarjan(v); low[u] = min(low[u], low[v]); &#125; else if(vis[v]) low[u] = min(low[u], low[v]); &#125; if(dfn[u] == low[u]) &#123; ++tot; while(st[top + 1] != u) &#123; bel[st[top]] = tot; vis[st[top]] = 0; --top; &#125; &#125;&#125;int get(int a, int b) &#123; if(s[a] == 'a') return b == 0 ? 0 : 2 * a + b - 1; else if(s[a] == 'b') return b == 1 ? 0 : 2 * a + b / 2; else return b == 2 ? 0 : 2 * a + b;&#125;bool solve() &#123; dfs_clock = 0; tot = 0; memset(dfn, 0, sizeof(dfn)); memset(low, 0, sizeof(low)); for(int i = 1; i &lt;= 2 * n + 1; ++i) G[i].clear(); for(int i = 1; i &lt;= m; ++i) &#123; int x = get(a[i], c[i]), y = get(b[i], d[i]); if(x) &#123; if(y) &#123; G[x].push_back(y); G[y ^ 1].push_back(x ^ 1); &#125; else &#123; G[x].push_back(x ^ 1); &#125; &#125; &#125; for(int i = 2; i &lt;= 2 * n + 1; ++i) if(!dfn[i]) tarjan(i); for(int i = 1; i &lt;= n; ++i) if(bel[i &lt;&lt; 1] == bel[i &lt;&lt; 1 | 1]) return 0; for(int i = 1; i &lt;= n; ++i) &#123; if(s[i] == 'a') putchar(bel[i &lt;&lt; 1] &lt; bel[i &lt;&lt; 1 | 1] ? 'B' : 'C'); else if(s[i] == 'b') putchar(bel[i &lt;&lt; 1] &lt; bel[i &lt;&lt; 1 | 1] ? 'A' : 'C'); else putchar(bel[i &lt;&lt; 1] &lt; bel[i &lt;&lt; 1 | 1] ? 'A' : 'B'); &#125; return 1;&#125;bool dfs(int d) &#123; if(d == n + 1) return solve(); if(s[d] == 'x') &#123; s[d] = 'a'; if(dfs(d + 1)) return 1; s[d] = 'b'; &#125; return dfs(d + 1);&#125;int main() &#123; scanf("%d%*d%s%d", &amp;n, s + 1, &amp;m); for(int i = 1; i &lt;= m; ++i) &#123; char s1[10], s2[10]; scanf("%d%s%d%s", &amp;a[i], s1, &amp;b[i], s2); c[i] = s1[0] - 'A'; d[i] = s2[0] - 'A'; &#125; if(!dfs(1)) puts("-1"); return 0;&#125;]]></content>
       <categories>
         <category>bzoj</category>
       </categories>
@@ -68,17 +126,6 @@
       <tags>
         <tag>hash</tag>
         <tag>分类讨论</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[刷题记录 & 日记]]></title>
-    <url>%2F2018%2F06%2F01%2F%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95-%E6%97%A5%E8%AE%B0%2F</url>
-    <content type="text"><![CDATA[前言为了记录NOI前的刷题记录以及想要刷的题,不能保证全部记录。 6.1刷题: poj 2409bzoj 1815bzoj 5206未完成: bzoj 4140 二进制分组 好难写 吐槽:上午继续昨天研究了置换群，终于搞懂了放置了很久的置换群。下午思考了很长时间bzoj1815，然后比较颓，没有做出来二进制分组，放弃之后做了原力，由于map重载错误看了很长时间。 6.2计划:bzoj 4140 (学习二进制分组)bzoj 3729 (复习ETT以及阶梯博弈)bzoj 4945 (复习2-sat)bzoj 4946 (新的模拟费用流套路)多项式取模to be continue…]]></content>
-      <categories>
-        <category>杂</category>
-      </categories>
-      <tags>
-        <tag>个人</tag>
       </tags>
   </entry>
   <entry>
@@ -228,8 +275,8 @@
         <category>loj</category>
       </categories>
       <tags>
-        <tag>多项式 &amp; 生成函数</tag>
         <tag>dp</tag>
+        <tag>多项式 &amp; 生成函数</tag>
         <tag>概率与期望</tag>
         <tag>分治</tag>
         <tag>容斥原理</tag>
@@ -289,8 +336,8 @@
         <category>loj</category>
       </categories>
       <tags>
-        <tag>多项式 &amp; 生成函数</tag>
         <tag>dp</tag>
+        <tag>多项式 &amp; 生成函数</tag>
       </tags>
   </entry>
   <entry>
@@ -301,8 +348,8 @@
         <category>bzoj</category>
       </categories>
       <tags>
-        <tag>点分治</tag>
         <tag>虚树</tag>
+        <tag>点分治</tag>
       </tags>
   </entry>
   <entry>
@@ -462,8 +509,8 @@
         <category>Codeforces</category>
       </categories>
       <tags>
-        <tag>线段树</tag>
         <tag>dp</tag>
+        <tag>线段树</tag>
       </tags>
   </entry>
   <entry>
@@ -474,8 +521,8 @@
         <category>bzoj</category>
       </categories>
       <tags>
-        <tag>线段树</tag>
         <tag>dp</tag>
+        <tag>线段树</tag>
         <tag>树链剖分</tag>
       </tags>
   </entry>

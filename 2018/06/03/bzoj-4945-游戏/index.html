@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="Description:给出一张地图，如果某个位置上的标记不为x则表示该位置不能使用编号为标记的赛车，是$x$则表示可以任意选。再给出$m$条关系，表示如果某个位置选了某种赛车那么另外一个位置必须选择另外一种赛车。输出方案。">
+<meta name="description" content="Description:给出一张地图，如果某个位置上的标记不为$x$则表示该位置不能使用编号为标记的赛车，是$x$则表示可以任意选。再给出$m$条关系，表示如果某个位置选了某种赛车那么另外一个位置必须选择另外一种赛车。输出方案。">
 <meta name="keywords" content="2-SAT">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[bzoj 4945] 游戏">
 <meta property="og:url" content="http://yoursite.com/2018/06/03/bzoj-4945-游戏/index.html">
 <meta property="og:site_name" content="19992147">
-<meta property="og:description" content="Description:给出一张地图，如果某个位置上的标记不为x则表示该位置不能使用编号为标记的赛车，是$x$则表示可以任意选。再给出$m$条关系，表示如果某个位置选了某种赛车那么另外一个位置必须选择另外一种赛车。输出方案。">
+<meta property="og:description" content="Description:给出一张地图，如果某个位置上的标记不为$x$则表示该位置不能使用编号为标记的赛车，是$x$则表示可以任意选。再给出$m$条关系，表示如果某个位置选了某种赛车那么另外一个位置必须选择另外一种赛车。输出方案。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-06-05T10:51:52.557Z">
+<meta property="og:updated_time" content="2018-06-06T03:20:25.810Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[bzoj 4945] 游戏">
-<meta name="twitter:description" content="Description:给出一张地图，如果某个位置上的标记不为x则表示该位置不能使用编号为标记的赛车，是$x$则表示可以任意选。再给出$m$条关系，表示如果某个位置选了某种赛车那么另外一个位置必须选择另外一种赛车。输出方案。">
+<meta name="twitter:description" content="Description:给出一张地图，如果某个位置上的标记不为$x$则表示该位置不能使用编号为标记的赛车，是$x$则表示可以任意选。再给出$m$条关系，表示如果某个位置选了某种赛车那么另外一个位置必须选择另外一种赛车。输出方案。">
 
 
 
@@ -401,7 +401,7 @@
       
 
       
-        <p><strong>Description:</strong><br>给出一张地图，如果某个位置上的标记不为x则表示该位置不能使用编号为标记的赛车，是$x$则表示可以任意选。再给出$m$条关系，表示如果某个位置选了某种赛车那么另外一个位置必须选择另外一种赛车。输出方案。</p>
+        <p><strong>Description:</strong><br>给出一张地图，如果某个位置上的标记不为$x$则表示该位置不能使用编号为标记的赛车，是$x$则表示可以任意选。再给出$m$条关系，表示如果某个位置选了某种赛车那么另外一个位置必须选择另外一种赛车。输出方案。</p>
 <hr>
 <a id="more"></a>
 <p><strong>Solution:</strong><br>可以看出本题是一个$3-SAT$问题。$3-SAT$问题是$NPC$问题，不能解决。<br>发现$x$的数量很少，于是枚举每个$x$位置的标记，表示不能选这种赛车，问题转化为了$2-SAT$问题。<br>考虑如何添加关系。每个位置拆成两个点，表示选了哪种赛车。给出的$m$条关系中可以直接添加，还需要添加这些关系的逆否命题。<br>最后输出方案，发现$tarjan$后的编号就是拓扑序，直接输出即可。</p>
@@ -524,7 +524,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">47</span>
+                  <span class="site-state-item-count">51</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -546,7 +546,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">44</span>
+                  <span class="site-state-item-count">45</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
