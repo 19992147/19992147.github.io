@@ -51,18 +51,19 @@
   <entry>
     <title><![CDATA[[Codeforces 990G] GCD Counting]]></title>
     <url>%2F2018%2F06%2F11%2FCodeforces-990G-GCD-Counting%2F</url>
-    <content type="text"><![CDATA[]]></content>
+    <content type="text"><![CDATA[Description:对于所有数求路径最大公约数为该数的路径数。 Solution:对于每个数计算最大公约数为该数倍数的路径数，最后利用莫比乌斯反演减去即可。计算的过程是暴力$dfs$，找出所有该数倍数的点$dfs$计算路径数，复杂度较玄学。 Code:123456789101112131415161718192021222324252627282930313233343536373839404142434445#include &lt;bits/stdc++.h&gt;using namespace std;const int maxn = 2e5 + 5, m = 2e5;inline int read() &#123; int x = 0; char c = getchar(); while(!isdigit(c)) c = getchar(); while(isdigit(c)) x = x * 10 + c - '0', c = getchar(); return x;&#125;int n;int vis[maxn], a[maxn];long long ans[maxn];vector&lt;int&gt; g[maxn], d[maxn], G[maxn];int dfs(int u, int x) &#123; vis[u] = 1; int ret = 1; for(int i = 0; i &lt; G[u].size(); ++i) &#123; int v = G[u][i]; if(!vis[v] &amp;&amp; a[v] % x == 0) ret += dfs(v, x); &#125; return ret;&#125;int main() &#123; n = read(); for(int i = 1; i &lt;= m; ++i) for(int j = i; j &lt;= m; j += i) d[j].push_back(i); for(int i = 1; i &lt;= n; ++i) &#123; a[i] = read(); for(int j = 0; j &lt; d[a[i]].size(); ++j) g[d[a[i]][j]].push_back(i); &#125; for(int i = 1; i &lt; n; ++i) &#123; int u = read(), v = read(); G[u].push_back(v); G[v].push_back(u); &#125; for(int i = m; i; --i) &#123; for(int j = 0; j &lt; g[i].size(); ++j) if(!vis[g[i][j]]) &#123; int t = dfs(g[i][j], i); ans[i] += 1LL * t * (t + 1) / 2; &#125; for(int j = 0; j &lt; g[i].size(); ++j) vis[g[i][j]] = 0; for(int j = 2 * i; j &lt;= m; j += i) ans[i] -= ans[j]; &#125; for(int i = 1; i &lt;= m; ++i) if(ans[i]) printf("%d %lld\n", i, ans[i]); return 0;&#125;]]></content>
       <categories>
         <category>Codeforces</category>
       </categories>
       <tags>
         <tag>容斥原理</tag>
+        <tag>莫比乌斯反演</tag>
       </tags>
   </entry>
   <entry>
     <title><![CDATA[[Codeforces 700E] Cool Slogans]]></title>
     <url>%2F2018%2F06%2F11%2FCodeforces-700E-Cool-Slogans%2F</url>
-    <content type="text"><![CDATA[Description:给你一个长度为$n$的字符串$S$，求最长的一个字符串序列$a_1..a_k$满足序列中的每一个字符串都是$S$的子串，且对于任意的$1&lt;i \leq k$都有$a_{i−1}$在$a_i$中至少出现两次。两次出现允许重叠。 Solution:对$S$建立后缀自动机,我们发现]]></content>
+    <content type="text"><![CDATA[Description:给你一个长度为$n$的字符串$S$，求最长的一个字符串序列$a_1..a_k$满足序列中的每一个字符串都是$S$的子串，且对于任意的$1&lt;i \leq k$都有$a_{i−1}$在$a_i$中至少出现两次。两次出现允许重叠。 Solution:对$S$建立后缀自动机,我们发现对于一个子串，能被其更新的串的$border$是该子串。考虑对于每个状态计算答案，那么一个状态能被它$parent$树上的祖先更新。每个状态维护$dp[S]$表示该状态最大的等级，线段树维护每个状态的$Right$集合，每个状态记录前继。判断父亲的前继是否在当前状态出现两次，是则更新$+1$,并把前继赋为自己。否则继承父亲的前继。]]></content>
       <categories>
         <category>Codeforces</category>
       </categories>
@@ -144,7 +145,7 @@
   <entry>
     <title><![CDATA[故事]]></title>
     <url>%2F2018%2F06%2F05%2F%E6%95%85%E4%BA%8B%2F</url>
-    <content type="text"><![CDATA[function doDecrypt (pwd, onError) { console.log('in doDecrypt'); const txt = document.getElementById('enc_content').innerHTML; let plantext; try { const bytes = CryptoJS.AES.decrypt(txt, pwd); var plaintext = bytes.toString(CryptoJS.enc.Utf8); } catch(err) { if(onError) { onError(err); } return; } document.getElementById('enc_content').innerHTML = plaintext; document.getElementById('enc_content').style.display = 'block'; document.getElementById('enc_passwd').style.display = 'none'; if(typeof MathJax !== 'undefined') { MathJax.Hub.Queue( ['resetEquationNumbers', MathJax.InputJax.TeX], ['PreProcess', MathJax.Hub], ['Reprocess', MathJax.Hub] ); } } U2FsdGVkX187z8wrlyeJyBSrJftepfHYP6JMcjbEA9Yn9+9EwnhC80VJZ3a285Ncf5u7Rj43Jm7XUQlIrJFizxHffNQkAkiPmJTCRi0S/XspP+tkkFtxz6kpAEAjadbwD6/GuEtCC0DKLrYOfKFGhiJI1QO9avoQciwadcfuXcFTqBoTapkV83EhkNEfGtFc var onError = function(error) { document.getElementById("enc_error").innerHTML = "password error!" }; function decrypt() { var passwd = document.getElementById("enc_pwd_input").value; console.log(passwd); doDecrypt(passwd, onError); }]]></content>
+    <content type="text"><![CDATA[function doDecrypt (pwd, onError) { console.log('in doDecrypt'); const txt = document.getElementById('enc_content').innerHTML; let plantext; try { const bytes = CryptoJS.AES.decrypt(txt, pwd); var plaintext = bytes.toString(CryptoJS.enc.Utf8); } catch(err) { if(onError) { onError(err); } return; } document.getElementById('enc_content').innerHTML = plaintext; document.getElementById('enc_content').style.display = 'block'; document.getElementById('enc_passwd').style.display = 'none'; if(typeof MathJax !== 'undefined') { MathJax.Hub.Queue( ['resetEquationNumbers', MathJax.InputJax.TeX], ['PreProcess', MathJax.Hub], ['Reprocess', MathJax.Hub] ); } } U2FsdGVkX18sPC32WVhpDhcLq1T84W6TNJ4SeP6uV/ZqNaItpt0wdXUmh8e/5O/HpvvFUVXrW+uamO9fgR9Xdvzl3LKezAVkxSw1XfBhWYKKMUeKMvnDrnUpVXhXPxi0sV37Wm3oHg9V9+Eg0uS6Qy/s/YcMoySa82Oeq9mDjw+zbj32eLJfoUZNkZ6NHHBx var onError = function(error) { document.getElementById("enc_error").innerHTML = "password error!" }; function decrypt() { var passwd = document.getElementById("enc_pwd_input").value; console.log(passwd); doDecrypt(passwd, onError); }]]></content>
       <categories>
         <category>杂</category>
       </categories>
@@ -545,8 +546,8 @@
         <category>bzoj</category>
       </categories>
       <tags>
-        <tag>可并堆</tag>
         <tag>凸包</tag>
+        <tag>可并堆</tag>
       </tags>
   </entry>
   <entry>

@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="19992147">
 <meta property="og:description" content="Description:给你一个长度为$n$的字符串$S$，求最长的一个字符串序列$a_1..a_k$满足序列中的每一个字符串都是$S$的子串，且对于任意的$1&amp;lt;i \leq k$都有$a_{i−1}$在$a_i$中至少出现两次。两次出现允许重叠。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-06-11T12:44:45.409Z">
+<meta property="og:updated_time" content="2018-06-15T12:55:33.718Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[Codeforces 700E] Cool Slogans">
 <meta name="twitter:description" content="Description:给你一个长度为$n$的字符串$S$，求最长的一个字符串序列$a_1..a_k$满足序列中的每一个字符串都是$S$的子串，且对于任意的$1&amp;lt;i \leq k$都有$a_{i−1}$在$a_i$中至少出现两次。两次出现允许重叠。">
@@ -404,7 +404,7 @@
         <p><strong>Description:</strong><br>给你一个长度为$n$的字符串$S$，求最长的一个字符串序列$a_1..a_k$满足序列中的每一个字符串都是$S$的子串，且对于任意的$1&lt;i \leq k$都有$a_{i−1}$在$a_i$中至少出现两次。两次出现允许重叠。</p>
 <hr>
 <a id="more"></a>
-<p><strong>Solution:</strong><br>对$S$建立后缀自动机,我们发现</p>
+<p><strong>Solution:</strong><br>对$S$建立后缀自动机,我们发现对于一个子串，能被其更新的串的$border$是该子串。考虑对于每个状态计算答案，那么一个状态能被它$parent$树上的祖先更新。每个状态维护$dp[S]$表示该状态最大的等级，线段树维护每个状态的$Right$集合，每个状态记录前继。判断父亲的前继是否在当前状态出现两次，是则更新$+1$,并把前继赋为自己。否则继承父亲的前继。</p>
 
       
     </div>

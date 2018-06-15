@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="容斥原理," />
+  <meta name="keywords" content="容斥原理,莫比乌斯反演," />
 
 
 
@@ -79,15 +79,18 @@
 
 
 
-<meta name="keywords" content="容斥原理">
+<meta name="description" content="Description:对于所有数求路径最大公约数为该数的路径数。">
+<meta name="keywords" content="容斥原理,莫比乌斯反演">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[Codeforces 990G] GCD Counting">
 <meta property="og:url" content="http://yoursite.com/2018/06/11/Codeforces-990G-GCD-Counting/index.html">
 <meta property="og:site_name" content="19992147">
+<meta property="og:description" content="Description:对于所有数求路径最大公约数为该数的路径数。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-06-11T12:38:47.386Z">
+<meta property="og:updated_time" content="2018-06-15T13:00:18.994Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[Codeforces 990G] GCD Counting">
+<meta name="twitter:description" content="Description:对于所有数求路径最大公约数为该数的路径数。">
 
 
 
@@ -398,7 +401,12 @@
       
 
       
-        <hr>
+        <p><strong>Description:</strong><br>对于所有数求路径最大公约数为该数的路径数。</p>
+<hr>
+<a id="more"></a>
+<p><strong>Solution:</strong><br>对于每个数计算最大公约数为该数倍数的路径数，最后利用莫比乌斯反演减去即可。计算的过程是暴力$dfs$，找出所有该数倍数的点$dfs$计算路径数，复杂度较玄学。</p>
+<hr>
+<p><strong>Code:</strong><br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">2e5</span> + <span class="number">5</span>, m = <span class="number">2e5</span>;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">read</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> x = <span class="number">0</span>; <span class="keyword">char</span> c = getchar();</span><br><span class="line">	<span class="keyword">while</span>(!<span class="built_in">isdigit</span>(c)) c = getchar();</span><br><span class="line">	<span class="keyword">while</span>(<span class="built_in">isdigit</span>(c)) x = x * <span class="number">10</span> + c - <span class="string">'0'</span>, c = getchar();</span><br><span class="line">	<span class="keyword">return</span> x;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">int</span> n;</span><br><span class="line"><span class="keyword">int</span> vis[maxn], a[maxn];</span><br><span class="line"><span class="keyword">long</span> <span class="keyword">long</span> ans[maxn];</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; g[maxn], d[maxn], G[maxn];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> u, <span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">	vis[u] = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">int</span> ret = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; G[u].size(); ++i) &#123;</span><br><span class="line">		<span class="keyword">int</span> v = G[u][i];</span><br><span class="line">		<span class="keyword">if</span>(!vis[v] &amp;&amp; a[v] % x == <span class="number">0</span>) ret += dfs(v, x);</span><br><span class="line">	&#125; </span><br><span class="line">	<span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	n = read();</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= m; ++i) <span class="keyword">for</span>(<span class="keyword">int</span> j = i; j &lt;= m; j += i) d[j].push_back(i);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">		a[i] = read();</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; d[a[i]].size(); ++j) g[d[a[i]][j]].push_back(i);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; ++i) &#123;</span><br><span class="line">		<span class="keyword">int</span> u = read(), v = read();</span><br><span class="line">		G[u].push_back(v);</span><br><span class="line">		G[v].push_back(u);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = m; i; --i) &#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; g[i].size(); ++j) <span class="keyword">if</span>(!vis[g[i][j]]) &#123;</span><br><span class="line">			<span class="keyword">int</span> t = dfs(g[i][j], i);</span><br><span class="line">			ans[i] += <span class="number">1L</span>L * t * (t + <span class="number">1</span>) / <span class="number">2</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; g[i].size(); ++j) vis[g[i][j]] = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">2</span> * i; j &lt;= m; j += i) ans[i] -= ans[j];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= m; ++i) <span class="keyword">if</span>(ans[i]) <span class="built_in">printf</span>(<span class="string">"%d %lld\n"</span>, i, ans[i]);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -417,6 +425,8 @@
         <div class="post-tags">
           
             <a href="/tags/容斥原理/" rel="tag"># 容斥原理</a>
+          
+            <a href="/tags/莫比乌斯反演/" rel="tag"># 莫比乌斯反演</a>
           
         </div>
       
