@@ -1,8 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title><![CDATA[[SRM 599C] FindPolygons]]></title>
-    <url>%2F2018%2F06%2F12%2FSRM-599C-FindPolygons%2F</url>
+    <title><![CDATA[[SRM 484C] NumberMagic]]></title>
+    <url>%2F2018%2F06%2F15%2FSRM-484C-NumberMagic%2F</url>
+    <content type="text"><![CDATA[Description:有$n$个数字，每张卡片上可以写$m$个数字，每次猜一个数字告诉有该数字的卡片编号。问最少几张卡片确定每个数字。 Solution:不难想到二分卡片数$x$，难点在于贪心验证是否可行。验证时枚举数字出现的卡片数，对于每种卡片数$i$每次贪心地尽量多地放数字，也就是$C_{x}^{i}$。 Code:12345678910111213141516171819202122232425262728#include &lt;bits/stdc++.h&gt;using namespace std;class NumberMagic &#123;public: bool C(int x, int n, int m) &#123; long long ans = 0, c; bool f = 0; for(int i = 0; i &lt;= x; ++i) &#123; if(i == 0) c = 1; else c = c * (x - i + 1) / i; if(c &gt;= n) &#123; f = 1; ans += 1LL * i * n; break; &#125; else ans += c * i, n -= c; &#125; if(!f) return 0; return ans &lt;= 1LL * m * x; &#125; int theMin(int n, int m) &#123; int l = 0, r = n; m = min(m, n - m); while(r - l &gt; 1) &#123; int mid = (l + r) &gt;&gt; 1; if(C(mid, n, m)) r = mid; else l = mid; &#125; return r; &#125;&#125;;]]></content>
+      <categories>
+        <category>TopCoder</category>
+      </categories>
+      <tags>
+        <tag>二分</tag>
+        <tag>贪心</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[[GYM 101630J] Journey from petersburg to Moscow]]></title>
+    <url>%2F2018%2F06%2F15%2FGYM-101630J-Journey-from-petersburg-to-Moscow%2F</url>
+    <content type="text"><![CDATA[Description:给出一张$n$个点$m$条边的无向图，求只计算前$k$条边长度到$n$的最短路。 Solution:这是一个$wqs$二分模型，运用$wqs$二分思路，给出一个额外的值$w$，每条边的边权变为$max(W-w,0)$,求最短路再加上$k*w$更新答案即可。不过由于码力较差，博主的$wqs$二分并未通过，于是写了枚举边权的版本，复杂度$O(m^2logn)$。 Code:1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859#include &lt;bits/stdc++.h&gt;using namespace std;typedef long long ll;const int maxn = 3005;inline int read() &#123; int x = 0; char c = getchar(); while(!isdigit(c)) c = getchar(); while(isdigit(c)) x = x * 10 + c - '0', c = getchar(); return x;&#125;struct Edge &#123; int u, v, w;&#125; E[maxn];struct edge &#123; int nxt, to, w;&#125; e[maxn * 2];int n, m, k, cnt = 1, w;ll ans;int h[maxn];ll d[maxn];void link(int u, int v, int w) &#123; e[++cnt].nxt = h[u]; h[u] = cnt; e[cnt].to = v; e[cnt].w = w;&#125;void D() &#123; priority_queue&lt;pair&lt;ll, int&gt;, vector&lt;pair&lt;ll, int&gt; &gt;, greater&lt;pair&lt;ll, int&gt; &gt; &gt; q; memset(d, 0x3f3f, sizeof(d)); d[1] = 0; q.push(make_pair(0, 1)); while(!q.empty()) &#123; pair&lt;ll, int&gt; o = q.top(); q.pop(); int u = o.second; if(d[u] &lt; o.first) continue; for(int i = h[u]; i; i = e[i].nxt) if(d[e[i].to] &gt; d[u] + max(e[i].w - w, 0)) &#123; d[e[i].to] = d[u] + max(e[i].w - w, 0); q.push(make_pair(d[e[i].to], e[i].to)); &#125; &#125;&#125;int main() &#123; n = read(); m = read(); k = read(); for(int i = 1; i &lt;= m; ++i) &#123; E[i].u = read(); E[i].v = read(); E[i].w = read(); link(E[i].u, E[i].v, E[i].w); link(E[i].v, E[i].u, E[i].w); &#125; D(); ans = d[n]; for(int i = 1; i &lt;= m; ++i) &#123; w = E[i].w; D(); ans = min(ans, d[n] + 1LL * w * k); &#125; printf("%lld\n", ans); return 0;&#125;]]></content>
+      <categories>
+        <category>GYM</category>
+      </categories>
+      <tags>
+        <tag>最短路</tag>
+        <tag>二分</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[[SRM 599B] FindPolygons]]></title>
+    <url>%2F2018%2F06%2F12%2FSRM-599B-FindPolygons%2F</url>
     <content type="text"><![CDATA[Description:给出整数$L$,要求顶点是整点的多边形周长为$L$且在边数最少的情况下最长边减最短边最小。 Solution:首先可以知道边长是整数，因为每条边可以视作直角边为整数的直角三角形的斜边。同时可以证明如果$L$为奇数那么不存在这样的多边形。由于$L$为偶数，那么答案最多为矩形，也就是边的数量最多为$4$，于是我们只要考虑三角形。对于三角形的要求是边长为整数，且坐标为整点。这个条件等价于三角形的面积为整数。于是枚举三条边判断合法即可。 Code:123456789101112131415161718192021#include &lt;bits/stdc++.h&gt;using namespace std;class FindPolygons &#123;public: bool sqr(long long x) &#123; long long t = sqrt(x) + 0.5; return t * t == x; &#125; double minimumPolygon(int L) &#123; if(L == 2) return -1; double ans = 1e9; for(int a = 1; a &lt; L; ++a) for(int b = a; b + a &lt; L; ++b) &#123; int c = L - a - b; if(a + b &gt; c &amp;&amp; c &gt;= b &amp;&amp; sqr(1LL * (a + b + c) * (-a + b + c) * (a - b + c) * (a + b - c))) ans = min(ans, (double)c - a); &#125; if(ans != 1e9) return ans; if(L % 4 == 0) return 0.0; if(L % 2 == 0) return 1.0; return -1; &#125; &#125;;]]></content>
       <categories>
         <category>TopCoder</category>
@@ -120,7 +144,7 @@
   <entry>
     <title><![CDATA[故事]]></title>
     <url>%2F2018%2F06%2F05%2F%E6%95%85%E4%BA%8B%2F</url>
-    <content type="text"><![CDATA[function doDecrypt (pwd, onError) { console.log('in doDecrypt'); const txt = document.getElementById('enc_content').innerHTML; let plantext; try { const bytes = CryptoJS.AES.decrypt(txt, pwd); var plaintext = bytes.toString(CryptoJS.enc.Utf8); } catch(err) { if(onError) { onError(err); } return; } document.getElementById('enc_content').innerHTML = plaintext; document.getElementById('enc_content').style.display = 'block'; document.getElementById('enc_passwd').style.display = 'none'; if(typeof MathJax !== 'undefined') { MathJax.Hub.Queue( ['resetEquationNumbers', MathJax.InputJax.TeX], ['PreProcess', MathJax.Hub], ['Reprocess', MathJax.Hub] ); } } U2FsdGVkX1+6fTwtV1RGIhe6fIB7lXUf6gBtjmByq8uL//LTNyAoCpFrn69Jzxcqh2MqI8nV3zu5GgShB9+fiepl4UVofOeQP/4PjUUPZijYfq9rQ+wQQmCZiknlxlJ7K9t1LFHrwXSbjaNIevIRkYpVqyQsn73df1+oFRzHeY3wtdeF5RpZtxwORVwsxb7L var onError = function(error) { document.getElementById("enc_error").innerHTML = "password error!" }; function decrypt() { var passwd = document.getElementById("enc_pwd_input").value; console.log(passwd); doDecrypt(passwd, onError); }]]></content>
+    <content type="text"><![CDATA[function doDecrypt (pwd, onError) { console.log('in doDecrypt'); const txt = document.getElementById('enc_content').innerHTML; let plantext; try { const bytes = CryptoJS.AES.decrypt(txt, pwd); var plaintext = bytes.toString(CryptoJS.enc.Utf8); } catch(err) { if(onError) { onError(err); } return; } document.getElementById('enc_content').innerHTML = plaintext; document.getElementById('enc_content').style.display = 'block'; document.getElementById('enc_passwd').style.display = 'none'; if(typeof MathJax !== 'undefined') { MathJax.Hub.Queue( ['resetEquationNumbers', MathJax.InputJax.TeX], ['PreProcess', MathJax.Hub], ['Reprocess', MathJax.Hub] ); } } U2FsdGVkX187z8wrlyeJyBSrJftepfHYP6JMcjbEA9Yn9+9EwnhC80VJZ3a285Ncf5u7Rj43Jm7XUQlIrJFizxHffNQkAkiPmJTCRi0S/XspP+tkkFtxz6kpAEAjadbwD6/GuEtCC0DKLrYOfKFGhiJI1QO9avoQciwadcfuXcFTqBoTapkV83EhkNEfGtFc var onError = function(error) { document.getElementById("enc_error").innerHTML = "password error!" }; function decrypt() { var passwd = document.getElementById("enc_pwd_input").value; console.log(passwd); doDecrypt(passwd, onError); }]]></content>
       <categories>
         <category>杂</category>
       </categories>
@@ -171,8 +195,8 @@
         <category>bzoj</category>
       </categories>
       <tags>
-        <tag>堆</tag>
         <tag>贪心</tag>
+        <tag>堆</tag>
       </tags>
   </entry>
   <entry>
@@ -241,8 +265,8 @@
       </categories>
       <tags>
         <tag>线段树</tag>
-        <tag>树链剖分</tag>
         <tag>二分</tag>
+        <tag>树链剖分</tag>
       </tags>
   </entry>
   <entry>
@@ -275,8 +299,8 @@
         <category>bzoj</category>
       </categories>
       <tags>
-        <tag>网络流</tag>
         <tag>最短路</tag>
+        <tag>网络流</tag>
       </tags>
   </entry>
   <entry>
@@ -568,8 +592,8 @@
         <category>Codeforces</category>
       </categories>
       <tags>
-        <tag>线段树</tag>
         <tag>dp</tag>
+        <tag>线段树</tag>
       </tags>
   </entry>
   <entry>
@@ -580,8 +604,8 @@
         <category>bzoj</category>
       </categories>
       <tags>
-        <tag>线段树</tag>
         <tag>dp</tag>
+        <tag>线段树</tag>
         <tag>树链剖分</tag>
       </tags>
   </entry>
@@ -615,8 +639,8 @@
         <category>Codeforces</category>
       </categories>
       <tags>
-        <tag>hash</tag>
         <tag>线段树</tag>
+        <tag>hash</tag>
       </tags>
   </entry>
   <entry>
