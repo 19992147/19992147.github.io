@@ -293,6 +293,353 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/24/学习笔记-拆系数FFT/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="19992147">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="19992147">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/06/24/学习笔记-拆系数FFT/" itemprop="url">[学习笔记] 拆系数FFT</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-24T16:50:48+08:00">
+                2018-06-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/学习笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">学习笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/06/24/学习笔记-拆系数FFT/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2018/06/24/学习笔记-拆系数FFT/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>通常$NTT$给出的模数为一些特殊的质数，形如$2^kx+1$,原因是$NTT$算法的原理。拆系数$FFT$可解决模数为任意质数的$NTT$。</p>
+<hr>
+<h2 id="拆系数FFT"><a href="#拆系数FFT" class="headerlink" title="拆系数FFT"></a>拆系数FFT</h2><p>找出一个数$M$，把所有数拆成形如$aM+b$的形式。<br>进行卷积的时候即时</p>
+<script type="math/tex; mode=display">(aM+b)(cM+d)=acM^2+(ad+bc)M+bd</script><p>那么分别对$a,b,c,d$进行$dft$，然后进行如上式的卷积。<br>再$idft$得出$ac,ad+bc,bd$,即得出答案。</p>
+<hr>
+<h2 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">FFT</span><span class="params">(cp *a, <span class="keyword">int</span> f)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; ++i) &#123;</span><br><span class="line">		<span class="keyword">int</span> t = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; len; ++j) <span class="keyword">if</span>(i &gt;&gt; j &amp; <span class="number">1</span>) t |= <span class="number">1</span> &lt;&lt; (len - j - <span class="number">1</span>);</span><br><span class="line">		<span class="keyword">if</span>(i &lt; t) swap(a[i], a[t]);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> l = <span class="number">2</span>; l &lt;= N; l &lt;&lt;= <span class="number">1</span>) &#123;</span><br><span class="line">		<span class="keyword">int</span> m = l &gt;&gt; <span class="number">1</span>;</span><br><span class="line">		cp w = cp(<span class="built_in">cos</span>(pi / m), f * <span class="built_in">sin</span>(pi / m));</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; i += l) &#123;</span><br><span class="line">			cp t = cp(<span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> k = <span class="number">0</span>; k &lt; m; ++k, t = t * w) &#123;</span><br><span class="line">				cp x = a[i + k], y = t * a[i + m + k];</span><br><span class="line">				a[i + k] = x + y;</span><br><span class="line">				a[i + m + k] = x - y;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;	</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">mul</span><span class="params">(<span class="keyword">int</span> *a, <span class="keyword">int</span> *b, <span class="keyword">int</span> *res)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; ++i) &#123;</span><br><span class="line">		a1[i] = cp(a[i] % M, <span class="number">0</span>);</span><br><span class="line">		a2[i] = cp(a[i] / M, <span class="number">0</span>);</span><br><span class="line">		b1[i] = cp(b[i] % M, <span class="number">0</span>);</span><br><span class="line">		b2[i] = cp(b[i] / M, <span class="number">0</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	FFT(a1, <span class="number">1</span>);</span><br><span class="line">	FFT(a2, <span class="number">1</span>);</span><br><span class="line">	FFT(b1, <span class="number">1</span>);</span><br><span class="line">	FFT(b2, <span class="number">1</span>);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; ++i) &#123;		</span><br><span class="line">		c1[i] = a1[i] * b1[i];</span><br><span class="line">		c3[i] = a2[i] * b2[i];</span><br><span class="line">		c2[i] = (a1[i] + a2[i]) * (b1[i] + b2[i]) - c1[i] - c3[i];</span><br><span class="line">	&#125;</span><br><span class="line">	FFT(c1, <span class="number">-1</span>);</span><br><span class="line">	FFT(c2, <span class="number">-1</span>);</span><br><span class="line">	FFT(c3, <span class="number">-1</span>);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; ++i) &#123;</span><br><span class="line">		<span class="keyword">int</span> x = (<span class="keyword">long</span> <span class="keyword">long</span>)(c1[i].x / N + <span class="number">0.5</span>) % P;</span><br><span class="line">		<span class="keyword">int</span> y = (<span class="keyword">long</span> <span class="keyword">long</span>)(c2[i].x / N + <span class="number">0.5</span>) % P;</span><br><span class="line">		<span class="keyword">int</span> z = (<span class="keyword">long</span> <span class="keyword">long</span>)(c3[i].x / N + <span class="number">0.5</span>) % P;</span><br><span class="line">		res[i] = (<span class="number">1L</span>L * z * M * M + <span class="number">1L</span>L * y * M + x) % P;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/24/模拟-湖南省队集训/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="19992147">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="19992147">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/06/24/模拟-湖南省队集训/" itemprop="url">湖南省队集训 & 雅礼集训</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-24T15:17:22+08:00">
+                2018-06-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/杂/" itemprop="url" rel="index">
+                    <span itemprop="name">杂</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/06/24/模拟-湖南省队集训/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2018/06/24/模拟-湖南省队集训/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src=/js/crypto-js.js></script>
+<script>
+function doDecrypt (pwd, onError) {
+	console.log('in doDecrypt');
+	const txt = document.getElementById('enc_content').innerHTML;
+	let plantext;
+	try {
+		const bytes = CryptoJS.AES.decrypt(txt, pwd);
+		var plaintext = bytes.toString(CryptoJS.enc.Utf8);
+	} catch(err) {
+		if(onError) {
+			onError(err);
+		}
+		return;
+	}
+	document.getElementById('enc_content').innerHTML = plaintext;
+	document.getElementById('enc_content').style.display = 'block';
+	document.getElementById('enc_passwd').style.display = 'none';
+	if(typeof MathJax !== 'undefined') {
+		MathJax.Hub.Queue(
+			['resetEquationNumbers', MathJax.InputJax.TeX],
+			['PreProcess', MathJax.Hub],
+			['Reprocess', MathJax.Hub]
+		);
+	}
+}
+</script>
+<div id="enc_content" style="display:none">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</div>
+<div id="enc_passwd"> <input id="enc_pwd_input" type="password" style="border-radius: 5px;border-style: groove;height: 30px;width: 50%;cursor: auto;font-size: 102%;color: currentColor;outline: none;text-overflow: initial;padding-left: 5px;" onkeydown="if (event.keyCode == 13) { decrypt(); return false;}"> <input type="submit" value="解&nbsp;密" onclick="decrypt()" style="width: 58px;height: 34px;border-radius: 5px;background-color: white;border-style: solid;color: currentColor;"><div id="enc_error" style="display: inline-block;color: #d84527;margin-left: 10px"></div>
+<script>
+var onError = function(error) {
+	document.getElementById("enc_error").innerHTML = "password error!"
+};
+function decrypt() {
+var passwd = document.getElementById("enc_pwd_input").value;
+console.log(passwd);
+doDecrypt(passwd, onError);
+}
+</script>
+</div>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/15/SRM-484C-NumberMagic/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1536,320 +1883,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/06/Linux下的对拍/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="19992147">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="19992147">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/06/06/Linux下的对拍/" itemprop="url">Linux下的对拍</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-06T16:02:04+08:00">
-                2018-06-06
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/技术/" itemprop="url" rel="index">
-                    <span itemprop="name">技术</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/06/06/Linux下的对拍/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2018/06/06/Linux下的对拍/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="数据生成器"><a href="#数据生成器" class="headerlink" title="数据生成器"></a>数据生成器</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	freopen(<span class="string">"data.in"</span>, <span class="string">"w"</span>, <span class="built_in">stdout</span>);</span><br><span class="line">	<span class="comment">//数据生成器</span></span><br><span class="line">	fclose(<span class="built_in">stdout</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<hr>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/06/06/Linux下的对拍/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/06/bzoj-4550-小奇的博弈/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="19992147">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="19992147">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/06/06/bzoj-4550-小奇的博弈/" itemprop="url">[bzoj 4550] 小奇的博弈</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-06T16:01:18+08:00">
-                2018-06-06
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/bzoj/" itemprop="url" rel="index">
-                    <span itemprop="name">bzoj</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/06/06/bzoj-4550-小奇的博弈/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2018/06/06/bzoj-4550-小奇的博弈/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p><strong>Description:</strong><br>$1*n$的棋盘上有$k$个棋子，一半为黑色另一半为白色。每次可以移动$[1,d]$个某种颜色的棋子，且黑色只能向右，白色只能向左，如果不能移动则输，问使黑棋先手获胜的初始棋局数。</p>
-<hr>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/06/06/bzoj-4550-小奇的博弈/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1904,7 +1937,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">58</span>
+                  <span class="site-state-item-count">60</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>

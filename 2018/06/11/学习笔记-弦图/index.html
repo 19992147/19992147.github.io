@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="19992147">
 <meta property="og:description" content="前言本篇文章主要介绍有关弦图题目的解法，如果想要更加详细了解弦图，请移步论文。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-06-11T11:34:45.536Z">
+<meta property="og:updated_time" content="2018-07-03T06:15:59.186Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[学习笔记] 弦图">
 <meta name="twitter:description" content="前言本篇文章主要介绍有关弦图题目的解法，如果想要更加详细了解弦图，请移步论文。">
@@ -404,7 +404,7 @@
         <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本篇文章主要介绍有关弦图题目的解法，如果想要更加详细了解弦图，请移步<a href="https://wenku.baidu.com/view/6f9f2223dd36a32d73758126.html?from=search" target="_blank" rel="noopener">论文</a>。</p>
 <hr>
 <a id="more"></a>
-<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>弦是连接环中两个不相邻的点的边，弦图中任意长度大于$3$的环都有至少一个弦。<br>对于有关弦图的题目，主要是关于完美消除序列的运用。</p>
+<h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><p>弦是连接环中两个不相邻的点的边，弦图中任意长度大于$3$的环都有至少一个弦。<br>对于有关弦图的题目，主要是关于完美消除序列的运用。</p>
 <hr>
 <h2 id="完美消除序列"><a href="#完美消除序列" class="headerlink" title="完美消除序列"></a>完美消除序列</h2><p>下面给出一些定义:<br>1.单纯点:如果点$u$为单纯点，那么点$u$与其相邻的点$v$构成的诱导子图为团。<br>2.完美消除序列:序列$a_1…a_n$是一个图中顶点编号的排列，对于其中每个序列$a_i…a_n$构成的诱导子图，点$a_i$为单纯点，那么称该序列为完美消除序列。</p>
 <p>用于求完美消除序列的最大势算法:<br>设$d_i$为点$i$的度，每次找出$d$最大且未访问的点，取出并将相邻未访问的点的$d$值$+1$，将取出序列翻转即为完美消除序列。<br>可以用堆维护，复杂度$O(mlogn)$,可以通过技巧优化至$O(m+n)$。</p>
@@ -542,7 +542,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">58</span>
+                  <span class="site-state-item-count">60</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -597,7 +597,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">2.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#完美消除序列"><span class="nav-number">3.</span> <span class="nav-text">完美消除序列</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#例题"><span class="nav-number">4.</span> <span class="nav-text">例题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#bzoj1242-Fishing-net"><span class="nav-number">4.1.</span> <span class="nav-text">bzoj1242 Fishing net</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#bzoj1006-神奇的国度"><span class="nav-number">4.2.</span> <span class="nav-text">bzoj1006 神奇的国度</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基本概念"><span class="nav-number">2.</span> <span class="nav-text">基本概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#完美消除序列"><span class="nav-number">3.</span> <span class="nav-text">完美消除序列</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#例题"><span class="nav-number">4.</span> <span class="nav-text">例题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#bzoj1242-Fishing-net"><span class="nav-number">4.1.</span> <span class="nav-text">bzoj1242 Fishing net</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#bzoj1006-神奇的国度"><span class="nav-number">4.2.</span> <span class="nav-text">bzoj1006 神奇的国度</span></a></li></ol></li></ol></div>
             
 
           </div>
