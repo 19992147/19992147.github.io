@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="19992147">
 <meta property="og:description" content="前言最近没时间写题解，于是便有了这个简易题解，之前省队集训的题解也会在这里更新。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-07-08T07:54:26.224Z">
+<meta property="og:updated_time" content="2018-07-08T07:56:51.054Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="口胡题解">
 <meta name="twitter:description" content="前言最近没时间写题解，于是便有了这个简易题解，之前省队集训的题解也会在这里更新。">
@@ -408,7 +408,7 @@
 <h4 id="bzoj-4515-游戏"><a href="#bzoj-4515-游戏" class="headerlink" title="bzoj 4515 游戏"></a>bzoj 4515 游戏</h4><p>一个李超线段树，李超线段树每个区间保存覆盖区间最大的线段，每次查询注意左右端点。</p>
 <h4 id="bzoj-5336-party"><a href="#bzoj-5336-party" class="headerlink" title="bzoj 5336 party"></a>bzoj 5336 party</h4><p>$dp$套$dp$，先$dp$出每种$lcs$状态添加字符后转移到的状态，然后$dp$即可。</p>
 <h4 id="bzoj-3639-Query-on-a-tree-VII"><a href="#bzoj-3639-Query-on-a-tree-VII" class="headerlink" title="bzoj 3639 Query on a tree VII"></a>bzoj 3639 Query on a tree VII</h4><p>$LCT$维护黑白两棵树，连通性通过每个点和自己父亲颜色相同连接。$LCT$每个点开$set$维护虚子树最大值。</p>
-<h4 id="bzoj-5338-xor"><a href="#bzoj-5338-xor" class="headerlink" title="bzoj 5338 xor"></a>bzoj 5338 xor</h4><p>可持久化Trie树</p>
+<h4 id="bzoj-5338-xor"><a href="#bzoj-5338-xor" class="headerlink" title="bzoj 5338 xor"></a>bzoj 5338 xor</h4><p>可持久化$Trie$树</p>
 <h4 id="bzoj-5311-贞鱼"><a href="#bzoj-5311-贞鱼" class="headerlink" title="bzoj 5311 贞鱼"></a>bzoj 5311 贞鱼</h4><p>设$dp[i][k]$表示前$i$个分成$k$段的最小值。转移$dp[i][k]=min{dp[j][k-1]+sum(j+1,i)}$。<br>如果对于$k_1&lt;k_2$且$dp[i][k_1]$优于$dp[i][k_2]$,那么以后$k_1$一直优于$k_2$,于是单调队列维护决策单调性，复杂度$O(nklogk)$。<br>再利用凸优化解决即可,复杂度$O(nlognlogk)$。<br>看见恰好$k$个可用凸优化，看见$dp$想决策单调性。</p>
 <h4 id="bzoj-2827-千山鸟飞绝"><a href="#bzoj-2827-千山鸟飞绝" class="headerlink" title="bzoj 2827 千山鸟飞绝"></a>bzoj 2827 千山鸟飞绝</h4><p>动态开点线段树区间赋值。</p>
 <h4 id="bzoj-5197-Gambling-Guide"><a href="#bzoj-5197-Gambling-Guide" class="headerlink" title="bzoj 5197 Gambling Guide"></a>bzoj 5197 Gambling Guide</h4><p>设$dp[i]$表示$i$点到$n$的期望钱数，那么考虑更新，$dp[i]$更新相邻的点，如果$dp[i]$更优那么选择$dp[i]$,否则选择$dp[j]$。得出$dp$方程用最短路转移即可。</p>
