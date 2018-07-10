@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next pisces use-motion" lang="">
+<html class="theme-next gemini use-motion" lang="">
 <head>
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="19992147">
 <meta property="og:description" content="前言最近没时间写题解，于是便有了这个简易题解，之前省队集训的题解也会在这里更新。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-07-08T07:56:51.054Z">
+<meta property="og:updated_time" content="2018-07-10T00:01:32.725Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="口胡题解">
 <meta name="twitter:description" content="前言最近没时间写题解，于是便有了这个简易题解，之前省队集训的题解也会在这里更新。">
@@ -97,7 +97,7 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Pisces',
+    scheme: 'Gemini',
     version: '5.1.4',
     sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
@@ -419,6 +419,10 @@
 <h4 id="bzoj-5408-string"><a href="#bzoj-5408-string" class="headerlink" title="bzoj 5408 string"></a>bzoj 5408 string</h4><p>$LCT$维护$parent$树，注意后缀自动机构建。</p>
 <h4 id="bzoj-5409-墨水大师"><a href="#bzoj-5409-墨水大师" class="headerlink" title="bzoj 5409 墨水大师"></a>bzoj 5409 墨水大师</h4><p>相当于对于每个边双联通分量求答案乘起来，环上方案数可用矩阵快速幂或公式维护，可以打表找规律。由于共有$\sqrt{n}$种环可做到$O(n\sqrt{n})$。</p>
 <h4 id="bzoj-5410-分岔路口"><a href="#bzoj-5410-分岔路口" class="headerlink" title="bzoj 5410 分岔路口"></a>bzoj 5410 分岔路口</h4><p>这是一种套路题，二分随机跳期望，距离小于期望直接跳，否则随机跳，二分动态树分治即可。</p>
+<h4 id="bzoj-5412-circle"><a href="#bzoj-5412-circle" class="headerlink" title="bzoj 5412 circle"></a>bzoj 5412 circle</h4><p>根据引理，对于一个强连通的竞赛图，存在$3 \leq i \leq n$的环，那么问题转化为删除所有三元强连通环。对于存在两个关键点的环肯定得删除未被标记的点，剩下存在一个关键点则需要考虑。两个黑点不相交的条件是$i&lt;j$且$f_i \leq f_j$,求最长上升子序列即可。</p>
+<h4 id="bzoj-4036-按位或"><a href="#bzoj-4036-按位或" class="headerlink" title="bzoj 4036 按位或"></a>bzoj 4036 按位或</h4><p>详见论文。</p>
+<h4 id="bzoj-4487-染色问题"><a href="#bzoj-4487-染色问题" class="headerlink" title="bzoj 4487 染色问题"></a>bzoj 4487 染色问题</h4><p>枚举i行j列未被染色，至少用了k种颜色，那么方案是$\sum_{i=0}^{n}\sum_{j=0}^{m}\sum_{k=0}^{c}{C{n}{i}C{m}{j}C{c}{k}(-1)^{i+j+k}(c-k+1)^{(n-i)(m-j)}}$</p>
+<h4 id="bzoj-5414-simulate"><a href="#bzoj-5414-simulate" class="headerlink" title="bzoj 5414 simulate"></a>bzoj 5414 simulate</h4><p><a href="http://www.cnblogs.com/JYYHH/p/9244562.html#4009008" target="_blank" rel="noopener">题解</a></p>
 
       
     </div>
@@ -590,7 +594,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#题解"><span class="nav-number">2.</span> <span class="nav-text">题解</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#bzoj-4012-开店"><span class="nav-number">2.1.</span> <span class="nav-text">bzoj 4012 开店</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#bzoj-4675-点对游戏"><span class="nav-number">2.2.</span> <span class="nav-text">bzoj 4675 点对游戏</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#bzoj-4515-游戏"><span class="nav-number">2.3.</span> <span class="nav-text">bzoj 4515 游戏</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#bzoj-5336-party"><span class="nav-number">2.4.</span> <span class="nav-text">bzoj 5336 party</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#bzoj-3639-Query-on-a-tree-VII"><span class="nav-number">2.5.</span> <span class="nav-text">bzoj 3639 Query on a tree VII</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#bzoj-5338-xor"><span class="nav-number">2.6.</span> <span class="nav-text">bzoj 5338 xor</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#bzoj-5311-贞鱼"><span class="nav-number">2.7.</span> <span class="nav-text">bzoj 5311 贞鱼</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#bzoj-2827-千山鸟飞绝"><span class="nav-number">2.8.</span> <span class="nav-text">bzoj 2827 千山鸟飞绝</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#bzoj-5197-Gambling-Guide"><span class="nav-number">2.9.</span> <span class="nav-text">bzoj 5197 Gambling Guide</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#bzoj-5312-冒险"><span class="nav-number">2.10.</span> <span class="nav-text">bzoj 5312 冒险</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#bzoj-4943-蚯蚓"><span class="nav-number">2.11.</span> <span class="nav-text">bzoj 4943 蚯蚓</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#bzoj-5413-color"><span class="nav-number">2.12.</span> <span class="nav-text">bzoj 5413 color</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#bzoj-5407-girls"><span class="nav-number">2.13.</span> <span class="nav-text">bzoj 5407 girls</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#bzoj-5408-string"><span class="nav-number">2.14.</span> <span class="nav-text">bzoj 5408 string</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#bzoj-5409-墨水大师"><span class="nav-number">2.15.</span> <span class="nav-text">bzoj 5409 墨水大师</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#bzoj-5410-分岔路口"><span class="nav-number">2.16.</span> <span class="nav-text">bzoj 5410 分岔路口</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#题解"><span class="nav-number">2.</span> <span class="nav-text">题解</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#bzoj-4012-开店"><span class="nav-number">2.1.</span> <span class="nav-text">bzoj 4012 开店</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#bzoj-4675-点对游戏"><span class="nav-number">2.2.</span> <span class="nav-text">bzoj 4675 点对游戏</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#bzoj-4515-游戏"><span class="nav-number">2.3.</span> <span class="nav-text">bzoj 4515 游戏</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#bzoj-5336-party"><span class="nav-number">2.4.</span> <span class="nav-text">bzoj 5336 party</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#bzoj-3639-Query-on-a-tree-VII"><span class="nav-number">2.5.</span> <span class="nav-text">bzoj 3639 Query on a tree VII</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#bzoj-5338-xor"><span class="nav-number">2.6.</span> <span class="nav-text">bzoj 5338 xor</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#bzoj-5311-贞鱼"><span class="nav-number">2.7.</span> <span class="nav-text">bzoj 5311 贞鱼</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#bzoj-2827-千山鸟飞绝"><span class="nav-number">2.8.</span> <span class="nav-text">bzoj 2827 千山鸟飞绝</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#bzoj-5197-Gambling-Guide"><span class="nav-number">2.9.</span> <span class="nav-text">bzoj 5197 Gambling Guide</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#bzoj-5312-冒险"><span class="nav-number">2.10.</span> <span class="nav-text">bzoj 5312 冒险</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#bzoj-4943-蚯蚓"><span class="nav-number">2.11.</span> <span class="nav-text">bzoj 4943 蚯蚓</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#bzoj-5413-color"><span class="nav-number">2.12.</span> <span class="nav-text">bzoj 5413 color</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#bzoj-5407-girls"><span class="nav-number">2.13.</span> <span class="nav-text">bzoj 5407 girls</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#bzoj-5408-string"><span class="nav-number">2.14.</span> <span class="nav-text">bzoj 5408 string</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#bzoj-5409-墨水大师"><span class="nav-number">2.15.</span> <span class="nav-text">bzoj 5409 墨水大师</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#bzoj-5410-分岔路口"><span class="nav-number">2.16.</span> <span class="nav-text">bzoj 5410 分岔路口</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#bzoj-5412-circle"><span class="nav-number">2.17.</span> <span class="nav-text">bzoj 5412 circle</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#bzoj-4036-按位或"><span class="nav-number">2.18.</span> <span class="nav-text">bzoj 4036 按位或</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#bzoj-4487-染色问题"><span class="nav-number">2.19.</span> <span class="nav-text">bzoj 4487 染色问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#bzoj-5414-simulate"><span class="nav-number">2.20.</span> <span class="nav-text">bzoj 5414 simulate</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -628,7 +632,7 @@
 
 
 
-  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
 
 
 
